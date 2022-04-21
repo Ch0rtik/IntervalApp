@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">Interval App</string>
+    <string-array name="note_names">
+        <item>F♭♭</item>
+        <item>C♭♭</item>
+        <item>G♭♭</item>
+        <item>D♭♭</item>
+        <item>A♭♭</item>
+        <item>E♭♭</item>
+        <item>B♭♭</item>
+        <item>F♭</item>
+        <item>C♭</item>
+        <item>G♭</item>
+        <item>D♭</item>
+        <item>A♭</item>
+        <item>E♭</item>
+        <item>B♭</item>
+        <item>F</item>
+        <item>C</item>
+        <item>G</item>
+        <item>D</item>
+        <item>A</item>
+        <item>E</item>
+        <item>B</item>
+        <item>F#</item>
+        <item>C#</item>
+        <item>G#</item>
+        <item>D#</item>
+        <item>A#</item>
+        <item>E#</item>
+        <item>B#</item>
+        <item>F##</item>
+        <item>C##</item>
+        <item>G##</item>
+        <item>D##</item>
+        <item>A##</item>
+        <item>E##</item>
+        <item>B##</item>
+    </string-array>
+    <string-array name="interval_names">
+        <item>Уменьшенную приму</item>
+        <item>Уменьшенную квинту</item>
+        <item>Малую секунду</item>
+        <item>Малую сексту</item>
+        <item>Малую терцию</item>
+        <item>Малую септиму</item>
+        <item>Чистую кварту</item>
+        <item>Приму</item>
+        <item>Чистую квинту</item>
+        <item>Большую секунду</item>
+        <item>Большую сексту</item>
+        <item>Большую терцию</item>
+        <item>Большую септиму</item>
+        <item>Увеличенную кварту</item>
+        <item>Увеличенную приму</item>
+        <item>Увеличенную квинту</item>
+        <item>Увеличенную секунду</item>
+        <item>Увеличенную сексту</item>
+        <item>Увеличенную терцию</item>
+        <item>Увеличенную септиму</item>
+        <item>Дважды увеличеннную кварту</item>
+    </string-array>
+</resources>
