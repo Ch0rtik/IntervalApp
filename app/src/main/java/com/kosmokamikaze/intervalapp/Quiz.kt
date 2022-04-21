@@ -15,7 +15,7 @@ class Quiz (
 
     private var score = 0
     private var possibleBttns: Set<Int> = setOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
-    private var questRange: Int = 3
+    private var questRange: Int = 5
 
     init {
         if (fourAnswers) {
@@ -32,12 +32,12 @@ class Quiz (
 
     private inner class Question(prevSubjId: Int) {
         val rightBtnId = possibleBttns.random()
-        private var questSubjId = (-questRange..questRange).random()
+        private var questSubjId = getRandomId()
         private val rightAnsId: Int
         private val usedAnsIds = mutableSetOf<Int>()
         init {
             while (questSubjId == prevSubjId) {
-                questSubjId = (-questRange..questRange).random()
+                questSubjId = getRandomId()
             }
             rightAnsId = getRightAns(questSubjId)
 
@@ -49,18 +49,22 @@ class Quiz (
 
             for (i in possibleBttns) {
                 if (i == rightBtnId) continue
-                var currentId = (-questRange..questRange).random()
+                var currentId = getRandomId()
                 while (usedAnsIds.contains(currentId)) {
-                    currentId = (-questRange..questRange).random()
+                    currentId = getRandomId()
                 }
                 usedAnsIds.add(currentId)
                 ansBttns[i].text = getText(currentId)
             }
         }
 
+        fun getRandomId(): Int {
+            return (-questRange..questRange).random()
+        }
+
         fun getText(relId: Int): String {
             //TEMPORARY !!!
-            return activity.resources.getStringArray(R.array.note_names)[relId + 15]
+            return activity.resources.getStringArray(R.array.note_names)[relId + 17]
         }
 
         fun getRightAns(relId: Int): Int {

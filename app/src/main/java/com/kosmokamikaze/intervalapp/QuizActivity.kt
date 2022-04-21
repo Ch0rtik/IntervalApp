@@ -18,7 +18,7 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
         setUpViews()
-        quiz = Quiz(true, this)
+        quiz = Quiz(false, this)
         setOnClickListeners()
         quiz.askNewQuestion()
     }

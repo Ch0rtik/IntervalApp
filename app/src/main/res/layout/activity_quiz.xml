@@ -27,12 +27,11 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/background_light"
-            android:text="До Ми Соль"
             android:gravity="center"
+            android:text="До Ми Соль"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="42sp"
-            android:textStyle="bold"
-            />
+            android:textSize="48sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/questText"
@@ -40,11 +39,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:background="@android:color/background_light"
-            android:text="Выберите"
             android:gravity="center"
+            android:text="Выберите"
+            android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="30sp"
-            android:textAllCaps="true"/>
+            android:textSize="34sp" />
 
         <TextView
             android:id="@+id/optionText"
@@ -52,12 +51,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:background="@android:color/background_light"
-            android:text="Чистую квинту"
             android:gravity="center"
+            android:text="Чистую квинту"
+            android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:textAllCaps="true"/>
+            android:textSize="34sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -68,7 +67,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.48000002">
@@ -80,10 +79,10 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/background_light"
-            android:text="Button"
+            android:text="Sol"
             android:textAllCaps="false"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="34sp"
             app:backgroundTint="@android:color/background_light" />
     </LinearLayout>
 
@@ -106,10 +105,10 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/background_light"
-            android:text="Button"
+            android:text="Sol"
             android:textAllCaps="false"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="34sp"
             app:backgroundTint="@android:color/background_light" />
     </LinearLayout>
 
@@ -121,7 +120,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintHorizontal_bias="0.84"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.48000002">
@@ -133,10 +132,10 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/background_light"
-            android:text="Button"
+            android:text="Sol"
             android:textAllCaps="false"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="34sp"
             app:backgroundTint="@android:color/background_light" />
     </LinearLayout>
 
@@ -148,7 +147,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.64">
@@ -160,10 +159,10 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/background_light"
-            android:text="Button"
+            android:text="Sol"
             android:textAllCaps="false"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="34sp"
             app:backgroundTint="@android:color/background_light" />
     </LinearLayout>
 
@@ -186,10 +185,10 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/background_light"
-            android:text="Button"
+            android:text="Sol"
             android:textAllCaps="false"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="34sp"
             app:backgroundTint="@android:color/background_light" />
     </LinearLayout>
 
@@ -201,7 +200,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintHorizontal_bias="0.84"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.64">
@@ -213,10 +212,10 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/background_light"
-            android:text="Button"
+            android:text="Sol"
             android:textAllCaps="false"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="34sp"
             app:backgroundTint="@android:color/background_light" />
     </LinearLayout>
 
@@ -228,7 +227,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.8">
@@ -240,10 +239,10 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/background_light"
-            android:text="Button"
+            android:text="Sol"
             android:textAllCaps="false"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="34sp"
             app:backgroundTint="@android:color/background_light" />
     </LinearLayout>
 
@@ -266,10 +265,10 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/background_light"
-            android:text="Button"
+            android:text="Sol"
             android:textAllCaps="false"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="34sp"
             app:backgroundTint="@android:color/background_light" />
     </LinearLayout>
 
@@ -281,7 +280,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintHorizontal_bias="0.84"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.8">
@@ -293,10 +292,10 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/background_light"
-            android:text="Button"
+            android:text="Sol"
             android:textAllCaps="false"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="34sp"
             app:backgroundTint="@android:color/background_light" />
     </LinearLayout>
 
