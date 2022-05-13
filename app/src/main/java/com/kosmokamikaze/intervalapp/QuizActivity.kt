@@ -3,32 +3,39 @@ package com.kosmokamikaze.intervalapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.kosmokamikaze.intervalapp.musical.MusicNameHandler
+import com.kosmokamikaze.intervalapp.questionmaker.QMFactory
 
 class QuizActivity : AppCompatActivity() {
-    lateinit var ansBttns: Array<Button>
-    lateinit var ansLyts: Array<LinearLayout>
-    lateinit var subjText: TextView
-    lateinit var optText: TextView
-    lateinit var quiz: Quiz
+    private lateinit var ansBtns: Array<Button>
+    private lateinit var ansLyts: Array<LinearLayout>
+    private lateinit var subjText: TextView
+    private lateinit var optText: TextView
+    private var possibleBttns = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
+    private val fourAnswers = true //!!!
+
+    private lateinit var quiz: Quiz
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
         setUpViews()
-        quiz = Quiz(false, this)
+        val questionMaker = QMFactory(MusicNameHandler(this)).getQuestionMaker(0, 1)
+        quiz = Quiz(true, questionMaker, 5)
         setOnClickListeners()
-        quiz.askNewQuestion()
+        setUpNewQuestion()
     }
 
     private fun setOnClickListeners() {
-        for (i in ansBttns.indices) {
-            ansBttns[i].setOnClickListener {
-                val result = quiz.giveAnswer(i)
+        for (i in ansBtns.indices) {
+            ansBtns[i].setOnClickListener {
+                val result = quiz.giveAnswer(possibleBttns.indexOf(i))
                 if (result == null) {
-                    quiz.askNewQuestion()
+                    setUpNewQuestion()
                 } else {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
@@ -38,7 +45,7 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun setUpViews() {
-        ansBttns = arrayOf(
+        ansBtns = arrayOf(
             findViewById(R.id.answerButton0),
             findViewById(R.id.answerButton1),
             findViewById(R.id.answerButton2),
@@ -62,5 +69,26 @@ class QuizActivity : AppCompatActivity() {
 
         subjText = findViewById(R.id.subjectText)
         optText = findViewById(R.id.optionText)
+
+        if (fourAnswers) {
+            possibleBttns = listOf(0, 2, 6, 8)
+            for (i in ansBtns.indices) {
+                if (!possibleBttns.contains(i)) {
+                    ansBtns[i].visibility = View.INVISIBLE
+                    ansBtns[i].isClickable = false
+                    ansLyts[i].visibility = View.INVISIBLE
+                }
+            }
+        }
+    }
+
+    private fun setUpNewQuestion() {
+        quiz.askNewQuestion()
+        val question = quiz.currentQuest
+        for ((j, i) in possibleBttns.withIndex()) {
+            ansBtns[i].text = question.buttonTexts[j]
+        }
+        subjText.text = question.subjText
+        optText.text = question.optionText
     }
 }

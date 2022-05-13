@@ -1,94 +1,65 @@
 package com.kosmokamikaze.intervalapp
 
-import android.view.View
+import com.kosmokamikaze.intervalapp.questionmaker.QuestionMaker
 
 class Quiz (
-    fourAnswers: Boolean,
-    private val activity: QuizActivity) {
-    private val ansLyts = activity.ansLyts
-    private val ansBttns = activity.ansBttns
-    private val subText = activity.subjText
-    private val optText = activity.optText
-
-    private lateinit var currentQuest: Question
-    private var prevSubjId = 0
+    private val fourAnswers: Boolean,
+    private val questionMaker: QuestionMaker, private val range: Int) {
+    lateinit var currentQuest: Question
 
     private var score = 0
-    private var possibleBttns: Set<Int> = setOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
-    private var questRange: Int = 5
-
-    init {
-        if (fourAnswers) {
-            possibleBttns = setOf(0, 2, 6, 8)
-            for (i in ansBttns.indices) {
-                if (!possibleBttns.contains(i)) {
-                    ansBttns[i].visibility = View.INVISIBLE
-                    ansBttns[i].isClickable = false
-                    ansLyts[i].visibility = View.INVISIBLE
-                }
-            }
-        }
-    }
-
-    private inner class Question(prevSubjId: Int) {
-        val rightBtnId = possibleBttns.random()
-        private var questSubjId = getRandomId()
-        private val rightAnsId: Int
-        private val usedAnsIds = mutableSetOf<Int>()
-        init {
-            while (questSubjId == prevSubjId) {
-                questSubjId = getRandomId()
-            }
-            rightAnsId = getRightAns(questSubjId)
-
-            usedAnsIds.add(questSubjId)
-            usedAnsIds.add(rightAnsId)
-
-            subText.text = getText(questSubjId)
-            ansBttns[rightBtnId].text = getText(rightAnsId)
-
-            for (i in possibleBttns) {
-                if (i == rightBtnId) continue
-                var currentId = getRandomId()
-                while (usedAnsIds.contains(currentId)) {
-                    currentId = getRandomId()
-                }
-                usedAnsIds.add(currentId)
-                ansBttns[i].text = getText(currentId)
-            }
-        }
-
-        fun getRandomId(): Int {
-            return (-questRange..questRange).random()
-        }
-
-        fun getText(relId: Int): String {
-            //TEMPORARY !!!
-            return activity.resources.getStringArray(R.array.note_names)[relId + 17]
-        }
-
-        fun getRightAns(relId: Int): Int {
-            //TEMPORARY !!!
-            return relId + 1
-        }
-
-        fun ask(): Int {
-            return questSubjId
-        }
-
-    }
+    private var prevSubj: Int = 0
 
 
     fun askNewQuestion() {
-        currentQuest = Question(prevSubjId)
-        prevSubjId = currentQuest.ask()
+        currentQuest = Question()
+        prevSubj = currentQuest.subject
     }
 
     fun giveAnswer(btnId: Int): Int? {
-        if (btnId == currentQuest.rightBtnId) {
+        if (btnId == currentQuest.rightButton) {
             score++
             return null
         }
         return score
+    }
+
+    inner class Question {
+        val subjText: String
+        val optionText: String
+        val buttonTexts = mutableListOf<String>()
+
+        var subject = getRandomId()
+        var rightButton: Int = 0
+
+
+        private fun getRandomId(): Int = (-range..range).random()
+
+        init {
+            while (subject == prevSubj) {
+                subject = getRandomId()
+            }
+            val ansAmount = if (fourAnswers) 4 else 9
+            rightButton = (0 until ansAmount).random()
+            val rightAnswer = questionMaker.getRightAnswer(subject)
+
+            val takenIds = mutableSetOf(rightAnswer, subject)
+
+            for (i in 0 until ansAmount) {
+                if (i == rightButton) {
+                    buttonTexts.add(questionMaker.getButtonText(rightAnswer))
+                    continue
+                }
+                var currentAns = getRandomId()
+                while (takenIds.contains(currentAns)) {
+                    currentAns = getRandomId()
+                }
+                takenIds.add(currentAns)
+                buttonTexts.add(questionMaker.getButtonText(currentAns))
+            }
+
+            subjText = questionMaker.getSubjectText(subject)
+            optionText = questionMaker.getOptionText()
+        }
     }
 }

@@ -37,6 +37,10 @@
         <item>E##</item>
         <item>B##</item>
     </string-array>
+    <string-array name="chord_types">
+        <item>мажорный</item>
+        <item>минорный</item>
+    </string-array>
     <string-array name="interval_names">
         <item>Уменьшенную приму</item>
         <item>Уменьшенную квинту</item>
