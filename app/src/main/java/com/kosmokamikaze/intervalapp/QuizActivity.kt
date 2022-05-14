@@ -17,10 +17,10 @@ class QuizActivity : AppCompatActivity() {
     private var possibleBttns = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
 
     ////////////////////////////////
-    private val type = 1
-    private val option = 10
-    private val range = 4
-    private val amountOfAnswers = 3
+    private val type = 2
+    private val option = 0
+    private val range = 2
+    private val amountOfAnswers = 4
     ////////////////////////////////
 
     private lateinit var quiz: Quiz

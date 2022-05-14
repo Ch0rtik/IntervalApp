@@ -12,6 +12,7 @@ class QuestionGenerator (private val type: Int,
         return when(type) {
             0 -> NoteFromInterval(prevSubj)
             1 -> ChordFromNotes(prevSubj)
+            2 -> IntervalFromNotes(prevSubj)
             else -> NoteFromInterval(prevSubj)
         }
     }
@@ -82,6 +83,36 @@ class QuestionGenerator (private val type: Int,
         override fun getTextById(id: Int): String {
             return mnh.getNoteName(id)
         }
+    }
+
+    private inner class IntervalFromNotes(prevSubj: Int): AbstractQuestion(prevSubj) {
+        override fun getRightAnswer(): Int {
+            return subject
+        }
+
+        override fun getNewId(): Int {
+            return getRandomId()
+        }
+
+        override fun getTakenSet(): MutableSet<Int> {
+            return mutableSetOf(subject)
+        }
+
+        override fun getTextById(id: Int): String {
+            return id.toString()
+        }
+
+        private fun getTwoNotes(): String {
+            val first = getRandomId()
+            val second = mnh.getNoteFromInterval(first, subject)
+            return (mnh.getNoteName(first) + ", " + mnh.getNoteName(second))
+        }
+
+        override val subjectText: String
+            get() = getTwoNotes()
+        override val optionText: String
+            get() = "ИНТЕРВАЛ"
+
     }
 
     private inner class ChordFromNotes(prevSubj: Int): AbstractQuestion(prevSubj) {
