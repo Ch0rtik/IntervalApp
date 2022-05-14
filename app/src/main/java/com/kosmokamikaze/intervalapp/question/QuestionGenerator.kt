@@ -1,12 +1,12 @@
 package com.kosmokamikaze.intervalapp.question
 
-import com.kosmokamikaze.intervalapp.musical.MusicNameHandler
+import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
 
 class QuestionGenerator (private val type: Int,
                          private val option: Int,
                          val amountOfAnswers: Int,
                          private val range: Int,
-                         private val mnh: MusicNameHandler) {
+                         private val mnh: MusicTheoryHandler) {
 
     fun getNewQuestion(prevSubj: Int): Question {
         return when(type) {
@@ -85,7 +85,7 @@ class QuestionGenerator (private val type: Int,
     }
 
     private inner class ChordFromNotes(prevSubj: Int): AbstractQuestion(prevSubj) {
-        private val chord = MusicNameHandler.buildChord(subject, option)
+        private val chord = MusicTheoryHandler.buildChord(subject, option)
 
         override fun getRightAnswer(): Int {
             return subject

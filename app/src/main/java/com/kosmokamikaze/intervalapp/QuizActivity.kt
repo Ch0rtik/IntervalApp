@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.kosmokamikaze.intervalapp.musical.MusicNameHandler
+import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
 
 class QuizActivity : AppCompatActivity() {
     private lateinit var ansBtns: Array<Button>
@@ -29,7 +29,7 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
         setUpViews()
-        val mnh = MusicNameHandler(this)
+        val mnh = MusicTheoryHandler(this)
         quiz = Quiz(type, option, amountOfAnswers, range, mnh)
         setOnClickListeners()
         setUpNewQuestion()

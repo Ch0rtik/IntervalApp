@@ -3,7 +3,7 @@ package com.kosmokamikaze.intervalapp.musical
 import android.content.Context
 import com.kosmokamikaze.intervalapp.R
 
-class MusicNameHandler(context: Context) {
+class MusicTheoryHandler(context: Context) {
     private object Constants {
         const val D_POSITION = 17
         const val PRIMA_POSITION = 7
@@ -22,10 +22,6 @@ class MusicNameHandler(context: Context) {
 
     fun getIntervalName(relId: Int): String {
         return intervalNames[relId + Constants.PRIMA_POSITION]
-    }
-
-    fun getChordNotes(chord: Set<Int>): String {
-        return chord.shuffled().joinToString(", ") { getNoteName(it) }
     }
 
     fun getNoteFromInterval(rootId: Int, interval: Int): Int {
