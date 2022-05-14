@@ -3,9 +3,10 @@ package com.kosmokamikaze.intervalapp
 import com.kosmokamikaze.intervalapp.questionmaker.QuestionMaker
 
 class Quiz (
-    private val fourAnswers: Boolean,
-    private val questionMaker: QuestionMaker, private val range: Int) {
+    private val questionMaker: QuestionMaker) {
     lateinit var currentQuest: Question
+
+    private val amountOfAnswers = questionMaker.getAmountOfAnswers()
 
     private var score = 0
     private var prevSubj: Int = 0
@@ -27,39 +28,17 @@ class Quiz (
     inner class Question {
         val subjText: String
         val optionText: String
-        val buttonTexts = mutableListOf<String>()
+        val buttonTexts: List<String>
+        val subject: Int
 
-        var subject = getRandomId()
-        var rightButton: Int = 0
-
-
-        private fun getRandomId(): Int = (-range..range).random()
+        var rightButton = (0 until amountOfAnswers).random()
 
         init {
-            while (subject == prevSubj) {
-                subject = getRandomId()
-            }
-            val ansAmount = if (fourAnswers) 4 else 9
-            rightButton = (0 until ansAmount).random()
-            val rightAnswer = questionMaker.getRightAnswer(subject)
-
-            val takenIds = mutableSetOf(rightAnswer, subject)
-
-            for (i in 0 until ansAmount) {
-                if (i == rightButton) {
-                    buttonTexts.add(questionMaker.getButtonText(rightAnswer))
-                    continue
-                }
-                var currentAns = getRandomId()
-                while (takenIds.contains(currentAns)) {
-                    currentAns = getRandomId()
-                }
-                takenIds.add(currentAns)
-                buttonTexts.add(questionMaker.getButtonText(currentAns))
-            }
-
-            subjText = questionMaker.getSubjectText(subject)
+            questionMaker.feedArguments(prevSubj, rightButton)
+            subjText = questionMaker.getSubjectText()
+            buttonTexts = questionMaker.getButtonTexts()
             optionText = questionMaker.getOptionText()
+            subject = questionMaker.getSubject()
         }
     }
 }

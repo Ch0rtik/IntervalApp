@@ -1,8 +1,10 @@
 package com.kosmokamikaze.intervalapp.questionmaker
 
 interface QuestionMaker {
-    fun getRightAnswer(subj: Int): Int
-    fun getSubjectText(subj: Int): String
-    fun getButtonText(id: Int): String
+    fun feedArguments(prevSubj: Int, rightButton: Int)
+    fun getSubjectText(): String
+    fun getButtonTexts(): List<String>
     fun getOptionText(): String
+    fun getSubject(): Int
+    fun getAmountOfAnswers(): Int
 }

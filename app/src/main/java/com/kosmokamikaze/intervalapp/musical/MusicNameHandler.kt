@@ -24,15 +24,19 @@ class MusicNameHandler(context: Context) {
         return intervalNames[relId + Constants.PRIMA_POSITION]
     }
 
+    fun getChordNotes(chord: Set<Int>): String {
+        return chord.shuffled().joinToString(", ") { getNoteName(it) }
+    }
+
     fun getNoteFromInterval(rootId: Int, interval: Int): Int {
         return rootId + interval
     }
 
     companion object ChordBuilder {
-        fun buildChord(relId: Int, chordType: Array<Boolean>): Set<Int> {
+        fun buildChord(relId: Int, chordType: List<Byte>): Set<Int> {
             val chord = mutableSetOf(relId)
             for(i in chordType.indices) {
-                val chordNote = relId + 4 + (i / 2) - 3*(i % 2) - (if (chordType[i]) 0 else 1)*7
+                val chordNote = relId + 4 + (i / 2) - 3*(i % 2) + (chordType[i] - 2) *7
                 chord.add(chordNote)
             }
             return chord

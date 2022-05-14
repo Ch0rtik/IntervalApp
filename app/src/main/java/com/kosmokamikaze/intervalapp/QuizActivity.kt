@@ -16,7 +16,13 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var subjText: TextView
     private lateinit var optText: TextView
     private var possibleBttns = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
-    private val fourAnswers = true //!!!
+
+    ////////////////////////////////
+    private val type = 1
+    private val option = 10
+    private val range = 5
+    private val amountOfAnswers = 3
+    ////////////////////////////////
 
     private lateinit var quiz: Quiz
 
@@ -24,8 +30,8 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
         setUpViews()
-        val questionMaker = QMFactory(MusicNameHandler(this)).getQuestionMaker(0, 1)
-        quiz = Quiz(true, questionMaker, 5)
+        val questionMaker = QMFactory(MusicNameHandler(this)).getQuestionMaker(type, option, amountOfAnswers, range)
+        quiz = Quiz(questionMaker)
         setOnClickListeners()
         setUpNewQuestion()
     }
@@ -70,8 +76,19 @@ class QuizActivity : AppCompatActivity() {
         subjText = findViewById(R.id.subjectText)
         optText = findViewById(R.id.optionText)
 
-        if (fourAnswers) {
+        if (amountOfAnswers == 4) {
             possibleBttns = listOf(0, 2, 6, 8)
+            for (i in ansBtns.indices) {
+                if (!possibleBttns.contains(i)) {
+                    ansBtns[i].visibility = View.INVISIBLE
+                    ansBtns[i].isClickable = false
+                    ansLyts[i].visibility = View.INVISIBLE
+                }
+            }
+        }
+
+        if (amountOfAnswers == 3) {
+            possibleBttns = listOf(0, 2, 6)
             for (i in ansBtns.indices) {
                 if (!possibleBttns.contains(i)) {
                     ansBtns[i].visibility = View.INVISIBLE
