@@ -8,8 +8,6 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.kosmokamikaze.intervalapp.musical.MusicNameHandler
-import com.kosmokamikaze.intervalapp.questionmaker.IntervalQM
-import com.kosmokamikaze.intervalapp.questionmaker.QMFactory
 
 class QuizActivity : AppCompatActivity() {
     private lateinit var ansBtns: Array<Button>
@@ -21,7 +19,7 @@ class QuizActivity : AppCompatActivity() {
     ////////////////////////////////
     private val type = 1
     private val option = 10
-    private val range = 3
+    private val range = 4
     private val amountOfAnswers = 3
     ////////////////////////////////
 
@@ -31,8 +29,8 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
         setUpViews()
-        val questionMaker = QMFactory(MusicNameHandler(this)).getQuestionMaker(type, option, amountOfAnswers, range)
-        quiz = Quiz(questionMaker)
+        val mnh = MusicNameHandler(this)
+        quiz = Quiz(type, option, amountOfAnswers, range, mnh)
         setOnClickListeners()
         setUpNewQuestion()
     }
@@ -102,11 +100,11 @@ class QuizActivity : AppCompatActivity() {
 
     private fun setUpNewQuestion() {
         quiz.askNewQuestion()
-        val question = quiz.currentQuest
+        val question = quiz.currentQuestion
         for ((j, i) in possibleBttns.withIndex()) {
             ansBtns[i].text = question.buttonTexts[j]
         }
-        subjText.text = question.subjText
+        subjText.text = question.subjectText
         optText.text = question.optionText
     }
 }

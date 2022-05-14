@@ -1,44 +1,34 @@
 package com.kosmokamikaze.intervalapp
 
-import com.kosmokamikaze.intervalapp.questionmaker.QuestionMaker
+import com.kosmokamikaze.intervalapp.musical.MusicNameHandler
+import com.kosmokamikaze.intervalapp.question.Question
+import com.kosmokamikaze.intervalapp.question.QuestionGenerator
 
-class Quiz (
-    private val questionMaker: QuestionMaker) {
-    lateinit var currentQuest: Question
+class Quiz (type: Int,
+            option: Int,
+            amountOfAnswers: Int,
+            range: Int,
+            mnh: MusicNameHandler
+) {
+    lateinit var currentQuestion: Question
 
-    private val amountOfAnswers = questionMaker.amountOfAnswers
+    private val questionGenerator: QuestionGenerator = QuestionGenerator(type, option, amountOfAnswers, range, mnh)
 
     private var score = 0
     private var prevSubj: Int = 0
 
 
     fun askNewQuestion() {
-        currentQuest = Question()
-        prevSubj = currentQuest.subject
+        currentQuestion = questionGenerator.getNewQuestion(prevSubj)
+        currentQuestion.ask()
+        prevSubj = currentQuestion.subject
     }
 
     fun giveAnswer(btnId: Int): Int? {
-        if (btnId == currentQuest.rightButton) {
+        if (btnId == currentQuestion.rightButton) {
             score++
             return null
         }
         return score
-    }
-
-    inner class Question {
-        val subjText: String
-        val optionText: String
-        val buttonTexts: List<String>
-        val subject: Int
-
-        var rightButton = (0 until amountOfAnswers).random()
-
-        init {
-            questionMaker.feedArguments(prevSubj, rightButton)
-            subjText = questionMaker.getSubjectText()
-            buttonTexts = questionMaker.getButtonTexts()
-            optionText = questionMaker.getOptionText()
-            subject = questionMaker.getSubject()
-        }
     }
 }

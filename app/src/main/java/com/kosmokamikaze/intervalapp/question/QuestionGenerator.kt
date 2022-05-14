@@ -1,24 +1,25 @@
-package com.kosmokamikaze.intervalapp.questionmaker
+package com.kosmokamikaze.intervalapp.question
 
 import com.kosmokamikaze.intervalapp.musical.MusicNameHandler
 
-class DemoQMFactory(private val type: Int,
-                    private val option: Int,
-                    private val amountOfAnswers: Int,
-                    private val range: Int,
-                    private val mnh: MusicNameHandler) {
+class QuestionGenerator (private val type: Int,
+                         private val option: Int,
+                         val amountOfAnswers: Int,
+                         private val range: Int,
+                         private val mnh: MusicNameHandler) {
 
     fun getNewQuestion(prevSubj: Int): Question {
         return when(type) {
-            0 -> IntervalQuestion(prevSubj)
-            else -> IntervalQuestion(prevSubj)
+            0 -> NoteFromInterval(prevSubj)
+            1 -> ChordFromNotes(prevSubj)
+            else -> NoteFromInterval(prevSubj)
         }
     }
 
     private abstract inner class AbstractQuestion(prevSubj: Int): Question {
-        final override val rightButton: Int = (0..amountOfAnswers).random()
+        final override val rightButton: Int = (0 until amountOfAnswers).random()
         final override val subject: Int
-        final override val buttonTexts: List<String>
+        override lateinit var buttonTexts: List<String>
         protected var rightAns = 0
 
         init {
@@ -27,6 +28,9 @@ class DemoQMFactory(private val type: Int,
                 subj = getRandomId()
             }
             this.subject = subj
+        }
+
+        override fun ask() {
             rightAns = getRightAnswer()
 
             val takenSet = getTakenSet()
@@ -43,10 +47,8 @@ class DemoQMFactory(private val type: Int,
                 list.add(id)
                 takenSet.add(id)
             }
-
             buttonTexts = list.map { getTextById(it) }
         }
-
 
         protected fun getRandomId(): Int = (-range..range).random()
 
@@ -57,10 +59,9 @@ class DemoQMFactory(private val type: Int,
         protected abstract fun getTakenSet(): MutableSet<Int>
 
         protected abstract fun getTextById(id: Int): String
-
     }
 
-    private inner class IntervalQuestion(prevSubj: Int): AbstractQuestion(prevSubj) {
+    private inner class NoteFromInterval(prevSubj: Int): AbstractQuestion(prevSubj) {
         override val subjectText: String
             get() = mnh.getNoteName(subject)
         override val optionText: String
@@ -82,12 +83,29 @@ class DemoQMFactory(private val type: Int,
             return mnh.getNoteName(id)
         }
     }
-}
 
-interface Question {
-    val rightButton: Int
-    val subject: Int
-    val subjectText: String
-    val buttonTexts: List<String>
-    val optionText: String
+    private inner class ChordFromNotes(prevSubj: Int): AbstractQuestion(prevSubj) {
+        private val chord = MusicNameHandler.buildChord(subject, option)
+
+        override fun getRightAnswer(): Int {
+            return subject
+        }
+
+        override fun getNewId(): Int {
+            return chord.random()
+        }
+
+        override fun getTakenSet(): MutableSet<Int> {
+            return mutableSetOf(subject)
+        }
+
+        override fun getTextById(id: Int): String {
+            return mnh.getNoteName(id)
+        }
+
+        override val subjectText: String
+            get() = chord.shuffled().joinToString(", ") { mnh.getNoteName(it)}
+        override val optionText: String
+            get() = "TODO"
+    }
 }
