@@ -33,8 +33,8 @@ class MusicNameHandler(context: Context) {
     }
 
     companion object ChordBuilder {
-        fun buildChord(relId: Int, chordType: List<Byte>): Set<Int> {
-            val chord = mutableSetOf(relId)
+        fun buildChord(relId: Int, chordType: List<Byte>): List<Int> {
+            val chord = mutableListOf(relId)
             for(i in chordType.indices) {
                 val chordNote = relId + 4 + (i / 2) - 3*(i % 2) + (chordType[i] - 2) *7
                 chord.add(chordNote)

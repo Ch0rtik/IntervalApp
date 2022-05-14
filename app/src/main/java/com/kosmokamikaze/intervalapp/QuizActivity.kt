@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.kosmokamikaze.intervalapp.musical.MusicNameHandler
+import com.kosmokamikaze.intervalapp.questionmaker.IntervalQM
 import com.kosmokamikaze.intervalapp.questionmaker.QMFactory
 
 class QuizActivity : AppCompatActivity() {
@@ -20,7 +21,7 @@ class QuizActivity : AppCompatActivity() {
     ////////////////////////////////
     private val type = 1
     private val option = 10
-    private val range = 5
+    private val range = 3
     private val amountOfAnswers = 3
     ////////////////////////////////
 

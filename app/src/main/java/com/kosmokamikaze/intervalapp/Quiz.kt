@@ -6,7 +6,7 @@ class Quiz (
     private val questionMaker: QuestionMaker) {
     lateinit var currentQuest: Question
 
-    private val amountOfAnswers = questionMaker.getAmountOfAnswers()
+    private val amountOfAnswers = questionMaker.amountOfAnswers
 
     private var score = 0
     private var prevSubj: Int = 0
