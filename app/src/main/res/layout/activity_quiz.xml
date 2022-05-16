@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
-    tools:context=".QuizActivity">
+    tools:context=".QuizActivity"
+    app:backgroundTint="@null">
 
 
     <LinearLayout
@@ -83,7 +84,7 @@
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="34sp"
-            app:backgroundTint="@android:color/background_light" />
+            app:backgroundTint="@null" />
     </LinearLayout>
 
     <LinearLayout
@@ -109,7 +110,7 @@
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="34sp"
-            app:backgroundTint="@android:color/background_light" />
+            app:backgroundTint="@null" />
     </LinearLayout>
 
     <LinearLayout
@@ -136,7 +137,7 @@
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="34sp"
-            app:backgroundTint="@android:color/background_light" />
+            app:backgroundTint="@null" />
     </LinearLayout>
 
     <LinearLayout
@@ -163,7 +164,7 @@
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="34sp"
-            app:backgroundTint="@android:color/background_light" />
+            app:backgroundTint="@null" />
     </LinearLayout>
 
     <LinearLayout
@@ -189,7 +190,7 @@
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="34sp"
-            app:backgroundTint="@android:color/background_light" />
+            app:backgroundTint="@null" />
     </LinearLayout>
 
     <LinearLayout
@@ -216,7 +217,7 @@
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="34sp"
-            app:backgroundTint="@android:color/background_light" />
+            app:backgroundTint="@null" />
     </LinearLayout>
 
     <LinearLayout
@@ -243,7 +244,7 @@
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="34sp"
-            app:backgroundTint="@android:color/background_light" />
+            app:backgroundTint="@null" />
     </LinearLayout>
 
     <LinearLayout
@@ -269,7 +270,7 @@
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="34sp"
-            app:backgroundTint="@android:color/background_light" />
+            app:backgroundTint="@null" />
     </LinearLayout>
 
     <LinearLayout
@@ -296,7 +297,7 @@
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="34sp"
-            app:backgroundTint="@android:color/background_light" />
+            app:backgroundTint="@null" />
     </LinearLayout>
 
     <LinearLayout
@@ -321,7 +322,7 @@
             android:text="Далее"
             android:textColor="@android:color/background_light"
             android:textSize="25sp"
-            app:backgroundTint="@color/colorPrimary"/>
+            app:backgroundTint="@null"/>
     </LinearLayout>
 
 

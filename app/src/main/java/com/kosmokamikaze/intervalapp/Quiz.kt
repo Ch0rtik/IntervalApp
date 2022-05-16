@@ -13,6 +13,7 @@ class Quiz (type: Int,
     lateinit var currentQuestion: Question
 
     private val questionGenerator: QuestionGenerator = QuestionGenerator(type, option, amountOfAnswers, range, mnh)
+    val amountOfAnswers = questionGenerator.amountOfAnswers
 
     private var score = 0
     private var prevSubj: Int = 0
@@ -24,8 +25,8 @@ class Quiz (type: Int,
         prevSubj = currentQuestion.subject
     }
 
-    fun giveAnswer(btnId: Int): Int? {
-        if (btnId == currentQuestion.rightButton) {
+    fun giveAnswer(btnIds: Set<Int>): Int? {
+        if (btnIds.containsAll(currentQuestion.correctButtons)) {
             score++
             return null
         }

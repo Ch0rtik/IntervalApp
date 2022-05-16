@@ -30,6 +30,7 @@ class QuestionGenerator (private val type: Int,
 
     private abstract inner class AbstractQuestion(prevSubj: Int): Question {
         final override val correctButtons: Set<Int>
+        final val rightAnswers = mutableSetOf<Int>()
         final override val rightButton: Int = (0 until amountOfButtons).random()
         final override val subject: Int
         override lateinit var buttonTexts: List<String>
@@ -61,7 +62,8 @@ class QuestionGenerator (private val type: Int,
             val takenSet = getTakenSet()
             val list = mutableListOf<Int>()
             for (i in 0 until amountOfButtons) {
-                if (i == rightButton) {
+                if (correctButtons.contains(i)) {
+                    val answer = rightAnswers.random()
                     list.add(rightAns)
                     continue
                 }
