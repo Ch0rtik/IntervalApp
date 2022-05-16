@@ -24,10 +24,10 @@ class QuizActivity : AppCompatActivity() {
     private val chosenButtons = mutableSetOf<Int>()
 
     ////////////////////////////////
-    private val type = 0
-    private val option = 1
-    private val range = 3
-    private val amountOfButtons = 4
+    private val type = 4
+    private val option = 2726
+    private val range = 5
+    private val amountOfButtons = 9
     ////////////////////////////////
 
     private lateinit var quiz: Quiz

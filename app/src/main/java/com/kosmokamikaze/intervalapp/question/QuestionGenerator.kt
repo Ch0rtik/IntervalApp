@@ -1,6 +1,7 @@
 package com.kosmokamikaze.intervalapp.question
 
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
+import java.lang.IllegalArgumentException
 import kotlin.math.ceil
 import kotlin.math.log
 
@@ -13,18 +14,20 @@ class QuestionGenerator (private val type: Int,
         0 -> 1
         1 -> 1
         2 -> 1
-        3 -> ceil(log(option.toDouble(), 4.0)).toInt()
+        3 -> ceil(log(option.toDouble(), 4.0)).toInt() + 1
+        4 -> 7
         else -> 1
     }
 
     fun getNewQuestion(prevSubj: Int): Question {
         return when(type) {
-            0 -> {
-                NoteFromInterval(prevSubj)
-            }
-            1 -> ChordFromNotes(prevSubj)
-            2 -> IntervalFromNotes(prevSubj)
-            else -> NoteFromInterval(prevSubj)
+            0 -> NoteFromInterval(prevSubj)
+            1 -> IntervalFromNotes(prevSubj)
+            2 -> ChordFromNotes(prevSubj)
+            3 -> NotesFromChord(prevSubj)
+            4 -> NotesFromScale(prevSubj)
+
+            else -> throw IllegalArgumentException("Wrong type")
         }
     }
 
@@ -113,8 +116,6 @@ class QuestionGenerator (private val type: Int,
     }
 
     private inner class IntervalFromNotes(prevSubj: Int): AbstractQuestion(prevSubj) {
-
-
         override fun generateRightAnswers(): MutableSet<Int> {
             return mutableSetOf(subject)
         }
@@ -167,5 +168,39 @@ class QuestionGenerator (private val type: Int,
             get() = chord.shuffled().joinToString(", ") { mnh.getNoteName(it)}
         override val optionText: String
             get() = "TODO"
+    }
+
+    private abstract inner class AbstractNotesQuestion(prevSubj: Int): AbstractQuestion(prevSubj) {
+        protected val notes = MusicTheoryHandler.buildChord(subject, option)
+
+        override fun generateRightAnswers(): MutableSet<Int> {
+            return notes.toMutableSet()
+        }
+
+        override fun getNewId(): Int {
+            return getRandomId()
+        }
+
+        override fun getTakenSet(): MutableSet<Int> {
+            return notes.toMutableSet()
+        }
+
+        override fun getTextById(id: Int): String {
+            return mnh.getNoteName(id)
+        }
+    }
+
+    private inner class NotesFromChord(prevSubj: Int): AbstractNotesQuestion(prevSubj) {
+        override val subjectText: String
+            get() = mnh.getNoteName(subject) //!!!
+        override val optionText: String
+            get() = "ноты"
+    }
+
+    private inner class NotesFromScale(prevSubj: Int): AbstractNotesQuestion(prevSubj) {
+        override val subjectText: String
+            get() = mnh.getNoteName(subject) //!!!
+        override val optionText: String
+            get() = "ноты"
     }
 }

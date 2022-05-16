@@ -8,9 +8,12 @@ class MusicTheoryHandler(context: Context) {
         const val D_POSITION = 17
         const val PRIMA_POSITION = 7
     }
+
+
     private val noteNames = context.resources.getStringArray(R.array.note_names)
     private val intervalNames = context.resources.getStringArray(R.array.interval_names)
     private val shortIntervalNames = context.resources.getStringArray(R.array.interval_names_short)
+
 
     fun getNoteList(range: Int): List<String> {
         return noteNames

@@ -87,4 +87,9 @@
         <item>A7</item>
         <item>AA5</item>
     </string-array>
+    <map linked="true">
+        <entry key="10">
+            Maj
+        </entry>
+    </map>
 </resources>
