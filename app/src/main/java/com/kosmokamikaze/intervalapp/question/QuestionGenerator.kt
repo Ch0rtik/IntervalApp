@@ -30,11 +30,9 @@ class QuestionGenerator (private val type: Int,
 
     private abstract inner class AbstractQuestion(prevSubj: Int): Question {
         final override val correctButtons: Set<Int>
-        final val rightAnswers = mutableSetOf<Int>()
-        final override val rightButton: Int = (0 until amountOfButtons).random()
+        protected lateinit var rightAnswers: MutableSet<Int>
         final override val subject: Int
         override lateinit var buttonTexts: List<String>
-        protected var rightAns = 0
 
         init {
             var subj = getRandomId()
@@ -57,14 +55,15 @@ class QuestionGenerator (private val type: Int,
         }
 
         override fun ask() {
-            rightAns = getRightAnswer()
+            rightAnswers = generateRightAnswers()
 
             val takenSet = getTakenSet()
             val list = mutableListOf<Int>()
             for (i in 0 until amountOfButtons) {
                 if (correctButtons.contains(i)) {
                     val answer = rightAnswers.random()
-                    list.add(rightAns)
+                    rightAnswers.remove(answer)
+                    list.add(answer)
                     continue
                 }
                 var id = getNewId()
@@ -79,7 +78,8 @@ class QuestionGenerator (private val type: Int,
 
         protected fun getRandomId(): Int = (-range..range).random()
 
-        protected abstract fun getRightAnswer(): Int
+
+        protected abstract fun generateRightAnswers(): MutableSet<Int>
 
         protected abstract fun getNewId(): Int
 
@@ -94,8 +94,9 @@ class QuestionGenerator (private val type: Int,
         override val optionText: String
             get() = mnh.getIntervalName(option)
 
-        override fun getRightAnswer(): Int {
-            return mnh.getNoteFromInterval(subject, option)
+
+        override fun generateRightAnswers(): MutableSet<Int> {
+            return mutableSetOf(mnh.getNoteFromInterval(subject, option))
         }
 
         override fun getNewId(): Int {
@@ -103,7 +104,7 @@ class QuestionGenerator (private val type: Int,
         }
 
         override fun getTakenSet(): MutableSet<Int> {
-            return mutableSetOf(subject, rightAns, subject + 7, subject - 7)
+            return mutableSetOf(subject, rightAnswers.random(), subject + 7, subject - 7)
         }
 
         override fun getTextById(id: Int): String {
@@ -112,8 +113,10 @@ class QuestionGenerator (private val type: Int,
     }
 
     private inner class IntervalFromNotes(prevSubj: Int): AbstractQuestion(prevSubj) {
-        override fun getRightAnswer(): Int {
-            return subject
+
+
+        override fun generateRightAnswers(): MutableSet<Int> {
+            return mutableSetOf(subject)
         }
 
         override fun getNewId(): Int {
@@ -144,8 +147,8 @@ class QuestionGenerator (private val type: Int,
     private inner class ChordFromNotes(prevSubj: Int): AbstractQuestion(prevSubj) {
         private val chord = MusicTheoryHandler.buildChord(subject, option)
 
-        override fun getRightAnswer(): Int {
-            return subject
+        override fun generateRightAnswers(): MutableSet<Int> {
+            return mutableSetOf(subject)
         }
 
         override fun getNewId(): Int {
