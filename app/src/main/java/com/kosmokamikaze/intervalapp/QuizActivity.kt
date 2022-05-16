@@ -10,17 +10,19 @@ import android.widget.TextView
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
 
 class QuizActivity : AppCompatActivity() {
-    private lateinit var ansBtns: Array<Button>
-    private lateinit var ansLyts: Array<LinearLayout>
+    private lateinit var ansButtons: Array<Button>
+    private lateinit var ansLayouts: Array<LinearLayout>
     private lateinit var subjText: TextView
     private lateinit var optText: TextView
-    private var possibleBttns = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
+    private lateinit var submitButton: Button
+    private lateinit var submitLayout: LinearLayout
+    private var possibleButtons = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
 
     ////////////////////////////////
     private val type = 2
     private val option = 0
     private val range = 2
-    private val amountOfAnswers = 4
+    private val amountOfButtons = 4
     ////////////////////////////////
 
     private lateinit var quiz: Quiz
@@ -30,15 +32,15 @@ class QuizActivity : AppCompatActivity() {
         setContentView(R.layout.activity_quiz)
         setUpViews()
         val mnh = MusicTheoryHandler(this)
-        quiz = Quiz(type, option, amountOfAnswers, range, mnh)
+        quiz = Quiz(type, option, amountOfButtons, range, mnh)
         setOnClickListeners()
         setUpNewQuestion()
     }
 
     private fun setOnClickListeners() {
-        for (i in ansBtns.indices) {
-            ansBtns[i].setOnClickListener {
-                val result = quiz.giveAnswer(possibleBttns.indexOf(i))
+        for (i in ansButtons.indices) {
+            ansButtons[i].setOnClickListener {
+                val result = quiz.giveAnswer(possibleButtons.indexOf(i))
                 if (result == null) {
                     setUpNewQuestion()
                 } else {
@@ -50,7 +52,7 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun setUpViews() {
-        ansBtns = arrayOf(
+        ansButtons = arrayOf(
             findViewById(R.id.answerButton0),
             findViewById(R.id.answerButton1),
             findViewById(R.id.answerButton2),
@@ -61,7 +63,7 @@ class QuizActivity : AppCompatActivity() {
             findViewById(R.id.answerButton7),
             findViewById(R.id.answerButton8),)
 
-        ansLyts = arrayOf(
+        ansLayouts = arrayOf(
             findViewById(R.id.answerLayout0),
             findViewById(R.id.answerLayout1),
             findViewById(R.id.answerLayout2),
@@ -75,34 +77,31 @@ class QuizActivity : AppCompatActivity() {
         subjText = findViewById(R.id.subjectText)
         optText = findViewById(R.id.optionText)
 
-        if (amountOfAnswers == 4) {
-            possibleBttns = listOf(0, 2, 6, 8)
-            for (i in ansBtns.indices) {
-                if (!possibleBttns.contains(i)) {
-                    ansBtns[i].visibility = View.INVISIBLE
-                    ansBtns[i].isClickable = false
-                    ansLyts[i].visibility = View.INVISIBLE
-                }
+        submitButton = findViewById(R.id.submitButton)
+        submitLayout = findViewById(R.id.submitLayout)
+
+        if (amountOfButtons == 4) possibleButtons = listOf(0, 2, 6, 8)
+
+        if (amountOfButtons == 3) possibleButtons = listOf(0, 2, 6)
+
+        for (i in ansButtons.indices) {
+            if (!possibleButtons.contains(i)) {
+                ansButtons[i].visibility = View.INVISIBLE
+                ansButtons[i].isClickable = false
+                ansLayouts[i].visibility = View.INVISIBLE
             }
         }
 
-        if (amountOfAnswers == 3) {
-            possibleBttns = listOf(0, 2, 6)
-            for (i in ansBtns.indices) {
-                if (!possibleBttns.contains(i)) {
-                    ansBtns[i].visibility = View.INVISIBLE
-                    ansBtns[i].isClickable = false
-                    ansLyts[i].visibility = View.INVISIBLE
-                }
-            }
-        }
+        submitButton.visibility = View.INVISIBLE
+        submitButton.isClickable = false
+        submitLayout.visibility = View.INVISIBLE
     }
 
     private fun setUpNewQuestion() {
         quiz.askNewQuestion()
         val question = quiz.currentQuestion
-        for ((j, i) in possibleBttns.withIndex()) {
-            ansBtns[i].text = question.buttonTexts[j]
+        for ((j, i) in possibleButtons.withIndex()) {
+            ansButtons[i].text = question.buttonTexts[j]
         }
         subjText.text = question.subjectText
         optText.text = question.optionText

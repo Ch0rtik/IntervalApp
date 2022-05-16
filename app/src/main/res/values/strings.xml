@@ -64,4 +64,27 @@
         <item>Увеличенную септиму</item>
         <item>Дважды увеличеннную кварту</item>
     </string-array>
+    <string-array name="interval_names_short">
+        <item>d1</item>
+        <item>d5</item>
+        <item>m2</item>
+        <item>m6</item>
+        <item>m3</item>
+        <item>m7</item>
+        <item>P4</item>
+        <item>P1</item>
+        <item>P5</item>
+        <item>M2</item>
+        <item>M6</item>
+        <item>M3</item>
+        <item>M7</item>
+        <item>A4</item>
+        <item>A1</item>
+        <item>A5</item>
+        <item>A2</item>
+        <item>A6</item>
+        <item>A3</item>
+        <item>A7</item>
+        <item>AA5</item>
+    </string-array>
 </resources>

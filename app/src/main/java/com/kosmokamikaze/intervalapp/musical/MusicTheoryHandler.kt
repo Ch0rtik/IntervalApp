@@ -10,6 +10,7 @@ class MusicTheoryHandler(context: Context) {
     }
     private val noteNames = context.resources.getStringArray(R.array.note_names)
     private val intervalNames = context.resources.getStringArray(R.array.interval_names)
+    private val shortIntervalNames = context.resources.getStringArray(R.array.interval_names_short)
 
     fun getNoteList(range: Int): List<String> {
         return noteNames
@@ -22,6 +23,10 @@ class MusicTheoryHandler(context: Context) {
 
     fun getIntervalName(relId: Int): String {
         return intervalNames[relId + Constants.PRIMA_POSITION]
+    }
+
+    fun getShortIntervalName(relId: Int): String {
+        return shortIntervalNames[relId + Constants.PRIMA_POSITION]
     }
 
     fun getNoteFromInterval(rootId: Int, interval: Int): Int {

@@ -1,16 +1,27 @@
 package com.kosmokamikaze.intervalapp.question
 
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
+import kotlin.math.ceil
+import kotlin.math.log
 
 class QuestionGenerator (private val type: Int,
                          private val option: Int,
-                         val amountOfAnswers: Int,
+                         val amountOfButtons: Int,
                          private val range: Int,
                          private val mnh: MusicTheoryHandler) {
+    val amountOfAnswers: Int = when(type) {
+        0 -> 1
+        1 -> 1
+        2 -> 1
+        3 -> ceil(log(option.toDouble(), 4.0)).toInt()
+        else -> 1
+    }
 
     fun getNewQuestion(prevSubj: Int): Question {
         return when(type) {
-            0 -> NoteFromInterval(prevSubj)
+            0 -> {
+                NoteFromInterval(prevSubj)
+            }
             1 -> ChordFromNotes(prevSubj)
             2 -> IntervalFromNotes(prevSubj)
             else -> NoteFromInterval(prevSubj)
@@ -18,7 +29,8 @@ class QuestionGenerator (private val type: Int,
     }
 
     private abstract inner class AbstractQuestion(prevSubj: Int): Question {
-        final override val rightButton: Int = (0 until amountOfAnswers).random()
+        final override val correctButtons: Set<Int>
+        final override val rightButton: Int = (0 until amountOfButtons).random()
         final override val subject: Int
         override lateinit var buttonTexts: List<String>
         protected var rightAns = 0
@@ -28,7 +40,19 @@ class QuestionGenerator (private val type: Int,
             while (subj == prevSubj) {
                 subj = getRandomId()
             }
+
             this.subject = subj
+
+            val correctButtons = mutableSetOf<Int>()
+            for (i in 0 until amountOfAnswers) {
+                var buttonId = (0 until amountOfButtons).random()
+                while (correctButtons.contains(buttonId)) {
+                    buttonId = (0 until amountOfButtons).random()
+                }
+                correctButtons.add(buttonId)
+            }
+
+            this.correctButtons = correctButtons
         }
 
         override fun ask() {
@@ -36,7 +60,7 @@ class QuestionGenerator (private val type: Int,
 
             val takenSet = getTakenSet()
             val list = mutableListOf<Int>()
-            for (i in 0 until amountOfAnswers) {
+            for (i in 0 until amountOfButtons) {
                 if (i == rightButton) {
                     list.add(rightAns)
                     continue
@@ -95,11 +119,11 @@ class QuestionGenerator (private val type: Int,
         }
 
         override fun getTakenSet(): MutableSet<Int> {
-            return mutableSetOf(subject)
+            return mutableSetOf(subject, 0)
         }
 
         override fun getTextById(id: Int): String {
-            return id.toString()
+            return mnh.getShortIntervalName(id)
         }
 
         private fun getTwoNotes(): String {
