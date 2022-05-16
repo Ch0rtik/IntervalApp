@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
 
 class QuizActivity : AppCompatActivity() {
@@ -25,8 +26,8 @@ class QuizActivity : AppCompatActivity() {
     ////////////////////////////////
     private val type = 0
     private val option = 1
-    private val range = 5
-    private val amountOfButtons = 9
+    private val range = 3
+    private val amountOfButtons = 4
     ////////////////////////////////
 
     private lateinit var quiz: Quiz
@@ -48,9 +49,9 @@ class QuizActivity : AppCompatActivity() {
                 if (!chosenButtons.contains(index)) {
                     if (chosenButtons.size < quiz.amountOfAnswers) {
                         chosenButtons.add(index)
-                        ansButtons[i].setBackgroundColor(resources.getColor(R.color.colorPrimary))
-                        ansButtons[i].setTextColor(resources.getColor(android.R.color.background_light))
-                        ansLayouts[i].setBackgroundColor(resources.getColor(android.R.color.background_light))
+                        ansButtons[i].setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                        ansButtons[i].setTextColor(ContextCompat.getColor(this, android.R.color.background_light))
+                        ansLayouts[i].setBackgroundColor(ContextCompat.getColor(this, android.R.color.background_light))
                         if (chosenButtons.size == quiz.amountOfAnswers) {
                             submitButton.visibility = View.VISIBLE
                             submitButton.isClickable = true
@@ -59,9 +60,9 @@ class QuizActivity : AppCompatActivity() {
                     }
                 } else {
                     chosenButtons.remove(index)
-                    ansButtons[i].setBackgroundColor(resources.getColor(android.R.color.background_light))
-                    ansButtons[i].setTextColor(resources.getColor(R.color.colorPrimary))
-                    ansLayouts[i].setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                    ansButtons[i].setBackgroundColor(ContextCompat.getColor(this, android.R.color.background_light))
+                    ansButtons[i].setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                    ansLayouts[i].setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary))
                     if (submitButton.isClickable) {
                         submitButton.visibility = View.INVISIBLE
                         submitButton.isClickable = false
@@ -133,9 +134,9 @@ class QuizActivity : AppCompatActivity() {
         val question = quiz.currentQuestion
         for ((j, i) in possibleButtons.withIndex()) {
             ansButtons[i].text = question.buttonTexts[j]
-            ansButtons[i].setBackgroundColor(resources.getColor(android.R.color.background_light))
-            ansButtons[i].setTextColor(resources.getColor(R.color.colorPrimary))
-            ansLayouts[i].setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            ansButtons[i].setBackgroundColor(ContextCompat.getColor(this, android.R.color.background_light))
+            ansButtons[i].setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
+            ansLayouts[i].setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary))
         }
 
         subjText.text = question.subjectText
