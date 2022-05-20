@@ -1,10 +1,12 @@
-package com.kosmokamikaze.intervalapp
+package com.kosmokamikaze.intervalapp.adapters
 
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.kosmokamikaze.intervalapp.QuizActivity
+import com.kosmokamikaze.intervalapp.R
 import com.kosmokamikaze.intervalapp.databinding.MenuItemBinding
 import com.kosmokamikaze.intervalapp.models.MenuSection
 

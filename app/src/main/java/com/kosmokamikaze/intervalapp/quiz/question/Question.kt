@@ -1,4 +1,4 @@
-package com.kosmokamikaze.intervalapp.question
+package com.kosmokamikaze.intervalapp.quiz.question
 
 interface Question {
     fun ask()

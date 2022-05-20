@@ -1,18 +1,18 @@
-package com.kosmokamikaze.intervalapp
+package com.kosmokamikaze.intervalapp.quiz
 
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
-import com.kosmokamikaze.intervalapp.question.Question
-import com.kosmokamikaze.intervalapp.question.QuestionGenerator
+import com.kosmokamikaze.intervalapp.quiz.question.Question
+import com.kosmokamikaze.intervalapp.quiz.question.QuestionGenerator
 
 class Quiz (type: Int,
             option: Int,
             amountOfAnswers: Int,
             range: Int,
-            mnh: MusicTheoryHandler
+            mth: MusicTheoryHandler
 ) {
     lateinit var currentQuestion: Question
 
-    private val questionGenerator: QuestionGenerator = QuestionGenerator(type, option, amountOfAnswers, range, mnh)
+    private val questionGenerator: QuestionGenerator = QuestionGenerator(type, option, amountOfAnswers, range, mth)
     private val amountOfAnswers = questionGenerator.amountOfAnswers
 
     private val chosenButtons = mutableSetOf<Int>()

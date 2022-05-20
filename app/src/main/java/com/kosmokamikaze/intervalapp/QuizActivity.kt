@@ -8,7 +8,11 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
+import com.kosmokamikaze.intervalapp.quiz.Quiz
+import com.kosmokamikaze.intervalapp.viewmodels.QuizViewModel
+import com.kosmokamikaze.intervalapp.viewmodels.QuizViewModelFactory
 
 class QuizActivity : AppCompatActivity() {
     private lateinit var ansButtons: Array<Button>
@@ -18,19 +22,20 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var submitButton: Button
     private lateinit var submitLayout: LinearLayout
 
-    private var possibleButtons = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
+    private var possibleButtons = setOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
     private var type = 0
     private var option = 0
     private var range = 0
     private var amountOfButtons = 0
 
 
+    private lateinit var quizViewModel: QuizViewModel
+
     private lateinit var quiz: Quiz
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
-
 
         intent.extras!!.apply {
             type = getInt("type")
@@ -102,9 +107,9 @@ class QuizActivity : AppCompatActivity() {
         submitButton = findViewById(R.id.submitButton)
         submitLayout = findViewById(R.id.submitLayout)
 
-        if (amountOfButtons == 4) possibleButtons = listOf(0, 2, 6, 8)
+        if (amountOfButtons == 4) possibleButtons = setOf(0, 2, 6, 8)
 
-        if (amountOfButtons == 3) possibleButtons = listOf(0, 2, 6)
+        if (amountOfButtons == 3) possibleButtons = setOf(0, 2, 6)
 
         for (i in ansButtons.indices) {
             if (!possibleButtons.contains(i)) {

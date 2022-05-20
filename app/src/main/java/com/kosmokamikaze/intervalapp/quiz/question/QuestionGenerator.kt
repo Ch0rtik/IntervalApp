@@ -1,4 +1,4 @@
-package com.kosmokamikaze.intervalapp.question
+package com.kosmokamikaze.intervalapp.quiz.question
 
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
 import java.lang.IllegalArgumentException
@@ -9,7 +9,7 @@ class QuestionGenerator (private val type: Int,
                          private val option: Int,
                          val amountOfButtons: Int,
                          private val range: Int,
-                         private val mnh: MusicTheoryHandler) {
+                         private val mth: MusicTheoryHandler) {
     val amountOfAnswers: Int = when(type) {
         0 -> 1
         1 -> 1
@@ -93,13 +93,13 @@ class QuestionGenerator (private val type: Int,
 
     private inner class NoteFromInterval(prevSubj: Int): AbstractQuestion(prevSubj) {
         override val subjectText: String
-            get() = mnh.getNoteName(subject)
+            get() = mth.getNoteName(subject)
         override val optionText: String
-            get() = mnh.getIntervalName(option)
+            get() = mth.getIntervalName(option)
 
 
         override fun generateRightAnswers(): MutableSet<Int> {
-            return mutableSetOf(mnh.getNoteFromInterval(subject, option))
+            return mutableSetOf(mth.getNoteFromInterval(subject, option))
         }
 
         override fun getNewId(): Int {
@@ -111,7 +111,7 @@ class QuestionGenerator (private val type: Int,
         }
 
         override fun getTextById(id: Int): String {
-            return mnh.getNoteName(id)
+            return mth.getNoteName(id)
         }
     }
 
@@ -129,13 +129,13 @@ class QuestionGenerator (private val type: Int,
         }
 
         override fun getTextById(id: Int): String {
-            return mnh.getShortIntervalName(id)
+            return mth.getShortIntervalName(id)
         }
 
         private fun getTwoNotes(): String {
             val first = getRandomId()
-            val second = mnh.getNoteFromInterval(first, subject)
-            return (mnh.getNoteName(first) + ", " + mnh.getNoteName(second))
+            val second = mth.getNoteFromInterval(first, subject)
+            return (mth.getNoteName(first) + ", " + mth.getNoteName(second))
         }
 
         override val subjectText: String
@@ -161,11 +161,11 @@ class QuestionGenerator (private val type: Int,
         }
 
         override fun getTextById(id: Int): String {
-            return mnh.getNoteName(id)
+            return mth.getNoteName(id)
         }
 
         override val subjectText: String
-            get() = chord.shuffled().joinToString(", ") { mnh.getNoteName(it)}
+            get() = chord.shuffled().joinToString(", ") { mth.getNoteName(it)}
         override val optionText: String
             get() = "TODO"
     }
@@ -186,20 +186,20 @@ class QuestionGenerator (private val type: Int,
         }
 
         override fun getTextById(id: Int): String {
-            return mnh.getNoteName(id)
+            return mth.getNoteName(id)
         }
     }
 
     private inner class NotesFromChord(prevSubj: Int): AbstractNotesQuestion(prevSubj) {
         override val subjectText: String
-            get() = mnh.getNoteName(subject) //!!!
+            get() = mth.getNoteName(subject) //!!!
         override val optionText: String
             get() = "ноты"
     }
 
     private inner class NotesFromScale(prevSubj: Int): AbstractNotesQuestion(prevSubj) {
         override val subjectText: String
-            get() = mnh.getNoteName(subject) //!!!
+            get() = mth.getNoteName(subject) //!!!
         override val optionText: String
             get() = "ноты"
     }
