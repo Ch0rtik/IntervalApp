@@ -2,9 +2,7 @@ package com.kosmokamikaze.intervalapp.viewmodels
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.core.text.util.LinkifyCompat
 import androidx.databinding.BaseObservable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +11,6 @@ import com.kosmokamikaze.intervalapp.MenuActivity
 import com.kosmokamikaze.intervalapp.QuizActivity
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
 import com.kosmokamikaze.intervalapp.quiz.Quiz
-import java.util.*
 
 class QuizViewModel(private val colorDark: Int,
                     private val colorLight: Int,
@@ -126,7 +123,7 @@ class QuizViewModel(private val colorDark: Int,
         mutSubmitButtonLive.value = mutSubmitButtonLive.value
     }
 
-    inner class AnsButtonData (): BaseObservable() {
+    inner class AnsButtonData: BaseObservable() {
 
         private var isPressed = false
 

@@ -1,16 +1,11 @@
 package com.kosmokamikaze.intervalapp
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
-import com.kosmokamikaze.intervalapp.quiz.Quiz
 import com.kosmokamikaze.intervalapp.viewmodels.QuizViewModel
 import com.kosmokamikaze.intervalapp.viewmodels.QuizViewModelFactory
 

@@ -1,6 +1,5 @@
 package com.kosmokamikaze.intervalapp.quiz
 
-import android.util.Log
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
 import com.kosmokamikaze.intervalapp.quiz.question.Question
 import com.kosmokamikaze.intervalapp.quiz.question.QuestionGenerator
@@ -9,7 +8,7 @@ class Quiz (type: Int,
             option: Int,
             amountOfButtons: Int,
             range: Int,
-            private val mth: MusicTheoryHandler
+            mth: MusicTheoryHandler
 ) {
     lateinit var currentQuestion: Question
 
