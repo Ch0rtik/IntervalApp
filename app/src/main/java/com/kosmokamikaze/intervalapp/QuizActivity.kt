@@ -22,59 +22,72 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var submitButton: Button
     private lateinit var submitLayout: LinearLayout
 
-    private var possibleButtons = setOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
-    private var type = 0
-    private var option = 0
-    private var range = 0
     private var amountOfButtons = 0
 
+    private lateinit var viewModel: QuizViewModel
 
-    private lateinit var quizViewModel: QuizViewModel
-
-    private lateinit var quiz: Quiz
+    private lateinit var function: (QuizActivity) -> Unit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
 
         intent.extras!!.apply {
-            type = getInt("type")
-            option = getInt("option")
-            range = getInt("range")
             amountOfButtons = getInt("amountOfButtons")
         }
 
-        setUpViews()
+        viewModel = ViewModelProvider(this, QuizViewModelFactory(this, intent.extras!!))
+            .get(QuizViewModel::class.java)
 
-        val mnh = MusicTheoryHandler(this)
-        quiz = Quiz(type, option, amountOfButtons, range, mnh)
+        setUpViews()
         setOnClickListeners()
-        setUpNewQuestion()
+
+        for (i in 0..8) {
+            viewModel.ansButtonsLive[i].observe(this) { buttonData ->
+                buttonData.apply {
+                    ansButtons[i].text = text
+                    ansButtons[i].setTextColor(textColor)
+                    ansButtons[i].setBackgroundColor(buttonColor)
+                    ansLayouts[i].setBackgroundColor(bgColor)
+
+                    ansButtons[i].isClickable = clickable
+                    ansButtons[i].visibility = visibility
+                    ansLayouts[i].visibility = visibility
+                }
+            }
+        }
+
+        viewModel.submitButtonLive.observe(this) { submitData ->
+            submitData.apply {
+                submitButton.visibility = visibility
+                submitButton.isClickable = clickable
+                submitLayout.visibility = visibility
+            }
+        }
+
+        viewModel.subjectLive.observe(this) {
+            subjText.text = it
+        }
+
+        viewModel.optionLive.observe(this) {
+            optText.text = it
+        }
+
+        viewModel.functionLive.observe(this) {
+            function = it
+        }
     }
 
     private fun setOnClickListeners() {
         for (i in ansButtons.indices) {
             ansButtons[i].setOnClickListener {
-                val index = possibleButtons.indexOf(i)
-
-                if (quiz.chooseAnswer(index)) {
-                    makeClicked(i)
-                    if (quiz.isSubmittable()) allowSubmission()
-                } else {
-                    makeUnclicked(i)
-                    if (!quiz.isSubmittable()) disallowSubmission()
-                }
+                viewModel.chooseAnswer(i)
              }
         }
 
         submitButton.setOnClickListener {
-            val result = quiz.submitAnswer()
-            if (result == null) {
-                setUpNewQuestion()
-            } else {
-                val intent = Intent(this, MenuActivity::class.java)
-                startActivity(intent)
-            }
+            viewModel.submitAnswer()
+            function(this)
         }
     }
 
@@ -88,7 +101,7 @@ class QuizActivity : AppCompatActivity() {
             findViewById(R.id.answerButton5),
             findViewById(R.id.answerButton6),
             findViewById(R.id.answerButton7),
-            findViewById(R.id.answerButton8),)
+            findViewById(R.id.answerButton8))
 
         ansLayouts = arrayOf(
             findViewById(R.id.answerLayout0),
@@ -99,64 +112,12 @@ class QuizActivity : AppCompatActivity() {
             findViewById(R.id.answerLayout5),
             findViewById(R.id.answerLayout6),
             findViewById(R.id.answerLayout7),
-            findViewById(R.id.answerLayout8),)
+            findViewById(R.id.answerLayout8))
 
         subjText = findViewById(R.id.subjectText)
         optText = findViewById(R.id.optionText)
 
         submitButton = findViewById(R.id.submitButton)
         submitLayout = findViewById(R.id.submitLayout)
-
-        if (amountOfButtons == 4) possibleButtons = setOf(0, 2, 6, 8)
-
-        if (amountOfButtons == 3) possibleButtons = setOf(0, 2, 6)
-
-        for (i in ansButtons.indices) {
-            if (!possibleButtons.contains(i)) {
-                ansButtons[i].visibility = View.INVISIBLE
-                ansButtons[i].isClickable = false
-                ansLayouts[i].visibility = View.INVISIBLE
-            }
-        }
-
-        disallowSubmission()
-    }
-
-    private fun setUpNewQuestion() {
-        quiz.askNewQuestion()
-        val question = quiz.currentQuestion
-        for ((j, i) in possibleButtons.withIndex()) {
-            ansButtons[i].text = question.buttonTexts[j]
-            makeUnclicked(i)
-        }
-
-        subjText.text = question.subjectText
-        optText.text = question.optionText
-
-        disallowSubmission()
-    }
-
-    private fun allowSubmission() {
-        submitButton.visibility = View.VISIBLE
-        submitButton.isClickable = true
-        submitLayout.visibility = View.VISIBLE
-    }
-
-    private fun disallowSubmission() {
-        submitButton.visibility = View.INVISIBLE
-        submitButton.isClickable = false
-        submitLayout.visibility = View.INVISIBLE
-    }
-
-    private fun makeClicked(id: Int) {
-        ansButtons[id].setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary))
-        ansButtons[id].setTextColor(ContextCompat.getColor(this, android.R.color.background_light))
-        ansLayouts[id].setBackgroundColor(ContextCompat.getColor(this, android.R.color.background_light))
-    }
-
-    private fun makeUnclicked(id: Int) {
-        ansButtons[id].setBackgroundColor(ContextCompat.getColor(this, android.R.color.background_light))
-        ansButtons[id].setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
-        ansLayouts[id].setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary))
     }
 }
