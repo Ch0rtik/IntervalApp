@@ -18,10 +18,9 @@ class QuizViewModel(private val colorDark: Int,
                     mth: MusicTheoryHandler): ViewModel() {
 
     private var possibleButtons = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
-    private var type = 0
-    private var option = 0
-    private var range = 0
+
     private var amountOfButtons = 0
+
 
     private val quiz: Quiz
     private val chosenButtons = mutableSetOf<Int>()
@@ -40,6 +39,9 @@ class QuizViewModel(private val colorDark: Int,
     val returnToMenuLive: LiveData<(QuizActivity) -> Unit> = mutReturnToMenuLive
 
     init {
+        var type: Int
+        var option: Int
+        var range: Int
         extras.apply {
             type = getInt("type")
             option = getInt("option")

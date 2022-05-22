@@ -1,18 +1,19 @@
 package com.kosmokamikaze.intervalapp.musical
 
 import android.content.Context
+import android.content.res.Resources
 import com.kosmokamikaze.intervalapp.R
 
-class MusicTheoryHandler(context: Context) {
+class MusicTheoryHandler(resources: Resources) {
     private object Constants {
         const val D_POSITION = 17
         const val PRIMA_POSITION = 7
     }
 
 
-    private val noteNames = context.resources.getStringArray(R.array.note_names)
-    private val intervalNames = context.resources.getStringArray(R.array.interval_names)
-    private val shortIntervalNames = context.resources.getStringArray(R.array.interval_names_short)
+    private val noteNames = resources.getStringArray(R.array.note_names)
+    private val intervalNames = resources.getStringArray(R.array.interval_names)
+    private val shortIntervalNames = resources.getStringArray(R.array.interval_names_short)
 
 
     fun getNoteList(range: Int): List<String> {

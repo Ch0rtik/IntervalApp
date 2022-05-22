@@ -17,8 +17,6 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var submitButton: Button
     private lateinit var submitLayout: LinearLayout
 
-    private var amountOfButtons = 0
-
     private lateinit var viewModel: QuizViewModel
 
     private lateinit var returnToMenu: (QuizActivity) -> Unit
@@ -26,10 +24,6 @@ class QuizActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
-
-        intent.extras!!.apply {
-            amountOfButtons = getInt("amountOfButtons")
-        }
 
         viewModel = ViewModelProvider(this, QuizViewModelFactory(this, intent.extras!!))
             .get(QuizViewModel::class.java)
