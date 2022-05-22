@@ -63,7 +63,7 @@ class QuizViewModel(private val colorDark: Int,
 
     private fun setUpButtons() {
         if (amountOfButtons == 4) possibleButtons = listOf(0, 2, 6, 8)
-        if (amountOfButtons == 3) possibleButtons = listOf(0, 2, 6)
+        if (amountOfButtons == 3) possibleButtons = listOf(0, 2, 7)
 
         for (i in mutAnsButtonsLive.indices) {
             if (!possibleButtons.contains(i)) {
