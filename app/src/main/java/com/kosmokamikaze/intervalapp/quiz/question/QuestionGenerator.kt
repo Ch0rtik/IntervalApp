@@ -44,14 +44,8 @@ class QuestionGenerator (private val type: Int,
 
         init {
             var subj = getRandomId()
-            Log.d("quiz", "prev: " + mth.getNoteName(prevSubj))
-            Log.d("quiz", mth.getNoteName(subj))
-            Log.d("quiz", (subj == prevSubj).toString())
             while (subj == prevSubj) {
                 subj = getRandomId()
-                Log.d("quiz", mth.getNoteName(subj))
-                Log.d("quiz", (subj == prevSubj).toString())
-
             }
 
             this.subject = subj
