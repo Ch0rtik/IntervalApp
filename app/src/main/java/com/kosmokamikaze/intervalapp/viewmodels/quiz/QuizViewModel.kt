@@ -1,4 +1,4 @@
-package com.kosmokamikaze.intervalapp.viewmodels
+package com.kosmokamikaze.intervalapp.viewmodels.quiz
 
 import android.content.Intent
 import android.os.Bundle
@@ -31,13 +31,13 @@ class QuizViewModel(private val colorDark: Int,
     private val mutSubmitButtonLive: MutableLiveData<SubmitButtonData> = MutableLiveData()
     private val mutOptionLive = MutableLiveData<String>()
     private val mutSubjectLive = MutableLiveData<String>()
-    private val mutFunctionLive = MutableLiveData<(QuizActivity) -> Unit>()
+    private val mutReturnToMenuLive = MutableLiveData<(QuizActivity) -> Unit>()
 
     val ansButtonsLive: Array<MutableLiveData<AnsButtonData>> = mutAnsButtonsLive
     val submitButtonLive: LiveData<SubmitButtonData> = mutSubmitButtonLive
     val optionLive: LiveData<String> = mutOptionLive
     val subjectLive: LiveData<String> = mutSubjectLive
-    val functionLive: LiveData<(QuizActivity) -> Unit> = mutFunctionLive
+    val returnToMenuLive: LiveData<(QuizActivity) -> Unit> = mutReturnToMenuLive
 
     init {
         extras.apply {
@@ -94,9 +94,9 @@ class QuizViewModel(private val colorDark: Int,
         val result = quiz.submitAnswer(chosenButtons)
         if (result == null) {
             setUpNewQuestion()
-            mutFunctionLive.value = { _: QuizActivity ->  }
+            mutReturnToMenuLive.value = { _: QuizActivity ->  }
         } else {
-            mutFunctionLive.value = { activity: QuizActivity ->
+            mutReturnToMenuLive.value = { activity: QuizActivity ->
                 activity.startActivity(Intent(activity, MenuActivity::class.java))
             }
         }

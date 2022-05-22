@@ -1,4 +1,4 @@
-package com.kosmokamikaze.intervalapp.viewmodels
+package com.kosmokamikaze.intervalapp.viewmodels.quiz
 
 import android.content.Context
 import android.os.Bundle
@@ -13,7 +13,8 @@ class QuizViewModelFactory(context: Context, private val extras: Bundle): ViewMo
     private val colorLight = ContextCompat.getColor(context, android.R.color.background_light)
     private val mth = MusicTheoryHandler(context)
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return QuizViewModel(
             colorDark, colorLight, extras, mth
         ) as T

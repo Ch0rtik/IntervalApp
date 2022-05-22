@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kosmokamikaze.intervalapp.QuizActivity
 import com.kosmokamikaze.intervalapp.R
 import com.kosmokamikaze.intervalapp.databinding.MenuItemBinding
-import com.kosmokamikaze.intervalapp.models.MenuSection
+import com.kosmokamikaze.intervalapp.data.QuizDataModel
 
 class MenuAdapter: RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
-    private var items: List<MenuSection> = ArrayList()
+    private var items: List<QuizDataModel> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.menu_item, parent, false)
@@ -26,27 +26,28 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
         return items.size
     }
 
-    fun submitList(list: List<MenuSection>) {
+    fun setData(list: List<QuizDataModel>) {
         items = list
+        notifyDataSetChanged()
     }
 
     class MenuViewHolder(item: View): RecyclerView.ViewHolder(item) {
         private val binding = MenuItemBinding.bind(item)
 
-        private lateinit var menuSection: MenuSection
-        fun bind(menuSection: MenuSection) = with(binding) {
-            this@MenuViewHolder.menuSection = menuSection
-            title.text = menuSection.title
-            highScore.text = menuSection.highScore.toString()
+        private lateinit var quizDataModel: QuizDataModel
+        fun bind(quizDataModel: QuizDataModel) = with(binding) {
+            this@MenuViewHolder.quizDataModel = quizDataModel
+            title.text = quizDataModel.title
+            highScore.text = quizDataModel.highScore.toString()
         }
 
         init {
             item.setOnClickListener {
                 val intent = Intent(item.context, QuizActivity::class.java)
-                intent.putExtra("type", menuSection.type)
-                intent.putExtra("option", menuSection.option)
-                intent.putExtra("range", menuSection.range)
-                intent.putExtra("amountOfButtons", menuSection.amountOfButtons)
+                intent.putExtra("type", quizDataModel.type)
+                intent.putExtra("option", quizDataModel.option)
+                intent.putExtra("range", quizDataModel.range)
+                intent.putExtra("amountOfButtons", quizDataModel.amountOfButtons)
                 item.context.startActivity(intent)
             }
         }

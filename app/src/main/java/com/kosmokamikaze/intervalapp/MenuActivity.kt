@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kosmokamikaze.intervalapp.adapters.MenuAdapter
 import com.kosmokamikaze.intervalapp.databinding.ActivityMenuBinding
-import com.kosmokamikaze.intervalapp.viewmodels.MenuViewModel
+import com.kosmokamikaze.intervalapp.viewmodels.menu.MenuViewModel
+import com.kosmokamikaze.intervalapp.viewmodels.menu.MenuViewModelFactory
 
 class MenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMenuBinding
@@ -15,24 +16,24 @@ class MenuActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MenuViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this).get(MenuViewModel::class.java)
+        viewModel = ViewModelProvider(this, MenuViewModelFactory(this.application)).get(
+            MenuViewModel::class.java)
 
-        viewModel.menuSections.observe(this) {
-            menuAdapter.notifyDataSetChanged()
-        }
 
         initRecyclerView()
+
+        viewModel.readAllData.observe(this) {
+            menuAdapter.setData(it)
+        }
     }
 
     private fun initRecyclerView() = with(binding.recyclerView) {
         layoutManager = LinearLayoutManager(this@MenuActivity)
         adapter = menuAdapter
-        menuAdapter.submitList(viewModel.menuSections.value!!)
     }
 }

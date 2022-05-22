@@ -6,8 +6,8 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
-import com.kosmokamikaze.intervalapp.viewmodels.QuizViewModel
-import com.kosmokamikaze.intervalapp.viewmodels.QuizViewModelFactory
+import com.kosmokamikaze.intervalapp.viewmodels.quiz.QuizViewModel
+import com.kosmokamikaze.intervalapp.viewmodels.quiz.QuizViewModelFactory
 
 class QuizActivity : AppCompatActivity() {
     private lateinit var ansButtons: Array<Button>
@@ -21,7 +21,7 @@ class QuizActivity : AppCompatActivity() {
 
     private lateinit var viewModel: QuizViewModel
 
-    private lateinit var function: (QuizActivity) -> Unit
+    private lateinit var returnToMenu: (QuizActivity) -> Unit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,8 +68,8 @@ class QuizActivity : AppCompatActivity() {
             optText.text = it
         }
 
-        viewModel.functionLive.observe(this) {
-            function = it
+        viewModel.returnToMenuLive.observe(this) {
+            returnToMenu = it
         }
     }
 
@@ -82,7 +82,7 @@ class QuizActivity : AppCompatActivity() {
 
         submitButton.setOnClickListener {
             viewModel.submitAnswer()
-            function(this)
+            returnToMenu(this)
         }
     }
 
