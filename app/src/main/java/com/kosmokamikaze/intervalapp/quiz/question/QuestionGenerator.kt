@@ -31,7 +31,7 @@ class QuestionGenerator (private val type: Int,
             3 -> NotesFromChord(prevSubj)
             4 -> NotesFromScale(prevSubj)
 
-            else -> throw IllegalArgumentException("Wrong type")
+            else -> NoteFromInterval(prevSubj)
         }
     }
 
