@@ -44,7 +44,7 @@ class MenuViewModel(application: Application): ViewModel() {
     private fun buildDataBase() {
         for (quiz in DataBaseFiller.getInitialValues()) {
             viewModelScope.launch(Dispatchers.IO) {
-                repository.addQuiz(quiz)
+                addQuiz(quiz)
             }
         }
     }

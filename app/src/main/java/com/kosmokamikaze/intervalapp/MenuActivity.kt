@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kosmokamikaze.intervalapp.adapters.MenuAdapter
+import com.kosmokamikaze.intervalapp.adapters.TopSpacingDecoration
 import com.kosmokamikaze.intervalapp.databinding.ActivityMenuBinding
 import com.kosmokamikaze.intervalapp.viewmodels.menu.MenuViewModel
 import com.kosmokamikaze.intervalapp.viewmodels.menu.MenuViewModelFactory
@@ -36,6 +37,8 @@ class MenuActivity : AppCompatActivity() {
 
     private fun initRecyclerView() = with(binding.recyclerView) {
         layoutManager = LinearLayoutManager(this@MenuActivity)
+        val decoration = TopSpacingDecoration()
+        addItemDecoration(decoration)
         adapter = menuAdapter
     }
 
