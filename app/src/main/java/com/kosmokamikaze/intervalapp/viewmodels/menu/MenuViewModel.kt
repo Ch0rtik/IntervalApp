@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kosmokamikaze.intervalapp.data.DataBaseBuilder
+import com.kosmokamikaze.intervalapp.data.DataBaseFiller
 import com.kosmokamikaze.intervalapp.data.QuizDatabase
 import com.kosmokamikaze.intervalapp.data.QuizRepository
 import com.kosmokamikaze.intervalapp.data.QuizDataModel
@@ -42,7 +42,7 @@ class MenuViewModel(application: Application): ViewModel() {
     }
 
     private fun buildDataBase() {
-        for (quiz in DataBaseBuilder.getInitialValues()) {
+        for (quiz in DataBaseFiller.getInitialValues()) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.addQuiz(quiz)
             }

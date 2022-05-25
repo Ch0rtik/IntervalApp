@@ -1,13 +1,15 @@
 package com.kosmokamikaze.intervalapp
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kosmokamikaze.intervalapp.adapters.MenuAdapter
 import com.kosmokamikaze.intervalapp.databinding.ActivityMenuBinding
 import com.kosmokamikaze.intervalapp.viewmodels.menu.MenuViewModel
 import com.kosmokamikaze.intervalapp.viewmodels.menu.MenuViewModelFactory
+
 
 class MenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMenuBinding
@@ -35,5 +37,11 @@ class MenuActivity : AppCompatActivity() {
     private fun initRecyclerView() = with(binding.recyclerView) {
         layoutManager = LinearLayoutManager(this@MenuActivity)
         adapter = menuAdapter
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this@MenuActivity, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

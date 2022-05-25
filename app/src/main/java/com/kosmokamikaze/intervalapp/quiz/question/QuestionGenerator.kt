@@ -1,6 +1,5 @@
 package com.kosmokamikaze.intervalapp.quiz.question
 
-import android.util.Log
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
 import java.lang.IllegalArgumentException
 import java.util.Calendar

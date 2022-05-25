@@ -1,6 +1,6 @@
 package com.kosmokamikaze.intervalapp.data
 
-class DataBaseBuilder {
+class DataBaseFiller {
     companion object {
         fun getInitialValues(): List<QuizDataModel> {
             val dataSet = mutableListOf<QuizDataModel>()
