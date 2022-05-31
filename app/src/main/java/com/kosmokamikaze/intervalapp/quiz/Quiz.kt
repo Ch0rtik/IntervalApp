@@ -16,8 +16,10 @@ class Quiz (type: Int,
     val amountOfAnswers = questionGenerator.amountOfAnswers
 
 
-    private var score = 0
+    private var mutScore = 0
     private var prevSubj: Int = (-range..range).random()
+
+    val score: Int get() = mutScore
 
 
     fun askNewQuestion() {
@@ -28,9 +30,9 @@ class Quiz (type: Int,
 
     fun submitAnswer(chosenButtons: Set<Int>): Int? {
         if (chosenButtons.containsAll(currentQuestion.correctButtons)) {
-            score++
+            mutScore++
             return null
         }
-        return score
+        return mutScore
     }
 }

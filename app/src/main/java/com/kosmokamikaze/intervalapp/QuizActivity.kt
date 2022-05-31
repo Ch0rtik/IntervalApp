@@ -6,42 +6,49 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import com.kosmokamikaze.intervalapp.databinding.ActivityQuizBinding
 import com.kosmokamikaze.intervalapp.viewmodels.quiz.QuizViewModel
 import com.kosmokamikaze.intervalapp.viewmodels.quiz.QuizViewModelFactory
 
 class QuizActivity : AppCompatActivity() {
-    private lateinit var ansButtons: Array<Button>
-    private lateinit var ansLayouts: Array<LinearLayout>
     private lateinit var subjText: TextView
     private lateinit var optText: TextView
     private lateinit var submitButton: Button
-    private lateinit var submitLayout: LinearLayout
+
+    private lateinit var answerButtons: Array<AnswerButton>
 
     private lateinit var viewModel: QuizViewModel
 
     private lateinit var returnToMenu: (QuizActivity) -> Unit
 
+    private lateinit var binding: ActivityQuizBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_quiz)
+        binding = ActivityQuizBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this, QuizViewModelFactory(this, intent.extras!!))
-            .get(QuizViewModel::class.java)
+        viewModel = ViewModelProvider(this,
+            QuizViewModelFactory(this, intent.extras!!))[QuizViewModel::class.java]
 
         setUpViews()
         setOnClickListeners()
+        setUpObservables()
+    }
 
+    private fun setUpObservables() {
         for (i in 0..8) {
-            viewModel.ansButtonsLive[i].observe(this) { buttonData ->
-                buttonData.apply {
-                    ansButtons[i].text = text
-                    ansButtons[i].setTextColor(textColor)
-                    ansButtons[i].setBackgroundColor(buttonColor)
-                    ansLayouts[i].setBackgroundColor(bgColor)
+            viewModel.buttonTexts[i].observe(this) {
+                answerButtons[i].setText(it)
+            }
 
-                    ansButtons[i].isClickable = clickable
-                    ansButtons[i].visibility = visibility
-                    ansLayouts[i].visibility = visibility
+            viewModel.buttonVisible[i].observe(this) {
+                if (!it) answerButtons[i].makeInvisible()
+            }
+
+            viewModel.buttonPressed[i].observe(this) {
+                answerButtons[i].apply {
+                    if (it) press() else unpress()
                 }
             }
         }
@@ -50,7 +57,6 @@ class QuizActivity : AppCompatActivity() {
             submitData.apply {
                 submitButton.visibility = visibility
                 submitButton.isClickable = clickable
-                submitLayout.visibility = visibility
             }
         }
 
@@ -68,10 +74,10 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun setOnClickListeners() {
-        for (i in ansButtons.indices) {
-            ansButtons[i].setOnClickListener {
+        for (i in answerButtons.indices) {
+            answerButtons[i].setOnClickListener {
                 viewModel.chooseAnswer(i)
-             }
+            }
         }
 
         submitButton.setOnClickListener {
@@ -81,32 +87,22 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun setUpViews() {
-        ansButtons = arrayOf(
-            findViewById(R.id.answerButton0),
-            findViewById(R.id.answerButton1),
-            findViewById(R.id.answerButton2),
-            findViewById(R.id.answerButton3),
-            findViewById(R.id.answerButton4),
-            findViewById(R.id.answerButton5),
-            findViewById(R.id.answerButton6),
-            findViewById(R.id.answerButton7),
-            findViewById(R.id.answerButton8))
 
-        ansLayouts = arrayOf(
-            findViewById(R.id.answerLayout0),
-            findViewById(R.id.answerLayout1),
-            findViewById(R.id.answerLayout2),
-            findViewById(R.id.answerLayout3),
-            findViewById(R.id.answerLayout4),
-            findViewById(R.id.answerLayout5),
-            findViewById(R.id.answerLayout6),
-            findViewById(R.id.answerLayout7),
-            findViewById(R.id.answerLayout8))
+        answerButtons = arrayOf(
+            AnswerButton(binding.answerButton0, binding.answerLayout0),
+            AnswerButton(binding.answerButton1, binding.answerLayout1),
+            AnswerButton(binding.answerButton2, binding.answerLayout2),
+            AnswerButton(binding.answerButton3, binding.answerLayout3),
+            AnswerButton(binding.answerButton4, binding.answerLayout4),
+            AnswerButton(binding.answerButton5, binding.answerLayout5),
+            AnswerButton(binding.answerButton6, binding.answerLayout6),
+            AnswerButton(binding.answerButton7, binding.answerLayout7),
+            AnswerButton(binding.answerButton8, binding.answerLayout8),
+        )
 
-        subjText = findViewById(R.id.subjectText)
-        optText = findViewById(R.id.optionText)
+        subjText = binding.subjectText
+        optText = binding.optionText
 
-        submitButton = findViewById(R.id.submitButton)
-        submitLayout = findViewById(R.id.submitLayout)
+        submitButton = binding.submitButton
     }
 }

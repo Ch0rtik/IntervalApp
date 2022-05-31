@@ -15,4 +15,7 @@ interface QuizDao {
 
     @Query("SELECT * FROM quiz_data ORDER BY id ASC")
     fun readAllData(): LiveData<List<QuizDataModel>>
+
+    @Query("UPDATE quiz_data SET highScore = :newHighScore WHERE id = :id")
+    suspend fun updateHighScore(id: Int, newHighScore: Int)
 }

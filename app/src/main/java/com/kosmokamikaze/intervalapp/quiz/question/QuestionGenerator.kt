@@ -1,7 +1,6 @@
 package com.kosmokamikaze.intervalapp.quiz.question
 
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
-import java.lang.IllegalArgumentException
 import java.util.Calendar
 import kotlin.math.ceil
 import kotlin.math.log
@@ -65,22 +64,24 @@ class QuestionGenerator (private val type: Int,
             rightAnswers = generateRightAnswers()
 
             val takenSet = getTakenSet()
-            val list = mutableListOf<Int>()
+            val buttonTexts = mutableListOf<Int>()
+
             for (i in 0 until amountOfButtons) {
                 if (correctButtons.contains(i)) {
                     val answer = rightAnswers.random()
                     rightAnswers.remove(answer)
-                    list.add(answer)
+                    buttonTexts.add(answer)
                     continue
                 }
                 var id = getNewId()
                 while (takenSet.contains(id)) {
                     id = getNewId()
                 }
-                list.add(id)
+                buttonTexts.add(id)
                 takenSet.add(id)
             }
-            buttonTexts = list.map { getTextById(it) }
+
+            this.buttonTexts = buttonTexts.map { getTextById(it) }
         }
 
         protected fun getRandomId(): Int = random.nextInt(-range, range)

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.kosmokamikaze.intervalapp.MenuActivity
 import com.kosmokamikaze.intervalapp.QuizActivity
 import com.kosmokamikaze.intervalapp.R
 import com.kosmokamikaze.intervalapp.databinding.MenuItemBinding
@@ -44,11 +45,14 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
         init {
             item.setOnClickListener {
                 val intent = Intent(item.context, QuizActivity::class.java)
+                intent.putExtra("id", quizDataModel.id)
                 intent.putExtra("type", quizDataModel.type)
                 intent.putExtra("option", quizDataModel.option)
                 intent.putExtra("range", quizDataModel.range)
                 intent.putExtra("amountOfButtons", quizDataModel.amountOfButtons)
-                item.context.startActivity(intent)
+                with(item.context as MenuActivity) {
+                    resultLauncher.launch(intent)
+                }
             }
         }
     }
