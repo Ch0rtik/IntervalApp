@@ -45,11 +45,11 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
         init {
             item.setOnClickListener {
                 val intent = Intent(item.context, QuizActivity::class.java)
-                intent.putExtra("id", quizDataModel.id)
-                intent.putExtra("type", quizDataModel.type)
-                intent.putExtra("option", quizDataModel.option)
-                intent.putExtra("range", quizDataModel.range)
-                intent.putExtra("amountOfButtons", quizDataModel.amountOfButtons)
+                intent.putExtra(QuizDataModel.ID, quizDataModel.id)
+                intent.putExtra(QuizDataModel.TYPE, quizDataModel.type)
+                intent.putExtra(QuizDataModel.OPTION, quizDataModel.option)
+                intent.putExtra(QuizDataModel.RANGE, quizDataModel.range)
+                intent.putExtra(QuizDataModel.AMOUNT_OF_BUTTONS, quizDataModel.amountOfButtons)
                 with(item.context as MenuActivity) {
                     resultLauncher.launch(intent)
                 }

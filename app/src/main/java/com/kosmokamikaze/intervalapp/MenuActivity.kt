@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kosmokamikaze.intervalapp.adapters.MenuAdapter
 import com.kosmokamikaze.intervalapp.adapters.TopSpacingDecoration
+import com.kosmokamikaze.intervalapp.data.QuizDataModel
 import com.kosmokamikaze.intervalapp.databinding.ActivityMenuBinding
 import com.kosmokamikaze.intervalapp.viewmodels.menu.MenuViewModel
 import com.kosmokamikaze.intervalapp.viewmodels.menu.MenuViewModelFactory
@@ -42,9 +43,8 @@ class MenuActivity : AppCompatActivity() {
         if (it.resultCode == Activity.RESULT_OK) {
             val data: Intent = it.data!!
             data.apply {
-                viewModel.updateHighScore(getIntExtra("id", 0), getIntExtra("high", 35))
+                viewModel.updateHighScore(getIntExtra(QuizDataModel.ID, 1), getIntExtra(QuizDataModel.HIGH_SCORE, 35))
             }
-            Toast.makeText(this, data.getIntExtra("high", 666).toString(), Toast.LENGTH_SHORT).show()
         }
     }
 

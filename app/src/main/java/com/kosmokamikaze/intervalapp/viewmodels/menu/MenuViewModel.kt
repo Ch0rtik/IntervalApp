@@ -2,9 +2,7 @@ package com.kosmokamikaze.intervalapp.viewmodels.menu
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kosmokamikaze.intervalapp.data.DataBaseFiller

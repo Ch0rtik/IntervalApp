@@ -1,6 +1,5 @@
 package com.kosmokamikaze.intervalapp.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 
 class QuizRepository(private val quizDao: QuizDao) {

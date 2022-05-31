@@ -3,13 +3,13 @@ package com.kosmokamikaze.intervalapp.viewmodels.quiz
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.databinding.BaseObservable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kosmokamikaze.intervalapp.QuizActivity
+import com.kosmokamikaze.intervalapp.data.QuizDataModel
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
 import com.kosmokamikaze.intervalapp.quiz.Quiz
 
@@ -52,11 +52,11 @@ class QuizViewModel(extras: Bundle,
         var option: Int
         var range: Int
         extras.apply {
-            id = getInt("id")
-            type = getInt("type")
-            option = getInt("option")
-            range = getInt("range")
-            amountOfButtons = getInt("amountOfButtons")
+            id = getInt(QuizDataModel.ID)
+            type = getInt(QuizDataModel.TYPE)
+            option = getInt(QuizDataModel.OPTION)
+            range = getInt(QuizDataModel.RANGE)
+            amountOfButtons = getInt(QuizDataModel.AMOUNT_OF_BUTTONS)
         }
 
         quiz = Quiz(type, option, amountOfButtons, range, mth)
@@ -112,8 +112,8 @@ class QuizViewModel(extras: Bundle,
         } else {
             mutReturnToMenuLive.value = { activity: QuizActivity ->
                 val data = Intent()
-                data.putExtra("id", id)
-                data.putExtra("high", quiz.score)
+                data.putExtra(QuizDataModel.ID, id)
+                data.putExtra(QuizDataModel.HIGH_SCORE, quiz.score)
                 activity.setResult(Activity.RESULT_OK, data)
                 activity.finish()
             }
