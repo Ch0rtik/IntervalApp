@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.kosmokamikaze.intervalapp.models.QuizDataModel
+import com.kosmokamikaze.intervalapp.model.QuizDataModel
 
 @Dao
 interface QuizDao {
@@ -15,13 +15,13 @@ interface QuizDao {
     @Query("SELECT * FROM quiz_data ORDER BY id ASC")
     fun readAllData(): LiveData<List<QuizDataModel>>
 
-    @Query("SELECT * FROM quiz_data WHERE (type == 0 OR type == 1) ORDER BY id ASC")
+    @Query("SELECT * FROM quiz_data WHERE (type == 'NOTE_FROM_INTERVAL' OR type == 'INTERVAL_FROM_NOTES' ) ORDER BY id ASC")
     fun readIntervalQuizData(): LiveData<List<QuizDataModel>>
 
-    @Query("SELECT * FROM quiz_data WHERE (type == 2 OR type == 3) ORDER BY id ASC")
+    @Query("SELECT * FROM quiz_data WHERE (type == 'CHORD_FROM_NOTES' OR type == 'NOTES_FROM_CHORD') ORDER BY id ASC")
     fun readChordQuizData(): LiveData<List<QuizDataModel>>
 
-    @Query("SELECT * FROM quiz_data WHERE type == 4 ORDER BY id ASC")
+    @Query("SELECT * FROM quiz_data WHERE type == 'NOTES_FROM_SCALE' ORDER BY id ASC")
     fun readScaleQuizData(): LiveData<List<QuizDataModel>>
 
     @Query("UPDATE quiz_data SET highScore = :newHighScore WHERE id = :id")

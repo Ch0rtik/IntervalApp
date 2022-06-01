@@ -10,10 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kosmokamikaze.intervalapp.adapters.MenuAdapter
 import com.kosmokamikaze.intervalapp.adapters.TopSpacingDecoration
-import com.kosmokamikaze.intervalapp.models.QuizDataModel
+import com.kosmokamikaze.intervalapp.model.QuizDataModel
 import com.kosmokamikaze.intervalapp.databinding.ActivityMenuBinding
-import com.kosmokamikaze.intervalapp.viewmodels.menu.MenuViewModel
-import com.kosmokamikaze.intervalapp.viewmodels.menu.MenuViewModelFactory
+import com.kosmokamikaze.intervalapp.viewmodel.menu.MenuViewModel
+import com.kosmokamikaze.intervalapp.viewmodel.menu.MenuViewModelFactory
 
 
 class MenuActivity : AppCompatActivity() {

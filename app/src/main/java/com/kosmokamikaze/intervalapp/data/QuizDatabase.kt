@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.kosmokamikaze.intervalapp.models.QuizDataModel
+import com.kosmokamikaze.intervalapp.model.QuizDataModel
 
 @Database(entities = [QuizDataModel::class], version = 1, exportSchema = false)
 abstract class QuizDatabase: RoomDatabase() {

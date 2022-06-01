@@ -6,8 +6,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.kosmokamikaze.intervalapp.databinding.ActivityQuizBinding
-import com.kosmokamikaze.intervalapp.viewmodels.quiz.QuizViewModel
-import com.kosmokamikaze.intervalapp.viewmodels.quiz.QuizViewModelFactory
+import com.kosmokamikaze.intervalapp.viewmodel.quiz.QuizViewModel
+import com.kosmokamikaze.intervalapp.viewmodel.quiz.QuizViewModelFactory
 
 class QuizActivity : AppCompatActivity() {
     private lateinit var subjText: TextView

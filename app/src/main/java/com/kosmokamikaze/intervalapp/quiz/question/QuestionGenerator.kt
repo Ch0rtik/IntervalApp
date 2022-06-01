@@ -1,36 +1,41 @@
 package com.kosmokamikaze.intervalapp.quiz.question
 
+import androidx.annotation.InspectableProperty
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
+import com.kosmokamikaze.intervalapp.quiz.QuizTypes
 import java.util.Calendar
 import kotlin.math.ceil
 import kotlin.math.log
 import kotlin.random.Random
 
-class QuestionGenerator (private val type: Int,
+class QuestionGenerator (private val type: QuizTypes,
                          private val option: Int,
                          val amountOfButtons: Int,
-                         private val range: Int,
-                         private val mth: MusicTheoryHandler) {
+                         private val range: Int) {
+    private lateinit var mth: MusicTheoryHandler
+
+
     val amountOfAnswers: Int = when(type) {
-        0 -> 1
-        1 -> 1
-        2 -> 1
-        3 -> ceil(log(option.toDouble(), 4.0)).toInt() + 1
-        4 -> 7
-        else -> 1
+        QuizTypes.NOTE_FROM_INTERVAL -> 1
+        QuizTypes.INTERVAL_FROM_NOTES -> 1
+        QuizTypes.CHORD_FROM_NOTES -> 1
+        QuizTypes.NOTES_FROM_CHORD -> ceil(log(option.toDouble(), 4.0)).toInt() + 1
+        QuizTypes.NOTES_FROM_SCALE -> 7
     }
 
     private val random = Random(Calendar.getInstance().timeInMillis)
 
+    fun setMusicTheoryHandler(mth: MusicTheoryHandler) {
+        this.mth = mth
+    }
+
     fun getNewQuestion(prevSubj: Int): Question {
         return when(type) {
-            0 -> NoteFromInterval(prevSubj)
-            1 -> IntervalFromNotes(prevSubj)
-            2 -> ChordFromNotes(prevSubj)
-            3 -> NotesFromChord(prevSubj)
-            4 -> NotesFromScale(prevSubj)
-
-            else -> NoteFromInterval(prevSubj)
+            QuizTypes.NOTE_FROM_INTERVAL -> NoteFromInterval(prevSubj)
+            QuizTypes.INTERVAL_FROM_NOTES -> IntervalFromNotes(prevSubj)
+            QuizTypes.CHORD_FROM_NOTES -> ChordFromNotes(prevSubj)
+            QuizTypes.NOTES_FROM_CHORD -> NotesFromChord(prevSubj)
+            QuizTypes.NOTES_FROM_SCALE -> NotesFromScale(prevSubj)
         }
     }
 

@@ -1,4 +1,4 @@
-package com.kosmokamikaze.intervalapp.viewmodels.quiz
+package com.kosmokamikaze.intervalapp.viewmodel.quiz
 
 import android.app.Activity
 import android.content.Intent
@@ -9,9 +9,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kosmokamikaze.intervalapp.view.quiz.QuizActivity
-import com.kosmokamikaze.intervalapp.models.QuizDataModel
+import com.kosmokamikaze.intervalapp.model.QuizDataModel
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
 import com.kosmokamikaze.intervalapp.quiz.Quiz
+import com.kosmokamikaze.intervalapp.quiz.QuizTypes
 
 class QuizViewModel(extras: Bundle,
                     mth: MusicTheoryHandler): ViewModel() {
@@ -48,24 +49,21 @@ class QuizViewModel(extras: Bundle,
     private var id: Int = 0
 
     init {
-        var type: Int
+        var type: QuizTypes
         var option: Int
         var range: Int
         extras.apply {
-            id = getInt(QuizDataModel.ID)
-            type = getInt(QuizDataModel.TYPE)
-            option = getInt(QuizDataModel.OPTION)
-            range = getInt(QuizDataModel.RANGE)
-            amountOfButtons = getInt(QuizDataModel.AMOUNT_OF_BUTTONS)
+            val quizData = getParcelable<QuizDataModel>("quiz")
+            id = quizData!!.id
+            type = quizData.type
+            option = quizData.option
+            range = quizData.range
+            amountOfButtons = quizData.amountOfButtons
         }
 
-        quiz = Quiz(type, option, amountOfButtons, range, mth)
+        quiz = Quiz(type, option, amountOfButtons, range)
 
-        for (i in mutButtonPressed.indices) {
-            mutButtonPressed[i].value = false
-            mutButtonVisible[i].value = true
-        }
-        mutSubmitButtonLive.value = SubmitButtonData()
+        quiz.setMusicTheoryHandler(mth)
 
         setUpButtons()
 
@@ -73,6 +71,13 @@ class QuizViewModel(extras: Bundle,
     }
 
     private fun setUpButtons() {
+        for (i in mutButtonPressed.indices) {
+            mutButtonPressed[i].value = false
+            mutButtonVisible[i].value = true
+        }
+
+        mutSubmitButtonLive.value = SubmitButtonData()
+
         if (amountOfButtons == 4) possibleButtons = listOf(0, 2, 6, 8)
         if (amountOfButtons == 3) possibleButtons = listOf(0, 2, 7)
 

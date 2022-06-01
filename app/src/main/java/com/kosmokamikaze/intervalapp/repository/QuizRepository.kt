@@ -2,9 +2,8 @@ package com.kosmokamikaze.intervalapp.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import com.kosmokamikaze.intervalapp.data.QuizDao
 import com.kosmokamikaze.intervalapp.data.QuizDatabase
-import com.kosmokamikaze.intervalapp.models.QuizDataModel
+import com.kosmokamikaze.intervalapp.model.QuizDataModel
 
 class QuizRepository(context: Context) {
     private val quizDao = QuizDatabase.getDatabase(context).quizDao()

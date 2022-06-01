@@ -1,11 +1,9 @@
-package com.kosmokamikaze.intervalapp.viewmodels.quiz
+package com.kosmokamikaze.intervalapp.viewmodel.quiz
 
 import android.content.Context
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kosmokamikaze.intervalapp.R
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
 import com.kosmokamikaze.intervalapp.musical.MusicalNames
 

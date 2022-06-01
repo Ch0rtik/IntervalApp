@@ -1,4 +1,4 @@
-package com.kosmokamikaze.intervalapp.viewmodels.menu
+package com.kosmokamikaze.intervalapp.viewmodel.menu
 
 import android.app.Application
 import android.content.Context
@@ -6,9 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kosmokamikaze.intervalapp.data.DataBaseFiller
-import com.kosmokamikaze.intervalapp.data.QuizDatabase
 import com.kosmokamikaze.intervalapp.repository.QuizRepository
-import com.kosmokamikaze.intervalapp.models.QuizDataModel
+import com.kosmokamikaze.intervalapp.model.QuizDataModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

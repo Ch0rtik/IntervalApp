@@ -9,8 +9,7 @@ import com.kosmokamikaze.intervalapp.view.menu.MenuActivity
 import com.kosmokamikaze.intervalapp.view.quiz.QuizActivity
 import com.kosmokamikaze.intervalapp.R
 import com.kosmokamikaze.intervalapp.databinding.MenuItemBinding
-import com.kosmokamikaze.intervalapp.models.QuizDataModel
-import com.kosmokamikaze.intervalapp.quiz.Quiz
+import com.kosmokamikaze.intervalapp.model.QuizDataModel
 
 class MenuAdapter: RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
     private var items: List<QuizDataModel> = ArrayList()
@@ -46,6 +45,7 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
         init {
             item.setOnClickListener {
                 val intent = Intent(item.context, QuizActivity::class.java)
+                intent.putExtra("quiz", quizDataModel)
                 intent.putExtra(QuizDataModel.ID, quizDataModel.id)
                 intent.putExtra(QuizDataModel.TYPE, quizDataModel.type)
                 intent.putExtra(QuizDataModel.OPTION, quizDataModel.option)

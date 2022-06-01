@@ -4,15 +4,14 @@ import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
 import com.kosmokamikaze.intervalapp.quiz.question.Question
 import com.kosmokamikaze.intervalapp.quiz.question.QuestionGenerator
 
-class Quiz (type: Int,
+class Quiz (type: QuizTypes,
             option: Int,
             amountOfButtons: Int,
-            range: Int,
-            mth: MusicTheoryHandler
+            range: Int
 ) {
     lateinit var currentQuestion: Question
 
-    private val questionGenerator: QuestionGenerator = QuestionGenerator(type, option, amountOfButtons, range, mth)
+    private val questionGenerator: QuestionGenerator = QuestionGenerator(type, option, amountOfButtons, range)
     val amountOfAnswers = questionGenerator.amountOfAnswers
 
 
@@ -20,6 +19,10 @@ class Quiz (type: Int,
     private var prevSubj: Int = (-range..range).random()
 
     val score: Int get() = mutScore
+
+    fun setMusicTheoryHandler(mth: MusicTheoryHandler) {
+        questionGenerator.setMusicTheoryHandler(mth)
+    }
 
 
     fun askNewQuestion() {

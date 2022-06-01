@@ -1,4 +1,4 @@
-package com.kosmokamikaze.intervalapp.viewmodels.menu
+package com.kosmokamikaze.intervalapp.viewmodel.menu
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
