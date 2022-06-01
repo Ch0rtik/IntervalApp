@@ -8,14 +8,15 @@ import androidx.databinding.BaseObservable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.kosmokamikaze.intervalapp.model.quiz.QuizData
 import com.kosmokamikaze.intervalapp.view.quiz.QuizActivity
-import com.kosmokamikaze.intervalapp.model.QuizDataModel
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
-import com.kosmokamikaze.intervalapp.quiz.Quiz
-import com.kosmokamikaze.intervalapp.quiz.QuizTypes
+import com.kosmokamikaze.intervalapp.model.quiz.Quiz
 
-class QuizViewModel(extras: Bundle,
-                    mth: MusicTheoryHandler): ViewModel() {
+class QuizViewModel(
+    extras: Bundle,
+    mth: MusicTheoryHandler
+) : ViewModel() {
 
     private var possibleButtons = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
 
@@ -49,19 +50,12 @@ class QuizViewModel(extras: Bundle,
     private var id: Int = 0
 
     init {
-        var type: QuizTypes
-        var option: Int
-        var range: Int
-        extras.apply {
-            val quizData = getParcelable<QuizDataModel>("quiz")
-            id = quizData!!.id
-            type = quizData.type
-            option = quizData.option
-            range = quizData.range
-            amountOfButtons = quizData.amountOfButtons
-        }
+        val quizData: QuizData = extras.getParcelable("quiz")!!
 
-        quiz = Quiz(type, option, amountOfButtons, range)
+        quiz = Quiz(quizData)
+
+        id = quizData.id
+        amountOfButtons = quizData.amountOfButtons
 
         quiz.setMusicTheoryHandler(mth)
 
@@ -113,12 +107,12 @@ class QuizViewModel(extras: Bundle,
         val result = quiz.submitAnswer(chosenButtons)
         if (result == null) {
             setUpNewQuestion()
-            mutReturnToMenuLive.value = { _: QuizActivity ->  }
+            mutReturnToMenuLive.value = { _: QuizActivity -> }
         } else {
             mutReturnToMenuLive.value = { activity: QuizActivity ->
                 val data = Intent()
-                data.putExtra(QuizDataModel.ID, id)
-                data.putExtra(QuizDataModel.HIGH_SCORE, quiz.score)
+                data.putExtra(QuizData.ID, id)
+                data.putExtra(QuizData.HIGH_SCORE, quiz.score)
                 activity.setResult(Activity.RESULT_OK, data)
                 activity.finish()
             }
@@ -148,13 +142,13 @@ class QuizViewModel(extras: Bundle,
         var visibility = View.VISIBLE
         var clickable = true
 
-        fun makeInvisible()  {
+        fun makeInvisible() {
             visibility = View.INVISIBLE
             clickable = false
             notifyChange()
         }
 
-        fun makeVisible()  {
+        fun makeVisible() {
             visibility = View.VISIBLE
             clickable = true
             notifyChange()

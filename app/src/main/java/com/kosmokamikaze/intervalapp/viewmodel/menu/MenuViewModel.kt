@@ -5,27 +5,28 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kosmokamikaze.intervalapp.data.DataBaseFiller
+import com.kosmokamikaze.intervalapp.App
+import com.kosmokamikaze.intervalapp.model.data.DataBaseFiller
+import com.kosmokamikaze.intervalapp.model.quiz.QuizData
 import com.kosmokamikaze.intervalapp.repository.QuizRepository
-import com.kosmokamikaze.intervalapp.model.QuizDataModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MenuViewModel(application: Application, typeGroup: Int): ViewModel() {
+class MenuViewModel(application: Application, private val typeGroup: Int) : ViewModel() {
 
-    var allData: LiveData<List<QuizDataModel>>
+    var allData: LiveData<List<QuizData>>
     private val repository: QuizRepository
 
 
     init {
         repository = QuizRepository(application.applicationContext)
 
-        val sharedPreferences = application.getSharedPreferences("quizData", Context.MODE_PRIVATE)
+        val sharedPreferences = application.getSharedPreferences(App.QUIZ_DATA, Context.MODE_PRIVATE)
 
-        if (!sharedPreferences.getBoolean("dataBaseCreated", false)) {
+        if (!sharedPreferences.getBoolean(App.DATA_BASE_CREATED, false)) {
             buildDataBase()
             with(sharedPreferences.edit()) {
-                putBoolean("dataBaseCreated", true)
+                putBoolean(App.DATA_BASE_CREATED, true)
                 apply()
             }
         }
@@ -33,9 +34,9 @@ class MenuViewModel(application: Application, typeGroup: Int): ViewModel() {
         allData = repository.readData(typeGroup)
     }
 
-    private fun addQuiz(quiz: QuizDataModel) {
+    private fun addQuiz(quizData: QuizData) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addQuiz(quiz)
+            repository.addQuiz(quizData)
         }
     }
 
@@ -59,7 +60,7 @@ class MenuViewModel(application: Application, typeGroup: Int): ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateHighScore(id, highScore)
         }
-        allData = repository.readAllData()
+        allData = repository.readData(typeGroup)
         return true
     }
 }

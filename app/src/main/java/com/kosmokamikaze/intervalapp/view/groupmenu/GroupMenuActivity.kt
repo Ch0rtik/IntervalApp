@@ -34,9 +34,4 @@ class GroupMenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
-    }
 }

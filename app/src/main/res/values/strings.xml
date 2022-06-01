@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Interval App</string>
+    <string name="app_name">Intervall</string>
     <string-array name="note_names">
         <item>F♭♭</item>
         <item>C♭♭</item>

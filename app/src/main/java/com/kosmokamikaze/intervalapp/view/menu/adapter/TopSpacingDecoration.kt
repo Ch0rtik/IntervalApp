@@ -1,4 +1,4 @@
-package com.kosmokamikaze.intervalapp.adapters
+package com.kosmokamikaze.intervalapp.view.menu.adapter
 
 import android.graphics.Rect
 import android.view.View

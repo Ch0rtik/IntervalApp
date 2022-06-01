@@ -1,21 +1,21 @@
-package com.kosmokamikaze.intervalapp.quiz.question
+package com.kosmokamikaze.intervalapp.model.quiz.question
 
-import androidx.annotation.InspectableProperty
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
-import com.kosmokamikaze.intervalapp.quiz.QuizTypes
+import com.kosmokamikaze.intervalapp.model.quiz.QuizTypes
 import java.util.Calendar
 import kotlin.math.ceil
 import kotlin.math.log
 import kotlin.random.Random
 
-class QuestionGenerator (private val type: QuizTypes,
-                         private val option: Int,
-                         val amountOfButtons: Int,
-                         private val range: Int) {
+class QuestionGenerator(
+    private val type: QuizTypes,
+    private val option: Int,
+    val amountOfButtons: Int,
+    private val range: Int
+) {
     private lateinit var mth: MusicTheoryHandler
 
-
-    val amountOfAnswers: Int = when(type) {
+    val amountOfAnswers: Int = when (type) {
         QuizTypes.NOTE_FROM_INTERVAL -> 1
         QuizTypes.INTERVAL_FROM_NOTES -> 1
         QuizTypes.CHORD_FROM_NOTES -> 1
@@ -30,7 +30,7 @@ class QuestionGenerator (private val type: QuizTypes,
     }
 
     fun getNewQuestion(prevSubj: Int): Question {
-        return when(type) {
+        return when (type) {
             QuizTypes.NOTE_FROM_INTERVAL -> NoteFromInterval(prevSubj)
             QuizTypes.INTERVAL_FROM_NOTES -> IntervalFromNotes(prevSubj)
             QuizTypes.CHORD_FROM_NOTES -> ChordFromNotes(prevSubj)
@@ -39,30 +39,30 @@ class QuestionGenerator (private val type: QuizTypes,
         }
     }
 
-    private abstract inner class AbstractQuestion(prevSubj: Int): Question {
-        final override val correctButtons: Set<Int>
+    private abstract inner class AbstractQuestion(prevSubj: Int) : Question {
+        final override val correctButtonNumbers: Set<Int>
         protected lateinit var rightAnswers: MutableSet<Int>
         final override val subject: Int
         override lateinit var buttonTexts: List<String>
 
         init {
-            var subj = getRandomId()
+            var subj = getRandomId(-range, range + 1)
             while (subj == prevSubj) {
-                subj = getRandomId()
+                subj = getRandomId(-range, range + 1)
             }
 
             this.subject = subj
 
             val correctButtons = mutableSetOf<Int>()
             for (i in 0 until amountOfAnswers) {
-                var buttonId = (0 until amountOfButtons).random()
+                var buttonId = getRandomId(0, amountOfButtons)
                 while (correctButtons.contains(buttonId)) {
-                    buttonId = (0 until amountOfButtons).random()
+                    buttonId = getRandomId(0, amountOfButtons)
                 }
                 correctButtons.add(buttonId)
             }
 
-            this.correctButtons = correctButtons
+            this.correctButtonNumbers = correctButtons
         }
 
         override fun ask() {
@@ -72,7 +72,7 @@ class QuestionGenerator (private val type: QuizTypes,
             val buttonTexts = mutableListOf<Int>()
 
             for (i in 0 until amountOfButtons) {
-                if (correctButtons.contains(i)) {
+                if (correctButtonNumbers.contains(i)) {
                     val answer = rightAnswers.random()
                     rightAnswers.remove(answer)
                     buttonTexts.add(answer)
@@ -89,7 +89,7 @@ class QuestionGenerator (private val type: QuizTypes,
             this.buttonTexts = buttonTexts.map { getTextById(it) }
         }
 
-        protected fun getRandomId(): Int = random.nextInt(-range, range)
+        protected fun getRandomId(from: Int, until: Int): Int = random.nextInt(from, until)
 
         protected abstract fun generateRightAnswers(): MutableSet<Int>
 
@@ -100,7 +100,7 @@ class QuestionGenerator (private val type: QuizTypes,
         protected abstract fun getTextById(id: Int): String
     }
 
-    private inner class NoteFromInterval(prevSubj: Int): AbstractQuestion(prevSubj) {
+    private inner class NoteFromInterval(prevSubj: Int) : AbstractQuestion(prevSubj) {
         override val subjectText: String
             get() = mth.getNoteName(subject)
         override val optionText: String
@@ -112,7 +112,7 @@ class QuestionGenerator (private val type: QuizTypes,
         }
 
         override fun getNewId(): Int {
-            return getRandomId()
+            return getRandomId(-range, range + 1)
         }
 
         override fun getTakenSet(): MutableSet<Int> {
@@ -124,13 +124,13 @@ class QuestionGenerator (private val type: QuizTypes,
         }
     }
 
-    private inner class IntervalFromNotes(prevSubj: Int): AbstractQuestion(prevSubj) {
+    private inner class IntervalFromNotes(prevSubj: Int) : AbstractQuestion(prevSubj) {
         override fun generateRightAnswers(): MutableSet<Int> {
             return mutableSetOf(subject)
         }
 
         override fun getNewId(): Int {
-            return getRandomId()
+            return getRandomId(-range, range + 1)
         }
 
         override fun getTakenSet(): MutableSet<Int> {
@@ -142,7 +142,7 @@ class QuestionGenerator (private val type: QuizTypes,
         }
 
         private fun getTwoNotes(): String {
-            val first = getRandomId()
+            val first = getRandomId(-range, range + 1)
             val second = mth.getNoteFromInterval(first, subject)
             return (mth.getNoteName(first) + ", " + mth.getNoteName(second))
         }
@@ -154,7 +154,7 @@ class QuestionGenerator (private val type: QuizTypes,
 
     }
 
-    private inner class ChordFromNotes(prevSubj: Int): AbstractQuestion(prevSubj) {
+    private inner class ChordFromNotes(prevSubj: Int) : AbstractQuestion(prevSubj) {
         private val chord = MusicTheoryHandler.buildChord(subject, option)
 
         override fun generateRightAnswers(): MutableSet<Int> {
@@ -174,12 +174,12 @@ class QuestionGenerator (private val type: QuizTypes,
         }
 
         override val subjectText: String
-            get() = chord.shuffled().joinToString(", ") { mth.getNoteName(it)}
+            get() = chord.shuffled().joinToString(", ") { mth.getNoteName(it) }
         override val optionText: String
             get() = "TODO"
     }
 
-    private abstract inner class AbstractNotesQuestion(prevSubj: Int): AbstractQuestion(prevSubj) {
+    private abstract inner class AbstractNotesQuestion(prevSubj: Int) : AbstractQuestion(prevSubj) {
         protected val notes = MusicTheoryHandler.buildChord(subject, option)
 
         override fun generateRightAnswers(): MutableSet<Int> {
@@ -187,7 +187,7 @@ class QuestionGenerator (private val type: QuizTypes,
         }
 
         override fun getNewId(): Int {
-            return getRandomId()
+            return getRandomId(-range, range + 1)
         }
 
         override fun getTakenSet(): MutableSet<Int> {
@@ -199,14 +199,14 @@ class QuestionGenerator (private val type: QuizTypes,
         }
     }
 
-    private inner class NotesFromChord(prevSubj: Int): AbstractNotesQuestion(prevSubj) {
+    private inner class NotesFromChord(prevSubj: Int) : AbstractNotesQuestion(prevSubj) {
         override val subjectText: String
             get() = mth.getNoteName(subject) //!!!
         override val optionText: String
             get() = "ноты"
     }
 
-    private inner class NotesFromScale(prevSubj: Int): AbstractNotesQuestion(prevSubj) {
+    private inner class NotesFromScale(prevSubj: Int) : AbstractNotesQuestion(prevSubj) {
         override val subjectText: String
             get() = mth.getNoteName(subject) //!!!
         override val optionText: String

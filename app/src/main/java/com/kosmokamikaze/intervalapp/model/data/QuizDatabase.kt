@@ -1,12 +1,12 @@
-package com.kosmokamikaze.intervalapp.data
+package com.kosmokamikaze.intervalapp.model.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.kosmokamikaze.intervalapp.model.QuizDataModel
+import com.kosmokamikaze.intervalapp.model.quiz.QuizData
 
-@Database(entities = [QuizDataModel::class], version = 1, exportSchema = false)
+@Database(entities = [QuizData::class], version = 1, exportSchema = false)
 abstract class QuizDatabase: RoomDatabase() {
     abstract fun quizDao(): QuizDao
 
