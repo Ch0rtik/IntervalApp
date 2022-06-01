@@ -1,4 +1,4 @@
-package com.kosmokamikaze.intervalapp
+package com.kosmokamikaze.intervalapp.view.quiz
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

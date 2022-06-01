@@ -7,20 +7,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kosmokamikaze.intervalapp.data.DataBaseFiller
 import com.kosmokamikaze.intervalapp.data.QuizDatabase
-import com.kosmokamikaze.intervalapp.data.QuizRepository
-import com.kosmokamikaze.intervalapp.data.QuizDataModel
+import com.kosmokamikaze.intervalapp.repository.QuizRepository
+import com.kosmokamikaze.intervalapp.models.QuizDataModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MenuViewModel(application: Application): ViewModel() {
+class MenuViewModel(application: Application, typeGroup: Int): ViewModel() {
 
     var allData: LiveData<List<QuizDataModel>>
     private val repository: QuizRepository
 
 
     init {
-        val quizDao = QuizDatabase.getDatabase(application).quizDao()
-        repository = QuizRepository(quizDao)
+        repository = QuizRepository(application.applicationContext)
 
         val sharedPreferences = application.getSharedPreferences("quizData", Context.MODE_PRIVATE)
 
@@ -32,7 +31,7 @@ class MenuViewModel(application: Application): ViewModel() {
             }
         }
 
-        allData = repository.readAllData()
+        allData = repository.readData(typeGroup)
     }
 
     private fun addQuiz(quiz: QuizDataModel) {
@@ -42,19 +41,26 @@ class MenuViewModel(application: Application): ViewModel() {
     }
 
     private fun buildDataBase() {
-        for (quiz in DataBaseFiller.getInitialValues()) {
-            addQuiz(quiz)
+        viewModelScope.launch(Dispatchers.IO) {
+            DataBaseFiller.addInitialValues(repository)
         }
     }
 
-    fun updateHighScore(id: Int, highScore: Int) {
-        val prevHighScore = allData.value!![id - 1].highScore
+    fun updateHighScore(id: Int, highScore: Int): Boolean {
+        var prevHighScore = 0
+        for (data in allData.value!!) {
+            if (data.id == id) {
+                prevHighScore = data.highScore
+                break
+            }
+        }
         if (prevHighScore >= highScore) {
-            return
+            return false
         }
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateHighScore(id, highScore)
         }
         allData = repository.readAllData()
+        return true
     }
 }

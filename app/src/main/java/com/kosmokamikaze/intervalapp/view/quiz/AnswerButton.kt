@@ -1,10 +1,11 @@
-package com.kosmokamikaze.intervalapp
+package com.kosmokamikaze.intervalapp.view.quiz
 
 
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import com.kosmokamikaze.intervalapp.R
 
 class AnswerButton(private val button: Button, private val layout: LinearLayout) {
 

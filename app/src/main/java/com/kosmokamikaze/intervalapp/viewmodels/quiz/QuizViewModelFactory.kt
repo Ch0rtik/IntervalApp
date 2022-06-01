@@ -7,9 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.kosmokamikaze.intervalapp.R
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
+import com.kosmokamikaze.intervalapp.musical.MusicalNames
 
 class QuizViewModelFactory(context: Context, private val extras: Bundle): ViewModelProvider.Factory {
-    private val mth = MusicTheoryHandler(context.resources)
+    private val mth = MusicTheoryHandler(MusicalNames(context.resources))
 
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

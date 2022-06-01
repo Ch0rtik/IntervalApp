@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.kosmokamikaze.intervalapp.MenuActivity
-import com.kosmokamikaze.intervalapp.QuizActivity
+import com.kosmokamikaze.intervalapp.view.menu.MenuActivity
+import com.kosmokamikaze.intervalapp.view.quiz.QuizActivity
 import com.kosmokamikaze.intervalapp.R
 import com.kosmokamikaze.intervalapp.databinding.MenuItemBinding
-import com.kosmokamikaze.intervalapp.data.QuizDataModel
+import com.kosmokamikaze.intervalapp.models.QuizDataModel
+import com.kosmokamikaze.intervalapp.quiz.Quiz
 
 class MenuAdapter: RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
     private var items: List<QuizDataModel> = ArrayList()

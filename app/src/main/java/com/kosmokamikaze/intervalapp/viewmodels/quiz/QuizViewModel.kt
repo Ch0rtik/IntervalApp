@@ -8,8 +8,8 @@ import androidx.databinding.BaseObservable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kosmokamikaze.intervalapp.QuizActivity
-import com.kosmokamikaze.intervalapp.data.QuizDataModel
+import com.kosmokamikaze.intervalapp.view.quiz.QuizActivity
+import com.kosmokamikaze.intervalapp.models.QuizDataModel
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
 import com.kosmokamikaze.intervalapp.quiz.Quiz
 
@@ -155,5 +155,4 @@ class QuizViewModel(extras: Bundle,
             notifyChange()
         }
     }
-
 }

@@ -1,23 +1,21 @@
 package com.kosmokamikaze.intervalapp.musical
 
-import android.content.res.Resources
-import com.kosmokamikaze.intervalapp.R
 
-class MusicTheoryHandler(resources: Resources) {
+class MusicTheoryHandler(musicalNames: MusicalNames) {
     private object Constants {
         const val D_POSITION = 17
         const val PRIMA_POSITION = 7
     }
 
 
-    private val noteNames = resources.getStringArray(R.array.note_names)
-    private val intervalNames = resources.getStringArray(R.array.interval_names)
-    private val shortIntervalNames = resources.getStringArray(R.array.interval_names_short)
+    private val noteNames = musicalNames.noteNames
+    private val intervalNames = musicalNames.intervalNames
+    private val shortIntervalNames = musicalNames.shortIntervalNames
 
 
     fun getNoteList(range: Int): List<String> {
         return noteNames
-            .slice(Constants.D_POSITION-range..Constants.D_POSITION+range)
+            .slice(Constants.D_POSITION - range..Constants.D_POSITION + range)
     }
 
     fun getNoteName(relId: Int): String {
@@ -39,8 +37,8 @@ class MusicTheoryHandler(resources: Resources) {
     companion object ChordBuilder {
         private fun buildChord(relId: Int, chordType: List<Byte>): List<Int> {
             val chord = mutableListOf(relId)
-            for(i in chordType.indices) {
-                val chordNote = relId + 4 + (i/2) - 3*(i % 2) + (chordType[i]-2) * 7
+            for (i in chordType.indices) {
+                val chordNote = relId + 4 + (i / 2) - 3 * (i % 2) + (chordType[i] - 2) * 7
                 chord.add(chordNote)
             }
             return chord

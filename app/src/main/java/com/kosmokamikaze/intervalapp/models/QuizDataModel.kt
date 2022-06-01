@@ -1,11 +1,7 @@
-package com.kosmokamikaze.intervalapp.data
+package com.kosmokamikaze.intervalapp.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
-
-
-
 
 @Entity(tableName = "quiz_data")
 data class QuizDataModel(
@@ -17,6 +13,9 @@ data class QuizDataModel(
     val option: Int,
     val range: Int,
     val amountOfButtons: Int) {
+
+    constructor(title: String, type: Int, option: Int, range: Int, amountOfButtons: Int): this(0, title, 0, type, option, range, amountOfButtons)
+
     companion object {
         const val ID = "id"
         const val TITLE = "title"
