@@ -1,4 +1,4 @@
-package com.kosmokamikaze.intervalapp.musical
+package com.kosmokamikaze.intervalapp.model.musical
 
 
 class MusicTheoryHandler(musicalNames: MusicalNames) {
@@ -6,21 +6,13 @@ class MusicTheoryHandler(musicalNames: MusicalNames) {
         const val D_POSITION = 17
         const val PRIMA_POSITION = 7
     }
-
-
     private val noteNames = musicalNames.noteNames
     private val intervalNames = musicalNames.intervalNames
     private val intervalNamesAccusative = musicalNames.intervalNamesAccusative
     private val shortIntervalNames = musicalNames.shortIntervalNames
-    private val shortChordNames = musicalNames.shortChordNames
     private val scaleNames = musicalNames.scaleNames
     private val chordTypes = musicalNames.chordTypeNames
-
-
-    fun getNoteList(range: Int): List<String> {
-        return noteNames
-            .slice(Constants.D_POSITION - range..Constants.D_POSITION + range)
-    }
+    val interval = musicalNames.interval
 
     fun getNoteName(relId: Int): String {
         return noteNames[relId + Constants.D_POSITION]
@@ -28,6 +20,10 @@ class MusicTheoryHandler(musicalNames: MusicalNames) {
 
     fun getIntervalName(option: Int): String {
         return intervalNames[option + Constants.PRIMA_POSITION]
+    }
+
+    fun getIntervalFromNotes(first: String, second: String): Int {
+        return getIntervalFromNotes(getNoteId(first), getNoteId(second))
     }
 
     fun getIntervalNameAccusative(option: Int): String {
@@ -38,16 +34,8 @@ class MusicTheoryHandler(musicalNames: MusicalNames) {
         return shortIntervalNames[relId + Constants.PRIMA_POSITION]
     }
 
-    fun getChordNameWithNote(relId: Int, option: Int): String {
-        return getNoteName(relId) + when(option) {
-            10 -> shortChordNames[0]
-            6 -> shortChordNames[1]
-            42 -> shortChordNames[2]
-            25 -> shortChordNames[3]
-            41 -> shortChordNames[4]
-            26 -> shortChordNames[5]
-            else -> ""
-        }
+    fun getNoteId(noteName: String): Int {
+        return noteNames.indexOf(noteName) - Constants.D_POSITION
     }
 
     fun getChordType(option: Int): String {
@@ -75,11 +63,15 @@ class MusicTheoryHandler(musicalNames: MusicalNames) {
         }
     }
 
-    fun getNoteFromInterval(rootId: Int, interval: Int): Int {
-        return rootId + interval
-    }
+    companion object {
+        fun getNoteFromInterval(rootId: Int, interval: Int): Int {
+            return rootId + interval
+        }
 
-    companion object ChordBuilder {
+        fun getIntervalFromNotes(first: Int, second: Int): Int {
+            return second - first
+        }
+
         private fun buildChord(relId: Int, chordType: List<Byte>): List<Int> {
             val chord = mutableListOf(relId)
             for (i in chordType.indices) {
@@ -91,6 +83,10 @@ class MusicTheoryHandler(musicalNames: MusicalNames) {
 
         fun buildChord(relId: Int, chordType: Int): List<Int> {
             return buildChord(relId, toQuaternaryList(chordType))
+        }
+
+        fun buildScale(relId: Int, scaleType: Int): List<Int> {
+            return buildChord(relId, scaleType)
         }
 
         private fun toQuaternaryList(num: Int): List<Byte> {

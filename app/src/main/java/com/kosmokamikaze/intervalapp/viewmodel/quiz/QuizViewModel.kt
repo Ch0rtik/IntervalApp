@@ -1,7 +1,6 @@
 package com.kosmokamikaze.intervalapp.viewmodel.quiz
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -11,9 +10,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kosmokamikaze.intervalapp.model.quiz.QuizData
 import com.kosmokamikaze.intervalapp.view.quiz.QuizActivity
-import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
+import com.kosmokamikaze.intervalapp.model.musical.MusicTheoryHandler
 import com.kosmokamikaze.intervalapp.model.quiz.Quiz
-import com.kosmokamikaze.intervalapp.musical.MusicalNames
+import com.kosmokamikaze.intervalapp.model.musical.MusicalNames
 
 class QuizViewModel(
     musicalNames: MusicalNames,

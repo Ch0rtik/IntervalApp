@@ -3,7 +3,6 @@ package com.kosmokamikaze.intervalapp.model.quiz
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.kosmokamikaze.intervalapp.model.quiz.QuizTypes
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -21,12 +20,7 @@ data class QuizData (
 
     companion object {
         const val ID = "id"
-        const val TITLE = "title"
         const val HIGH_SCORE = "highScore"
-        const val TYPE = "type"
-        const val OPTION = "option"
-        const val RANGE = "range"
-        const val AMOUNT_OF_BUTTONS = "amountOfButtons"
         const val TYPE_GROUP = "typeGroup"
     }
 }

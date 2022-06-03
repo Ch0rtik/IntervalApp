@@ -2,10 +2,9 @@ package com.kosmokamikaze.intervalapp.viewmodel.factory
 
 import android.content.Context
 import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kosmokamikaze.intervalapp.musical.MusicalNames
+import com.kosmokamikaze.intervalapp.model.musical.MusicalNames
 import com.kosmokamikaze.intervalapp.view.main.MainActivity
 import com.kosmokamikaze.intervalapp.viewmodel.menu.MenuViewModel
 import com.kosmokamikaze.intervalapp.viewmodel.quiz.QuizViewModel

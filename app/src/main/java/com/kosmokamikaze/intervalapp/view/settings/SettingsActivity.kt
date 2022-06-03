@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.kosmokamikaze.intervalapp.R
 import com.kosmokamikaze.intervalapp.databinding.ActivitySettingsBinding
-import com.kosmokamikaze.intervalapp.musical.MusicalNames
+import com.kosmokamikaze.intervalapp.model.musical.MusicalNames
 import com.kosmokamikaze.intervalapp.repository.QuizRepository
 import com.kosmokamikaze.intervalapp.view.main.MainActivity
 import kotlinx.coroutines.Dispatchers

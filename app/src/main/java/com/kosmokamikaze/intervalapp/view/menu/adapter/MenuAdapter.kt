@@ -1,8 +1,6 @@
 package com.kosmokamikaze.intervalapp.view.menu.adapter
 
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +9,8 @@ import com.kosmokamikaze.intervalapp.R
 import com.kosmokamikaze.intervalapp.databinding.MenuItemBinding
 import com.kosmokamikaze.intervalapp.model.quiz.QuizData
 import com.kosmokamikaze.intervalapp.model.quiz.QuizTypes
-import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
-import com.kosmokamikaze.intervalapp.musical.MusicalNames
-import com.kosmokamikaze.intervalapp.view.main.MainActivity
+import com.kosmokamikaze.intervalapp.model.musical.MusicTheoryHandler
+import com.kosmokamikaze.intervalapp.model.musical.MusicalNames
 import com.kosmokamikaze.intervalapp.view.menu.MenuActivity
 import com.kosmokamikaze.intervalapp.view.quiz.QuizActivity
 

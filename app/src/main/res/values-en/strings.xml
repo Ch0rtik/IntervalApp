@@ -84,12 +84,12 @@
         <item>Double-augmented fourth</item>
     </string-array>
     <string-array name="chord_types">
-        <item>Major triads</item>
-        <item>Minor triads</item>
-        <item>Maj7 chords</item>
-        <item>min7 chords</item>
-        <item>Dominant chords</item>
-        <item>minMaj7 chords</item>
+        <item>Major triad</item>
+        <item>Minor triad</item>
+        <item>Maj7 chord</item>
+        <item>min7 chord</item>
+        <item>Dominant chord</item>
+        <item>minMaj7 chord</item>
     </string-array>
     <string-array name="scale_names">
         <item>Ionian scale</item>
@@ -116,4 +116,5 @@
     <string name="reset_records">Reset Records</string>
     <string name="intervals">Intervals</string>
     <string name="chords">Chords</string>
+    <string name="interval">Interval</string>
 </resources>

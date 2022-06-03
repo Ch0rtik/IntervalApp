@@ -17,4 +17,5 @@
     <string name="choose">Выберите</string>
     <string name="next">Далее</string>
     <string name="new_record">!!! НОВЫЙ РЕКОРД !!!</string>
+    <string name="interval">Интервал</string>
 </resources>

@@ -1,6 +1,6 @@
 package com.kosmokamikaze.intervalapp.model.quiz
 
-import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
+import com.kosmokamikaze.intervalapp.model.musical.MusicTheoryHandler
 import com.kosmokamikaze.intervalapp.model.quiz.question.Question
 import com.kosmokamikaze.intervalapp.model.quiz.question.QuestionGenerator
 
@@ -19,7 +19,7 @@ class Quiz(
     val amountOfAnswers = questionGenerator.amountOfAnswers
 
     private var mutScore = 0
-    private var prevSubj: Int = (-quizData.range..quizData.range).random()
+    var subject: Int = (-quizData.range..quizData.range).random()
 
     val score: Int get() = mutScore
 
@@ -28,9 +28,9 @@ class Quiz(
     }
 
     fun askNewQuestion() {
-        currentQuestion = questionGenerator.getNewQuestion(prevSubj)
+        currentQuestion = questionGenerator.getNewQuestion(subject)
         currentQuestion.ask()
-        prevSubj = currentQuestion.subject
+        subject = currentQuestion.subject
     }
 
     fun submitAnswer(chosenButtonNumbers: Set<Int>): Int? {

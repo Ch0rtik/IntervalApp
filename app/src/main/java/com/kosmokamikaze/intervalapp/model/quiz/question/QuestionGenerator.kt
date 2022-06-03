@@ -1,6 +1,6 @@
 package com.kosmokamikaze.intervalapp.model.quiz.question
 
-import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
+import com.kosmokamikaze.intervalapp.model.musical.MusicTheoryHandler
 import com.kosmokamikaze.intervalapp.model.quiz.QuizTypes
 import java.util.Calendar
 import kotlin.math.ceil
@@ -108,7 +108,7 @@ class QuestionGenerator(
 
 
         override fun generateRightAnswers(): MutableSet<Int> {
-            return mutableSetOf(mth.getNoteFromInterval(subject, option))
+            return mutableSetOf(MusicTheoryHandler.getNoteFromInterval(subject, option))
         }
 
         override fun getNewId(): Int {
@@ -143,14 +143,14 @@ class QuestionGenerator(
 
         private fun getTwoNotes(): String {
             val first = getRandomId(-range, range + 1)
-            val second = mth.getNoteFromInterval(first, subject)
+            val second = MusicTheoryHandler.getNoteFromInterval(first, subject)
             return (mth.getNoteName(first) + ", " + mth.getNoteName(second))
         }
 
         override val subjectText: String
             get() = getTwoNotes()
         override val optionText: String
-            get() = "ИНТЕРВАЛ"
+            get() = mth.interval
 
     }
 
@@ -176,7 +176,7 @@ class QuestionGenerator(
         override val subjectText: String
             get() = chord.shuffled().joinToString(", ") { mth.getNoteName(it) }
         override val optionText: String
-            get() = "ОСНОВНОЙ ТОН"
+            get() = mth.getChordType(option)
     }
 
     private abstract inner class AbstractNotesQuestion(prevSubj: Int) : AbstractQuestion(prevSubj) {
@@ -201,14 +201,14 @@ class QuestionGenerator(
 
     private inner class NotesFromChord(prevSubj: Int) : AbstractNotesQuestion(prevSubj) {
         override val subjectText: String
-            get() = mth.getChordNameWithNote(subject, option)
+            get() = mth.getNoteName(subject)
         override val optionText: String
-            get() = "все ноты"
+            get() = mth.getChordType(option)
     }
 
     private inner class NotesFromScale(prevSubj: Int) : AbstractNotesQuestion(prevSubj) {
         override val subjectText: String
-            get() = mth.getNoteName(subject) //!!!
+            get() = mth.getNoteName(subject)
         override val optionText: String
             get() = mth.getScaleName(option)
     }

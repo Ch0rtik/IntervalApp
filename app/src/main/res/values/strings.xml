@@ -152,12 +152,12 @@
         <item>minMaj7</item>
     </string-array>
     <string-array name="chord_types">
-        <item>Мажорные трезвучия</item>
-        <item>Минорные трезвучия</item>
-        <item>Maj7 аккорды</item>
-        <item>min7 аккорды</item>
-        <item>доминантные аккорды</item>
-        <item>minMaj7 акорды</item>
+        <item>Мажорное трезвучие</item>
+        <item>Минорное трезвучие</item>
+        <item>Maj7 аккорд</item>
+        <item>min7 аккорд</item>
+        <item>доминантные аккорд</item>
+        <item>minMaj7 акорд</item>
     </string-array>
     <string-array name="scale_names">
         <item>ИОНИЙСКИЙ ЛАД</item>
@@ -194,4 +194,6 @@
     <string name="next">Далее</string>
 
     <string name="new_record">!!! НОВЫЙ РЕКОРД !!!</string>
+
+    <string name="interval">Интервал</string>
 </resources>
