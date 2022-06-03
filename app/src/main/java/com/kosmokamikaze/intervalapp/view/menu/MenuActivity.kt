@@ -50,9 +50,8 @@ class MenuActivity : AppCompatActivity() {
                 val data: Intent = it.data!!
                 data.apply {
                     val newRecordSet = viewModel.updateHighScore(
-                        getIntExtra(QuizData.ID, 1), getIntExtra(
-                            QuizData.HIGH_SCORE, 0
-                        )
+                        getIntExtra(QuizData.ID, 1),
+                        getIntExtra(QuizData.HIGH_SCORE, 0)
                     )
                     if (newRecordSet) Toast.makeText(
                         this@MenuActivity,

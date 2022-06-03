@@ -14,8 +14,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.mainImage.setImageResource(R.drawable.main_image)
-        val quizButton = binding.quizButton
-        quizButton.setOnClickListener {
+        binding.quizButton.setOnClickListener {
             val intent = Intent(this, GroupMenuActivity::class.java)
             startActivity(intent)
         }
