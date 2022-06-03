@@ -8,7 +8,6 @@ import com.kosmokamikaze.intervalapp.model.quiz.question.QuestionGenerator
 class Quiz(
     quizData: QuizData
 ) {
-
     lateinit var currentQuestion: Question
 
     private val questionGenerator: QuestionGenerator = QuestionGenerator(
@@ -19,7 +18,6 @@ class Quiz(
     )
     val amountOfAnswers = questionGenerator.amountOfAnswers
 
-
     private var mutScore = 0
     private var prevSubj: Int = (-quizData.range..quizData.range).random()
 
@@ -28,7 +26,6 @@ class Quiz(
     fun setMusicTheoryHandler(mth: MusicTheoryHandler) {
         questionGenerator.setMusicTheoryHandler(mth)
     }
-
 
     fun askNewQuestion() {
         currentQuestion = questionGenerator.getNewQuestion(prevSubj)
@@ -43,5 +40,4 @@ class Quiz(
         }
         return mutScore
     }
-
 }

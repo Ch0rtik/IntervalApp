@@ -8,13 +8,14 @@ import androidx.lifecycle.viewModelScope
 import com.kosmokamikaze.intervalapp.App
 import com.kosmokamikaze.intervalapp.model.data.DataBaseFiller
 import com.kosmokamikaze.intervalapp.model.quiz.QuizData
+import com.kosmokamikaze.intervalapp.model.quiz.TypeGroups
 import com.kosmokamikaze.intervalapp.repository.QuizRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MenuViewModel(application: Application, private val typeGroup: Int) : ViewModel() {
+class MenuViewModel(application: Application, private val typeGroup: TypeGroups) : ViewModel() {
 
-    var allData: LiveData<List<QuizData>>
+    var quizGroup: LiveData<List<QuizData>>
     private val repository: QuizRepository
 
 
@@ -31,7 +32,7 @@ class MenuViewModel(application: Application, private val typeGroup: Int) : View
             }
         }
 
-        allData = repository.readData(typeGroup)
+        quizGroup = repository.readData(typeGroup)
     }
 
     private fun addQuiz(quizData: QuizData) {
@@ -48,7 +49,7 @@ class MenuViewModel(application: Application, private val typeGroup: Int) : View
 
     fun updateHighScore(id: Int, highScore: Int): Boolean {
         var prevHighScore = 0
-        for (data in allData.value!!) {
+        for (data in quizGroup.value!!) {
             if (data.id == id) {
                 prevHighScore = data.highScore
                 break
@@ -57,10 +58,11 @@ class MenuViewModel(application: Application, private val typeGroup: Int) : View
         if (prevHighScore >= highScore) {
             return false
         }
+
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateHighScore(id, highScore)
         }
-        allData = repository.readData(typeGroup)
+        quizGroup = repository.readData(typeGroup)
         return true
     }
 }

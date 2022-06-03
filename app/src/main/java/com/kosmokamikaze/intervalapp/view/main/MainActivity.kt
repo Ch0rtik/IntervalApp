@@ -13,8 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val imageView = binding.mainImage
-        imageView.setImageResource(R.drawable.main_image)
+        binding.mainImage.setImageResource(R.drawable.main_image)
         val quizButton = binding.quizButton
         quizButton.setOnClickListener {
             val intent = Intent(this, GroupMenuActivity::class.java)

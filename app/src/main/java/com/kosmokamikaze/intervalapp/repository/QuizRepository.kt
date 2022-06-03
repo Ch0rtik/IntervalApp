@@ -4,18 +4,18 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import com.kosmokamikaze.intervalapp.model.data.QuizDatabase
 import com.kosmokamikaze.intervalapp.model.quiz.QuizData
+import com.kosmokamikaze.intervalapp.model.quiz.TypeGroups
 
 class QuizRepository(context: Context) {
     private val quizDao = QuizDatabase.getDatabase(context).quizDao()
 
     fun readAllData(): LiveData<List<QuizData>> = quizDao.readAllData()
 
-    fun readData(typeGroup: Int): LiveData<List<QuizData>> {
+    fun readData(typeGroup: TypeGroups): LiveData<List<QuizData>> {
         return when (typeGroup) {
-            0 -> quizDao.readIntervalQuizData()
-            1 -> quizDao.readChordQuizData()
-            2 -> quizDao.readScaleQuizData()
-            else -> quizDao.readIntervalQuizData()
+            TypeGroups.INTERVAL_GROUP -> quizDao.readIntervalQuizData()
+            TypeGroups.CHORD_GROUP -> quizDao.readChordQuizData()
+            TypeGroups.SCALE_GROUP -> quizDao.readScaleQuizData()
         }
     }
 

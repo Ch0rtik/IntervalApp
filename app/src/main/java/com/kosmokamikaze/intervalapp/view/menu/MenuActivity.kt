@@ -12,6 +12,7 @@ import com.kosmokamikaze.intervalapp.view.menu.adapter.MenuAdapter
 import com.kosmokamikaze.intervalapp.view.menu.adapter.TopSpacingDecoration
 import com.kosmokamikaze.intervalapp.databinding.ActivityMenuBinding
 import com.kosmokamikaze.intervalapp.model.quiz.QuizData
+import com.kosmokamikaze.intervalapp.model.quiz.TypeGroups
 import com.kosmokamikaze.intervalapp.viewmodel.menu.MenuViewModel
 import com.kosmokamikaze.intervalapp.viewmodel.menu.MenuViewModelFactory
 
@@ -31,14 +32,13 @@ class MenuActivity : AppCompatActivity() {
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this, MenuViewModelFactory(this.application, intent.getIntExtra(
-            TYPE_GROUP, 0)))[MenuViewModel::class.java]
+        viewModel = ViewModelProvider(this, MenuViewModelFactory(this.application,
+            intent.getSerializableExtra(TYPE_GROUP) as TypeGroups
+        ))[MenuViewModel::class.java]
 
         initRecyclerView()
-
         setData()
     }
-
 
     val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == Activity.RESULT_OK) {
@@ -46,7 +46,7 @@ class MenuActivity : AppCompatActivity() {
             var newRecordSet: Boolean
             data.apply {
                 newRecordSet = viewModel.updateHighScore(getIntExtra(QuizData.ID, 1), getIntExtra(
-                    QuizData.HIGH_SCORE, 35))
+                    QuizData.HIGH_SCORE, 0))
             }
             if (newRecordSet) Toast.makeText(this, "!!! Новый рекорд !!!", Toast.LENGTH_SHORT).show()
         }
@@ -60,7 +60,7 @@ class MenuActivity : AppCompatActivity() {
     }
 
     private fun setData() {
-        viewModel.allData.observe(this) {
+        viewModel.quizGroup.observe(this) {
             menuAdapter.setData(it)
         }
     }

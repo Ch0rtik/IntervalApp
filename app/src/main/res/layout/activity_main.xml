@@ -45,6 +45,8 @@
             android:textSize="35sp"
             app:backgroundTint="@null" />
 
+
+<!--
         <Button
             android:id="@+id/theoryButton"
             android:text="Теория"
@@ -68,6 +70,8 @@
             android:textColor="@color/colorPrimary"
             android:textSize="35sp"
             app:backgroundTint="@null" />
+            -->
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
