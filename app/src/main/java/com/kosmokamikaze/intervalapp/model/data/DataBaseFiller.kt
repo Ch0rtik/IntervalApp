@@ -26,12 +26,18 @@ class DataBaseFiller {
 
             repository.addQuiz(QuizData("МАЖОРНЫЕ ТРЕЗВУЧИЯ",  QuizTypes.CHORD_FROM_NOTES, 10, 5, 3))
             repository.addQuiz(QuizData("МИНОРНЫЕ ТРЕЗВУЧИЯ",  QuizTypes.CHORD_FROM_NOTES, 6, 5, 3))
-            repository.addQuiz(QuizData("MAJ7 АККОРДЫ",  QuizTypes.CHORD_FROM_NOTES, 42, 5, 3))
-            repository.addQuiz(QuizData("MIN7 АККОРДЫ",  QuizTypes.CHORD_FROM_NOTES, 25, 5, 3))
-            repository.addQuiz(QuizData("ДОМИНАНТНЫЕ АККОРДЫ",  QuizTypes.CHORD_FROM_NOTES, 41, 5, 3))
-            repository.addQuiz(QuizData("MINMAJ АККОРДЫ",  QuizTypes.CHORD_FROM_NOTES, 26, 5, 3))
+            repository.addQuiz(QuizData("MAJ7 АККОРДЫ",  QuizTypes.CHORD_FROM_NOTES, 42, 5, 4))
+            repository.addQuiz(QuizData("MIN7 АККОРДЫ",  QuizTypes.CHORD_FROM_NOTES, 25, 5, 4))
+            repository.addQuiz(QuizData("ДОМИНАНТНЫЕ АККОРДЫ",  QuizTypes.CHORD_FROM_NOTES, 41, 5, 4))
+            repository.addQuiz(QuizData("MINMAJ АККОРДЫ",  QuizTypes.CHORD_FROM_NOTES, 26, 5, 4))
 
-            repository.addQuiz(QuizData(0,"ИОНИЙСКИЙ ЛАД", 0, QuizTypes.NOTES_FROM_SCALE, 2726, 5, 9))
+            repository.addQuiz(QuizData("ИОНИЙСКИЙ ЛАД", QuizTypes.NOTES_FROM_SCALE, 2726, 5, 9))
+            repository.addQuiz(QuizData("ЭОЛИЙСКИЙ ЛАД", QuizTypes.NOTES_FROM_SCALE, 1637, 5, 9))
+            repository.addQuiz(QuizData("ФРИГИЙСКИЙ ЛАД", QuizTypes.NOTES_FROM_SCALE, 1621, 5, 9))
+            repository.addQuiz(QuizData("ДОРИЙСКИЙ ЛАД", QuizTypes.NOTES_FROM_SCALE, 1638, 5, 9))
+            repository.addQuiz(QuizData("МИКСОЛИДИЙСКИЙ ЛАД", QuizTypes.NOTES_FROM_SCALE, 2662, 5, 9))
+            repository.addQuiz(QuizData("ЛИДИЙСКИЙ ЛАД", QuizTypes.NOTES_FROM_SCALE, 2730, 5, 9))
+            repository.addQuiz(QuizData("ЛОКРИЙСКИЙ ЛАД", QuizTypes.NOTES_FROM_SCALE, 1365, 5, 9))
         }
     }
 }

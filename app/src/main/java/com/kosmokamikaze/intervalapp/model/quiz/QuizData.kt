@@ -12,7 +12,7 @@ data class QuizData (
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val title: String,
-    val highScore: Int,
+    var highScore: Int,
     val type: QuizTypes,
     val option: Int,
     val range: Int,
@@ -28,5 +28,6 @@ data class QuizData (
         const val OPTION = "option"
         const val RANGE = "range"
         const val AMOUNT_OF_BUTTONS = "amountOfButtons"
+        const val TYPE_GROUP = "typeGroup"
     }
 }

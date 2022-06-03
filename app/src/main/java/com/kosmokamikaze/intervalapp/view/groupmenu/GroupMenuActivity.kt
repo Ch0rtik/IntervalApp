@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.kosmokamikaze.intervalapp.databinding.ActivityGroupMenuBinding
+import com.kosmokamikaze.intervalapp.model.quiz.QuizData
 import com.kosmokamikaze.intervalapp.model.quiz.TypeGroups
 import com.kosmokamikaze.intervalapp.view.menu.MenuActivity
 
@@ -26,7 +27,7 @@ class GroupMenuActivity : AppCompatActivity() {
 
     private fun startMenuActivity(typeGroup: TypeGroups) {
         val intent = Intent(this, MenuActivity::class.java)
-        intent.putExtra(MenuActivity.TYPE_GROUP, typeGroup)
+        intent.putExtra(QuizData.TYPE_GROUP, typeGroup)
         startActivity(intent)
     }
 }

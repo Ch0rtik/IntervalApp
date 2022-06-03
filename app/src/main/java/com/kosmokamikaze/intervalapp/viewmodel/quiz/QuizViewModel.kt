@@ -1,6 +1,7 @@
 package com.kosmokamikaze.intervalapp.viewmodel.quiz
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -12,12 +13,12 @@ import com.kosmokamikaze.intervalapp.model.quiz.QuizData
 import com.kosmokamikaze.intervalapp.view.quiz.QuizActivity
 import com.kosmokamikaze.intervalapp.musical.MusicTheoryHandler
 import com.kosmokamikaze.intervalapp.model.quiz.Quiz
+import com.kosmokamikaze.intervalapp.musical.MusicalNames
 
 class QuizViewModel(
+    musicalNames: MusicalNames,
     extras: Bundle,
-    mth: MusicTheoryHandler
 ) : ViewModel() {
-
     private var possibleButtons = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
 
     private var amountOfButtons = 0
@@ -28,7 +29,6 @@ class QuizViewModel(
         Array(9) { MutableLiveData() }
     private val mutButtonTexts: Array<MutableLiveData<String>> =
         Array(9) { MutableLiveData() }
-
 
     private val quiz: Quiz
     private val chosenButtons = mutableSetOf<Int>()
@@ -57,7 +57,7 @@ class QuizViewModel(
         id = quizData.id
         amountOfButtons = quizData.amountOfButtons
 
-        quiz.setMusicTheoryHandler(mth)
+        quiz.setMusicTheoryHandler(MusicTheoryHandler(musicalNames))
 
         setUpButtons()
 

@@ -17,10 +17,6 @@ import com.kosmokamikaze.intervalapp.viewmodel.menu.MenuViewModel
 
 
 class MenuActivity : AppCompatActivity() {
-    companion object {
-        const val TYPE_GROUP = "typeGroup"
-    }
-
     private lateinit var binding: ActivityMenuBinding
 
     private val menuAdapter = MenuAdapter()
@@ -34,7 +30,7 @@ class MenuActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(
             this, ViewModelFactory(
-                this.application,
+                this.application.applicationContext,
                 intent.extras!!,
                 ViewModelFactory.ViewModelType.MENU
             )
