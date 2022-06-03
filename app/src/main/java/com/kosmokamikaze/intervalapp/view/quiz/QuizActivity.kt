@@ -6,8 +6,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.kosmokamikaze.intervalapp.databinding.ActivityQuizBinding
+import com.kosmokamikaze.intervalapp.viewmodel.factory.ViewModelFactory
 import com.kosmokamikaze.intervalapp.viewmodel.quiz.QuizViewModel
-import com.kosmokamikaze.intervalapp.viewmodel.quiz.QuizViewModelFactory
 
 class QuizActivity : AppCompatActivity() {
     private lateinit var subjText: TextView
@@ -27,8 +27,10 @@ class QuizActivity : AppCompatActivity() {
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this,
-            QuizViewModelFactory(this, intent.extras!!))[QuizViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(this.application, intent.extras!!, ViewModelFactory.ViewModelType.QUIZ)
+        )[QuizViewModel::class.java]
 
         setUpViews()
         setOnClickListeners()
