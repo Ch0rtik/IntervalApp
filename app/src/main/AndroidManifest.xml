@@ -9,6 +9,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IntervalApp">
         <activity
+            android:name=".view.settings.SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.groupmenu.GroupMenuActivity"
             android:exported="false" />
         <activity

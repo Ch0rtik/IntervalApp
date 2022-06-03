@@ -58,7 +58,7 @@
             android:textColor="@color/colorPrimary"
             android:textSize="35sp"
             app:backgroundTint="@null" />
-
+-->
         <Button
             android:id="@+id/settingsButton"
             android:text="Настройки"
@@ -70,7 +70,7 @@
             android:textColor="@color/colorPrimary"
             android:textSize="35sp"
             app:backgroundTint="@null" />
-            -->
+
     </LinearLayout>
 
 

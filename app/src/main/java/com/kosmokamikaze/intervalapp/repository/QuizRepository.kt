@@ -26,4 +26,8 @@ class QuizRepository(context: Context) {
     suspend fun updateHighScore(id: Int, highScore: Int) {
         quizDao.updateHighScore(id, highScore)
     }
+
+    suspend fun resetHighScores() {
+        quizDao.resetHighScore()
+    }
 }

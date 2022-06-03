@@ -26,4 +26,7 @@ interface QuizDao {
 
     @Query("UPDATE quiz_data SET highScore = :newHighScore WHERE id = :id")
     suspend fun updateHighScore(id: Int, newHighScore: Int)
+
+    @Query("UPDATE quiz_data SET highScore = 0")
+    suspend fun resetHighScore()
 }
