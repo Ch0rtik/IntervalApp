@@ -43,12 +43,12 @@ class MenuActivity : AppCompatActivity() {
     val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == Activity.RESULT_OK) {
             val data: Intent = it.data!!
-            var newRecordSet: Boolean
             data.apply {
-                newRecordSet = viewModel.updateHighScore(getIntExtra(QuizData.ID, 1), getIntExtra(
+                val newRecordSet = viewModel.updateHighScore(getIntExtra(QuizData.ID, 1), getIntExtra(
                     QuizData.HIGH_SCORE, 0))
+                if (newRecordSet) Toast.makeText(this@MenuActivity, "!!! Новый рекорд !!!", Toast.LENGTH_SHORT).show()
             }
-            if (newRecordSet) Toast.makeText(this, "!!! Новый рекорд !!!", Toast.LENGTH_SHORT).show()
+
         }
     }
 
