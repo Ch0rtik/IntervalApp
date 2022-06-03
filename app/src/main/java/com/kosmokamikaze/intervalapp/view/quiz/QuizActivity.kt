@@ -39,15 +39,15 @@ class QuizActivity : AppCompatActivity() {
 
     private fun setUpObservables() {
         for (i in 0..8) {
-            viewModel.buttonTexts[i].observe(this) {
+            viewModel.buttonsTexts[i].observe(this) {
                 answerButtons[i].setText(it)
             }
 
-            viewModel.buttonVisible[i].observe(this) {
+            viewModel.buttonsVisible[i].observe(this) {
                 if (!it) answerButtons[i].makeInvisible()
             }
 
-            viewModel.buttonPressed[i].observe(this) {
+            viewModel.buttonsPressed[i].observe(this) {
                 answerButtons[i].apply {
                     if (it) press() else unpress()
                 }

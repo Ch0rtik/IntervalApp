@@ -22,11 +22,11 @@ class QuizViewModel(
 
     private var amountOfButtons = 0
 
-    private val mutButtonPressed: Array<MutableLiveData<Boolean>> =
+    private val mutButtonsPressed: Array<MutableLiveData<Boolean>> =
         Array(9) { MutableLiveData() }
-    private val mutButtonVisible: Array<MutableLiveData<Boolean>> =
+    private val mutButtonsVisible: Array<MutableLiveData<Boolean>> =
         Array(9) { MutableLiveData() }
-    private val mutButtonTexts: Array<MutableLiveData<String>> =
+    private val mutButtonsTexts: Array<MutableLiveData<String>> =
         Array(9) { MutableLiveData() }
 
     private val quiz: Quiz
@@ -42,9 +42,9 @@ class QuizViewModel(
     val subjectLive: LiveData<String> = mutSubjectLive
     val returnToMenuLive: LiveData<(QuizActivity) -> Unit> = mutReturnToMenuLive
 
-    val buttonPressed = mutButtonPressed
-    val buttonVisible = mutButtonVisible
-    val buttonTexts = mutButtonTexts
+    val buttonsPressed = mutButtonsPressed
+    val buttonsVisible = mutButtonsVisible
+    val buttonsTexts = mutButtonsTexts
 
     private var id: Int = 0
 
@@ -64,9 +64,9 @@ class QuizViewModel(
     }
 
     private fun setUpButtons() {
-        for (i in mutButtonPressed.indices) {
-            mutButtonPressed[i].value = false
-            mutButtonVisible[i].value = true
+        for (i in mutButtonsPressed.indices) {
+            mutButtonsPressed[i].value = false
+            mutButtonsVisible[i].value = true
         }
 
         mutSubmitButtonLive.value = SubmitButtonData()
@@ -74,9 +74,9 @@ class QuizViewModel(
         if (amountOfButtons == 4) possibleButtons = listOf(0, 2, 6, 8)
         if (amountOfButtons == 3) possibleButtons = listOf(0, 2, 7)
 
-        for (i in mutButtonVisible.indices) {
+        for (i in mutButtonsVisible.indices) {
             if (!possibleButtons.contains(i)) {
-                mutButtonVisible[i].value = false
+                mutButtonsVisible[i].value = false
             }
         }
     }
@@ -88,14 +88,14 @@ class QuizViewModel(
             if (chosenButtons.size < quiz.amountOfAnswers) {
                 chosenButtons.add(index)
 
-                mutButtonPressed[id].value = true
+                mutButtonsPressed[id].value = true
                 if (chosenButtons.size == quiz.amountOfAnswers) {
                     mutSubmitButtonLive.value!!.makeVisible()
                 }
             }
         } else {
             chosenButtons.remove(index)
-            mutButtonPressed[id].value = false
+            mutButtonsPressed[id].value = false
             mutSubmitButtonLive.value!!.makeInvisible()
         }
 
@@ -125,8 +125,8 @@ class QuizViewModel(
         val question = quiz.currentQuestion
         for ((j, i) in possibleButtons.withIndex()) {
 
-            mutButtonTexts[i].value = question.buttonTexts[j]
-            mutButtonPressed[i].value = false
+            mutButtonsTexts[i].value = question.buttonTexts[j]
+            mutButtonsPressed[i].value = false
         }
 
         mutSubmitButtonLive.value!!.makeInvisible()

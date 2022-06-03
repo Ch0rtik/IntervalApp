@@ -25,8 +25,8 @@ class SettingsActivity : AppCompatActivity() {
         binding.resetButton.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
                 QuizRepository(applicationContext).resetHighScores()
-                Toast.makeText(this@SettingsActivity, resources.getString(R.string.records_reset), Toast.LENGTH_SHORT).show()
             }
+            Toast.makeText(this@SettingsActivity, resources.getString(R.string.records_reset), Toast.LENGTH_SHORT).show()
         }
 
         sharedPrefs = getSharedPreferences(MainActivity.SHARED_PREFS, Context.MODE_PRIVATE)
