@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notes_from_chord">Ноты аккорда</string>
+    <string name="interval_from_notes">Ноты аккорда</string>
+    <string name="app_logo">Логотип приложения</string>
+    <string name="settings">Настройки</string>
+    <string name="exercises">Упражнения</string>
+    <string name="change_note_names">Сменить названия нот на:</string>
+    <string name="do_re_mi">До, Ре, Ми…</string>
+    <string name="c_d_e">C, D, E…</string>
+    <string name="reset_records">Сбросить рекорды</string>
+    <string name="records_reset">Рекорды сброшены</string>
+    <string name="high_score">Рекорд:</string>
+    <string name="intervals">Интервалы</string>
+    <string name="chords">Аккорды</string>
+    <string name="scales">Лады</string>
+    <string name="choose">Выберите</string>
+    <string name="next">Далее</string>
+    <string name="new_record">!!! НОВЫЙ РЕКОРД !!!</string>
+</resources>

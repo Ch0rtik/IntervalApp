@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kosmokamikaze.intervalapp.R
 import com.kosmokamikaze.intervalapp.view.menu.adapter.MenuAdapter
 import com.kosmokamikaze.intervalapp.view.menu.adapter.TopSpacingDecoration
 import com.kosmokamikaze.intervalapp.databinding.ActivityMenuBinding
@@ -51,7 +52,7 @@ class MenuActivity : AppCompatActivity() {
                     )
                     if (newRecordSet) Toast.makeText(
                         this@MenuActivity,
-                        "!!! Новый рекорд !!!",
+                        resources.getString(R.string.new_record),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

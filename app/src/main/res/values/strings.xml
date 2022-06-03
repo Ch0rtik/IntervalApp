@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Intervall</string>
+    <string name="app_name" translatable="false">Intervall</string>
     <string-array name="note_names">
         <item>F♭♭</item>
         <item>C♭♭</item>
@@ -37,11 +37,44 @@
         <item>E##</item>
         <item>B##</item>
     </string-array>
-    <string-array name="chord_types">
-        <item>мажорный</item>
-        <item>минорный</item>
+    <string-array name="note_names_do">
+        <item>Фа♭♭</item>
+        <item>До♭♭</item>
+        <item>Соль♭♭</item>
+        <item>Ре♭♭</item>
+        <item>Ля♭♭</item>
+        <item>Ми♭♭</item>
+        <item>Си♭♭</item>
+        <item>Фа♭</item>
+        <item>До♭</item>
+        <item>Соль♭</item>
+        <item>Ре♭</item>
+        <item>Ля♭</item>
+        <item>Ми♭</item>
+        <item>Си♭</item>
+        <item>Фа</item>
+        <item>До</item>
+        <item>Соль</item>
+        <item>Ре</item>
+        <item>Ля</item>
+        <item>Ми</item>
+        <item>Си</item>
+        <item>Фа#</item>
+        <item>До#</item>
+        <item>Соль#</item>
+        <item>Ре#</item>
+        <item>Ля#</item>
+        <item>Ми#</item>
+        <item>Си#</item>
+        <item>Фа##</item>
+        <item>До##</item>
+        <item>Соль##</item>
+        <item>Ре##</item>
+        <item>Ля##</item>
+        <item>Ми##</item>
+        <item>Си##</item>
     </string-array>
-    <string-array name="interval_names">
+    <string-array name="interval_names_accusative">
         <item>Уменьшенную приму</item>
         <item>Уменьшенную квинту</item>
         <item>Малую секунду</item>
@@ -63,6 +96,29 @@
         <item>Увеличенную терцию</item>
         <item>Увеличенную септиму</item>
         <item>Дважды увеличеннную кварту</item>
+    </string-array>
+    <string-array name="interval_names">
+        <item>Уменьшенная прима</item>
+        <item>Уменьшенная квинта</item>
+        <item>Малая секунда</item>
+        <item>Малая секста</item>
+        <item>Малая терция</item>
+        <item>Малая септима</item>
+        <item>Чистая кварта</item>
+        <item>Прима</item>
+        <item>Чистая квинта</item>
+        <item>Большая секунда</item>
+        <item>Большая секста</item>
+        <item>Большая терцая</item>
+        <item>Большая септима</item>
+        <item>Увеличенная кварта</item>
+        <item>Увеличенная прима</item>
+        <item>Увеличенная квинта</item>
+        <item>Увеличенная секунда</item>
+        <item>Увеличенная секста</item>
+        <item>Увеличенная терция</item>
+        <item>Увеличенная септима</item>
+        <item>Дважды увеличеннная кварта</item>
     </string-array>
     <string-array name="interval_names_short">
         <item>d1</item>
@@ -87,6 +143,55 @@
         <item>A7</item>
         <item>AA5</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="short_chord_types">
+        <item>M</item>
+        <item>m</item>
+        <item>Maj7</item>
+        <item>m7</item>
+        <item>7</item>
+        <item>minMaj7</item>
+    </string-array>
+    <string-array name="chord_types">
+        <item>Мажорные трезвучия</item>
+        <item>Минорные трезвучия</item>
+        <item>Maj7 аккорды</item>
+        <item>min7 аккорды</item>
+        <item>доминантные аккорды</item>
+        <item>minMaj7 акорды</item>
+    </string-array>
+    <string-array name="scale_names">
+        <item>ИОНИЙСКИЙ ЛАД</item>
+        <item>ЭОЛИЙСКИЙ ЛАД</item>
+        <item>ФРИГИЙСКИЙ ЛАД</item>
+        <item>ДОРИЙСКИЙ ЛАД</item>
+        <item>МИКСОЛИДИЙСКИЙ ЛАД</item>
+        <item>ЛИДИЙСКИЙ ЛАД</item>
+        <item>ЛОКРИЙСКИЙ ЛАД</item>
+    </string-array>
+
+    <string name="notes_from_chord">Ноты аккорда</string>
+    <string name="interval_from_notes">Ноты аккорда</string>
+
+
+    <string name="app_logo">Логотип приложения</string>
+    <string name="settings">Настройки</string>
+    <string name="exercises">Упражнения</string>
+
+
+    <string name="change_note_names">Сменить названия нот на:</string>
+    <string name="do_re_mi">До, Ре, Ми…</string>
+    <string name="c_d_e" translatable="false">C, D, E...</string>
+    <string name="reset_records">Сбросить рекорды</string>
+    <string name="records_reset">Рекорды сброшены</string>
+
+    <string name="high_score">Рекорд:</string>
+
+    <string name="intervals">Интервалы</string>
+    <string name="chords">Аккорды</string>
+    <string name="scales">Лады</string>
+
+    <string name="choose">Выберите</string>
+    <string name="next">Далее</string>
+
+    <string name="new_record">!!! НОВЫЙ РЕКОРД !!!</string>
 </resources>

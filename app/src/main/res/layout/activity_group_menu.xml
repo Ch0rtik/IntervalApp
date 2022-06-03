@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:background="@android:color/background_light"
-            android:text="Интервалы"
+            android:text="@string/intervals"
             android:textColor="@color/colorPrimary"
             android:textSize="34sp"
             app:backgroundTint="@null" />
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:background="@android:color/background_light"
-            android:text="Аккорды"
+            android:text="@string/chords"
             android:textColor="@color/colorPrimary"
             android:textSize="34sp"
             app:backgroundTint="@null" />
@@ -47,7 +47,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:background="@android:color/background_light"
-            android:text="Лады"
+            android:text="@string/scales"
             android:textColor="@color/colorPrimary"
             android:textSize="34sp"
             app:backgroundTint="@null" />

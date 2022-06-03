@@ -11,14 +11,13 @@ import kotlinx.android.parcel.Parcelize
 data class QuizData (
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val title: String,
     var highScore: Int,
     val type: QuizTypes,
     val option: Int,
     val range: Int,
     val amountOfButtons: Int
 ) : Parcelable {
-    constructor(title: String, type: QuizTypes, option: Int, range: Int, amountOfButtons: Int): this(0, title, 0, type, option, range, amountOfButtons)
+    constructor(type: QuizTypes, option: Int, range: Int, amountOfButtons: Int): this(0, 0, type, option, range, amountOfButtons)
 
     companion object {
         const val ID = "id"

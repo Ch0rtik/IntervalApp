@@ -3,7 +3,6 @@ package com.kosmokamikaze.intervalapp.view.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.kosmokamikaze.intervalapp.R
 import com.kosmokamikaze.intervalapp.databinding.ActivityMainBinding
 import com.kosmokamikaze.intervalapp.view.groupmenu.GroupMenuActivity
@@ -23,7 +22,10 @@ class MainActivity : AppCompatActivity() {
         binding.settingsButton.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
-            Toast.makeText(this, "Рекорды сброшены", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    companion object {
+        const val SHARED_PREFS = "sharedPrefs"
     }
 }

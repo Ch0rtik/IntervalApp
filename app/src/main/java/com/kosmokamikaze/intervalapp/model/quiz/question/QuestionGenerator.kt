@@ -104,7 +104,7 @@ class QuestionGenerator(
         override val subjectText: String
             get() = mth.getNoteName(subject)
         override val optionText: String
-            get() = mth.getIntervalName(option)
+            get() = mth.getIntervalNameAccusative(option)
 
 
         override fun generateRightAnswers(): MutableSet<Int> {
@@ -176,7 +176,7 @@ class QuestionGenerator(
         override val subjectText: String
             get() = chord.shuffled().joinToString(", ") { mth.getNoteName(it) }
         override val optionText: String
-            get() = "TODO"
+            get() = "ОСНОВНОЙ ТОН"
     }
 
     private abstract inner class AbstractNotesQuestion(prevSubj: Int) : AbstractQuestion(prevSubj) {
@@ -201,15 +201,15 @@ class QuestionGenerator(
 
     private inner class NotesFromChord(prevSubj: Int) : AbstractNotesQuestion(prevSubj) {
         override val subjectText: String
-            get() = mth.getNoteName(subject) //!!!
+            get() = mth.getChordNameWithNote(subject, option)
         override val optionText: String
-            get() = "ноты"
+            get() = "все ноты"
     }
 
     private inner class NotesFromScale(prevSubj: Int) : AbstractNotesQuestion(prevSubj) {
         override val subjectText: String
             get() = mth.getNoteName(subject) //!!!
         override val optionText: String
-            get() = "ноты"
+            get() = mth.getScaleName(option)
     }
 }

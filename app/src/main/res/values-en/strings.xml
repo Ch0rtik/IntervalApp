@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="interval_names">
+        <item>Diminished unison</item>
+        <item>Diminished fifth</item>
+        <item>Minor second</item>
+        <item>Minor sixth</item>
+        <item>Minor third</item>
+        <item>Minor seventh</item>
+        <item>Perfect fourth</item>
+        <item>Unison</item>
+        <item>Perfect fifth</item>
+        <item>Major second</item>
+        <item>Major sixth</item>
+        <item>Major third</item>
+        <item>Major seventh</item>
+        <item>Augmented fourth</item>
+        <item>Augmented unison</item>
+        <item>Augmented fifth</item>
+        <item>Augmented second</item>
+        <item>Augmented sixth</item>
+        <item>Augmented third</item>
+        <item>Augmented seventh</item>
+        <item>Double-augmented fourth</item>
+    </string-array>
+    <string-array name="note_names_do">
+        <item>Fa♭♭</item>
+        <item>Do♭♭</item>
+        <item>Sol♭♭</item>
+        <item>Re♭♭</item>
+        <item>La♭♭</item>
+        <item>Mi♭♭</item>
+        <item>Si♭♭</item>
+        <item>Fa♭</item>
+        <item>Do♭</item>
+        <item>Sol♭</item>
+        <item>Re♭</item>
+        <item>La♭</item>
+        <item>Mi♭</item>
+        <item>Si♭</item>
+        <item>Fa</item>
+        <item>Do</item>
+        <item>Sol</item>
+        <item>Re</item>
+        <item>La</item>
+        <item>Mi</item>
+        <item>Si</item>
+        <item>Fa#</item>
+        <item>Do#</item>
+        <item>Sol#</item>
+        <item>Re#</item>
+        <item>La#</item>
+        <item>Mi#</item>
+        <item>Si#</item>
+        <item>Fa##</item>
+        <item>Do##</item>
+        <item>Sol##</item>
+        <item>Re##</item>
+        <item>La##</item>
+        <item>Mi##</item>
+        <item>Si##</item>
+    </string-array>
+    <string-array name="interval_names_accusative">
+        <item>Diminished unison</item>
+        <item>Diminished fifth</item>
+        <item>Minor second</item>
+        <item>Minor sixth</item>
+        <item>Minor third</item>
+        <item>Minor seventh</item>
+        <item>Perfect fourth</item>
+        <item>Unison</item>
+        <item>Perfect fifth</item>
+        <item>Major second</item>
+        <item>Major sixth</item>
+        <item>Major third</item>
+        <item>Major seventh</item>
+        <item>Augmented fourth</item>
+        <item>Augmented unison</item>
+        <item>Augmented fifth</item>
+        <item>Augmented second</item>
+        <item>Augmented sixth</item>
+        <item>Augmented third</item>
+        <item>Augmented seventh</item>
+        <item>Double-augmented fourth</item>
+    </string-array>
+    <string-array name="chord_types">
+        <item>Major triads</item>
+        <item>Minor triads</item>
+        <item>Maj7 chords</item>
+        <item>min7 chords</item>
+        <item>Dominant chords</item>
+        <item>minMaj7 chords</item>
+    </string-array>
+    <string-array name="scale_names">
+        <item>Ionian scale</item>
+        <item>Aeolian scale</item>
+        <item>Phrygian scale</item>
+        <item>Dorian scale</item>
+        <item>Mixolydian scale</item>
+        <item>Lydian scale</item>
+        <item>Locrian Scale</item>
+    </string-array>
+    <string name="notes_from_chord">Notes of chord</string>
+    <string name="interval_from_notes">Interval from notes</string>
+    <string name="app_logo">App logo</string>
+    <string name="settings">Settings</string>
+    <string name="exercises">Exercises</string>
+    <string name="choose">Choose</string>
+    <string name="next">Next</string>
+    <string name="new_record">!!! New Record !!!</string>
+    <string name="scales">Scales</string>
+    <string name="high_score">Highscore:</string>
+    <string name="change_note_names">Change note names to:</string>
+    <string name="do_re_mi">Do, Re, Mi…</string>
+    <string name="records_reset">Records reset</string>
+    <string name="reset_records">Reset Records</string>
+    <string name="intervals">Intervals</string>
+    <string name="chords">Chords</string>
+</resources>

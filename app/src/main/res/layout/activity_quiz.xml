@@ -30,7 +30,7 @@
             android:background="@android:color/background_light"
             android:gravity="center"
             android:text="До Ми Соль"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimary"
             android:textSize="48sp"
             android:textStyle="bold" />
 
@@ -41,9 +41,9 @@
             android:layout_marginBottom="4dp"
             android:background="@android:color/background_light"
             android:gravity="center"
-            android:text="Выберите"
+            android:text="@string/choose"
             android:textAllCaps="true"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimary"
             android:textSize="34sp" />
 
         <TextView
@@ -55,7 +55,7 @@
             android:gravity="center"
             android:text="Чистую квинту"
             android:textAllCaps="true"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimary"
             android:textSize="34sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -82,7 +82,7 @@
             android:background="@android:color/background_light"
             android:text="Sol"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:textSize="34sp"
             app:backgroundTint="@null" />
     </LinearLayout>
@@ -108,7 +108,7 @@
             android:layout_marginBottom="4dp"
             android:background="@android:color/background_light"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:textSize="34sp"
             app:backgroundTint="@null" />
     </LinearLayout>
@@ -135,7 +135,7 @@
             android:background="@android:color/background_light"
             android:text="Sol"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:textSize="34sp"
             app:backgroundTint="@null" />
     </LinearLayout>
@@ -162,7 +162,7 @@
             android:background="@android:color/background_light"
             android:text="Sol"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:textSize="34sp"
             app:backgroundTint="@null" />
     </LinearLayout>
@@ -188,7 +188,7 @@
             android:background="@android:color/background_light"
             android:text="Sol"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:textSize="34sp"
             app:backgroundTint="@null" />
     </LinearLayout>
@@ -215,7 +215,7 @@
             android:background="@android:color/background_light"
             android:text="Sol"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:textSize="34sp"
             app:backgroundTint="@null" />
     </LinearLayout>
@@ -242,7 +242,7 @@
             android:background="@android:color/background_light"
             android:text="Sol"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:textSize="34sp"
             app:backgroundTint="@null" />
     </LinearLayout>
@@ -268,7 +268,7 @@
             android:background="@android:color/background_light"
             android:text="Sol"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:textSize="34sp"
             app:backgroundTint="@null" />
     </LinearLayout>
@@ -295,7 +295,7 @@
             android:background="@android:color/background_light"
             android:text="Sol"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:textSize="34sp"
             app:backgroundTint="@null" />
     </LinearLayout>
@@ -319,7 +319,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:background="@color/colorPrimary"
-            android:text="Далее"
+            android:text="@string/next"
             android:textColor="@android:color/background_light"
             android:textSize="25sp"
             app:backgroundTint="@null"/>

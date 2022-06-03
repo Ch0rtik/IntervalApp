@@ -10,7 +10,11 @@ class MusicTheoryHandler(musicalNames: MusicalNames) {
 
     private val noteNames = musicalNames.noteNames
     private val intervalNames = musicalNames.intervalNames
+    private val intervalNamesAccusative = musicalNames.intervalNamesAccusative
     private val shortIntervalNames = musicalNames.shortIntervalNames
+    private val shortChordNames = musicalNames.shortChordNames
+    private val scaleNames = musicalNames.scaleNames
+    private val chordTypes = musicalNames.chordTypeNames
 
 
     fun getNoteList(range: Int): List<String> {
@@ -22,12 +26,53 @@ class MusicTheoryHandler(musicalNames: MusicalNames) {
         return noteNames[relId + Constants.D_POSITION]
     }
 
-    fun getIntervalName(relId: Int): String {
-        return intervalNames[relId + Constants.PRIMA_POSITION]
+    fun getIntervalName(option: Int): String {
+        return intervalNames[option + Constants.PRIMA_POSITION]
+    }
+
+    fun getIntervalNameAccusative(option: Int): String {
+        return intervalNamesAccusative[option + Constants.PRIMA_POSITION]
     }
 
     fun getShortIntervalName(relId: Int): String {
         return shortIntervalNames[relId + Constants.PRIMA_POSITION]
+    }
+
+    fun getChordNameWithNote(relId: Int, option: Int): String {
+        return getNoteName(relId) + when(option) {
+            10 -> shortChordNames[0]
+            6 -> shortChordNames[1]
+            42 -> shortChordNames[2]
+            25 -> shortChordNames[3]
+            41 -> shortChordNames[4]
+            26 -> shortChordNames[5]
+            else -> ""
+        }
+    }
+
+    fun getChordType(option: Int): String {
+        return when(option) {
+            10 -> chordTypes[0]
+            6 -> chordTypes[1]
+            42 -> chordTypes[2]
+            25 -> chordTypes[3]
+            41 -> chordTypes[4]
+            26 -> chordTypes[5]
+            else -> ""
+        }
+    }
+
+    fun getScaleName(option: Int): String {
+        return when(option) {
+            2726 -> scaleNames[0]
+            1637 -> scaleNames[1]
+            1621 -> scaleNames[2]
+            1638 -> scaleNames[3]
+            2662 -> scaleNames[4]
+            2730 -> scaleNames[5]
+            1365 -> scaleNames[6]
+            else -> ""
+        }
     }
 
     fun getNoteFromInterval(rootId: Int, interval: Int): Int {
