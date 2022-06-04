@@ -35,7 +35,12 @@ class QuizUnitTests {
                 "Увеличенную септиму",
                 "Дважды увеличеннную кварту"
             ),
-            arrayOf(),
+            arrayOf("Мажорное трезвучие",
+                "Минорное трезвучие",
+                "Maj7 аккорд",
+                "min7 аккорд",
+                "доминантные аккорд",
+                "minMaj7 акорд"),
             arrayOf(
                 "d1", "d5",
                 "m2", "m6", "m3", "m7",
@@ -57,37 +62,44 @@ class QuizUnitTests {
         )
     )
 
+    private fun generateQuiz(type: QuizTypes, option: Int, amountOfButtons: Int): Quiz {
+        val quiz = Quiz(QuizData(type, option, 5, amountOfButtons))
+        quiz.setMusicTheoryHandler(mth)
+        quiz.askNewQuestion()
+        return quiz
+    }
+
+    private val intervalOptions = setOf(1, 2, 3, 4, 5, 6, 7, 8)
+
     @Test
     fun noteFromInterval() {
-        val option = 1
-        val quiz = Quiz(QuizData(0, 0, QuizTypes.NOTE_FROM_INTERVAL, option, 5, 4))
-        quiz.setMusicTheoryHandler(mth)
-        quiz.askNewQuestion()
-        val answerId = MusicTheoryHandler.getNoteFromInterval(quiz.subject, option)
-        val rightAnswer = mth.getNoteName(answerId)
-        val rightButtonNumber = quiz.currentQuestion.buttonTexts.indexOf(rightAnswer)
+        for (option in intervalOptions) {
+            val quiz = generateQuiz(QuizTypes.NOTE_FROM_INTERVAL, option, 4)
+            val answerId = MusicTheoryHandler.getNoteFromInterval(quiz.subject, option)
+            val rightAnswer = mth.getNoteName(answerId)
+            val rightButtonNumber = quiz.currentQuestion.buttonTexts.indexOf(rightAnswer)
 
-        assert(quiz.submitAnswer(setOf(rightButtonNumber)) == null)
-        assert(quiz.score == 1)
+            assert(quiz.submitAnswer(setOf(rightButtonNumber)) == null)
+            assert(quiz.score == 1)
+        }
     }
 
     @Test
-    fun intervalQuizOption() {
-        val option = 1
-        val quiz = Quiz(QuizData( QuizTypes.NOTE_FROM_INTERVAL, option, 5, 4))
-        quiz.setMusicTheoryHandler(mth)
-        quiz.askNewQuestion()
+    fun noteFromIntervalUI() {
+        for (option in intervalOptions) {
+            val quiz = generateQuiz(QuizTypes.NOTE_FROM_INTERVAL, option, 4)
 
-        assert(quiz.currentQuestion.optionText == mth.getIntervalNameAccusative(option))
+            assert(quiz.currentQuestion.optionText == mth.getIntervalNameAccusative(option))
+            assert(quiz.currentQuestion.subjectText == mth.getNoteName(quiz.currentQuestion.subject))
+        }
     }
+
+
 
     @Test
     fun intervalFromNotes() {
-        val options = setOf(1, 2, 3, 4, 5, 6, 7, 8)
-        for (option in options) {
-            val quiz = Quiz(QuizData(QuizTypes.INTERVAL_FROM_NOTES, option, 5, 4))
-            quiz.setMusicTheoryHandler(mth)
-            quiz.askNewQuestion()
+        for (option in intervalOptions) {
+            val quiz = generateQuiz(QuizTypes.INTERVAL_FROM_NOTES, option, 4)
             val subjectNotes = quiz.currentQuestion.subjectText.split(", ")
             val rightAnswer = mth.getShortIntervalName(mth.getIntervalFromNotes(subjectNotes[0], subjectNotes[1]))
             val rightButtonNumber =
@@ -98,39 +110,73 @@ class QuizUnitTests {
     }
 
     @Test
-    fun chordFromNotes() {
-        val option = 10
-        val quiz = Quiz(QuizData(QuizTypes.CHORD_FROM_NOTES, option, 5, 3))
-        quiz.setMusicTheoryHandler(mth)
-        quiz.askNewQuestion()
-        val answerId = quiz.subject
-        val rightButtonNumber = quiz.currentQuestion.buttonTexts.indexOf(mth.getNoteName(answerId))
+    fun intervalFromNotesUI() {
+        for (option in intervalOptions) {
+            val quiz = generateQuiz(QuizTypes.INTERVAL_FROM_NOTES, option, 4)
 
-        assert(quiz.submitAnswer(setOf(rightButtonNumber)) == null)
+            assert(quiz.currentQuestion.optionText == mth.interval)
+        }
+    }
+
+    private val chordOptions = setOf(10, 6, 45, 25, 41, 26)
+
+    @Test
+    fun chordFromNotes() {
+        for (option in chordOptions) {
+            val quiz = generateQuiz(QuizTypes.CHORD_FROM_NOTES, option, 3)
+            val answerId = quiz.currentQuestion.subject
+            val rightButtonNumber =
+                quiz.currentQuestion.buttonTexts.indexOf(mth.getNoteName(answerId))
+
+            assert(quiz.submitAnswer(setOf(rightButtonNumber)) == null)
+        }
+    }
+
+    @Test
+    fun chordFromNotesUI() {
+        for (option in chordOptions) {
+            val quiz = generateQuiz(QuizTypes.CHORD_FROM_NOTES, option, 3)
+
+            assert(quiz.currentQuestion.optionText == mth.getChordType(option))
+        }
     }
 
     @Test
     fun notesFromChord() {
-        val option = 10
-        val quiz = Quiz(QuizData(QuizTypes.NOTES_FROM_CHORD, option, 5, 9))
-        quiz.setMusicTheoryHandler(mth)
-        quiz.askNewQuestion()
-        val answerIds = MusicTheoryHandler.buildChord(quiz.currentQuestion.subject, option)
-        val rightButtonNumbers = mutableSetOf<Int>()
-        for (answerId in answerIds) {
-            rightButtonNumbers.add(quiz.currentQuestion.buttonTexts.indexOf(mth.getNoteName(answerId)))
-        }
+        for (option in chordOptions) {
+            val quiz = generateQuiz(QuizTypes.NOTES_FROM_CHORD, option, 9)
+            val answerIds = MusicTheoryHandler.buildChord(quiz.currentQuestion.subject, option)
+            val rightButtonNumbers = mutableSetOf<Int>()
+            for (answerId in answerIds) {
+                rightButtonNumbers.add(
+                    quiz.currentQuestion.buttonTexts.indexOf(
+                        mth.getNoteName(
+                            answerId
+                        )
+                    )
+                )
+            }
 
-        assert(quiz.submitAnswer(rightButtonNumbers) == null)
+            assert(quiz.submitAnswer(rightButtonNumbers) == null)
+        }
     }
 
     @Test
+    fun notesFromChordUI() {
+        for (option in chordOptions) {
+            val quiz = generateQuiz(QuizTypes.NOTES_FROM_CHORD, option, 9)
+
+            assert(quiz.currentQuestion.optionText == mth.getChordType(option))
+            assert(quiz.currentQuestion.subjectText == mth.getNoteName(quiz.currentQuestion.subject))
+        }
+    }
+
+    private val notesFromScaleOptions = setOf(2726, 1637, 1621, 1638, 2662, 2730, 1365)
+
+    @Test
     fun notesFromScale() {
-        val options = setOf(2726, 1637, 1621, 1638, 2662, 2730, 1365)
-        for(option in options) {
-            val quiz = Quiz(QuizData(QuizTypes.NOTES_FROM_SCALE, option, 5, 9))
-            quiz.setMusicTheoryHandler(mth)
-            quiz.askNewQuestion()
+        for(option in notesFromScaleOptions) {
+            val quiz = generateQuiz(QuizTypes.NOTES_FROM_SCALE, option, 9)
             val answerIds = MusicTheoryHandler.buildScale(quiz.currentQuestion.subject, option)
             val rightButtonNumbers = mutableSetOf<Int>()
             for (answerId in answerIds) {
@@ -143,8 +189,17 @@ class QuizUnitTests {
                 )
             }
 
-            assert(quiz.currentQuestion.optionText == mth.getScaleName(option))
             assert(quiz.submitAnswer(rightButtonNumbers) == null)
+        }
+    }
+
+    @Test
+    fun notesFromScaleUI() {
+        for(option in notesFromScaleOptions) {
+            val quiz = generateQuiz(QuizTypes.NOTES_FROM_SCALE, option, 9)
+
+            assert(quiz.currentQuestion.optionText == mth.getScaleName(option))
+            assert(quiz.currentQuestion.subjectText == mth.getNoteName(quiz.currentQuestion.subject))
         }
     }
 }
