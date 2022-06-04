@@ -112,8 +112,8 @@
     <string name="high_score">Highscore:</string>
     <string name="change_note_names">Change note names to:</string>
     <string name="do_re_mi">Do, Re, Mi…</string>
-    <string name="records_reset">Records reset</string>
-    <string name="reset_records">Reset Records</string>
+    <string name="high_score_reset">Highscores reset</string>
+    <string name="reset_high_score">Reset highscores</string>
     <string name="intervals">Intervals</string>
     <string name="chords">Chords</string>
     <string name="interval">Interval</string>

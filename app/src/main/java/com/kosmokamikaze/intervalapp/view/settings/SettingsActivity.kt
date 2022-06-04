@@ -1,21 +1,13 @@
 package com.kosmokamikaze.intervalapp.view.settings
 
-import android.content.Context
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.kosmokamikaze.intervalapp.R
 import com.kosmokamikaze.intervalapp.databinding.ActivitySettingsBinding
-import com.kosmokamikaze.intervalapp.model.musical.MusicalNames
-import com.kosmokamikaze.intervalapp.repository.QuizRepository
-import com.kosmokamikaze.intervalapp.view.main.MainActivity
 import com.kosmokamikaze.intervalapp.viewmodel.factory.ViewModelFactory
 import com.kosmokamikaze.intervalapp.viewmodel.settings.SettingsViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
@@ -49,6 +41,9 @@ class SettingsActivity : AppCompatActivity() {
 
         binding.doButton.setOnClickListener { viewModel.changeNoteSystem() }
 
-        binding.resetButton.setOnClickListener { viewModel.resetHighScores() }
+        binding.resetButton.setOnClickListener {
+            viewModel.resetHighScores()
+            Toast.makeText(this, resources.getString(R.string.high_score_reset), Toast.LENGTH_SHORT).show()
+        }
     }
 }
