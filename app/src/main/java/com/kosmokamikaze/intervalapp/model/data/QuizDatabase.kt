@@ -1,7 +1,6 @@
 package com.kosmokamikaze.intervalapp.model.data
 
 import android.content.Context
-import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -20,7 +19,6 @@ abstract class QuizDatabase: RoomDatabase() {
             if (tempInstance != null) return tempInstance
 
             synchronized(this) {
-                Log.d("database", "Creation started")
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     QuizDatabase::class.java,

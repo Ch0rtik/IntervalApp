@@ -66,9 +66,19 @@ class QuizUnitTests {
         val answerId = MusicTheoryHandler.getNoteFromInterval(quiz.subject, option)
         val rightAnswer = mth.getNoteName(answerId)
         val rightButtonNumber = quiz.currentQuestion.buttonTexts.indexOf(rightAnswer)
-        assert(quiz.currentQuestion.optionText == mth.getIntervalNameAccusative(option))
+
         assert(quiz.submitAnswer(setOf(rightButtonNumber)) == null)
         assert(quiz.score == 1)
+    }
+
+    @Test
+    fun intervalQuizOption() {
+        val option = 1
+        val quiz = Quiz(QuizData( QuizTypes.NOTE_FROM_INTERVAL, option, 5, 4))
+        quiz.setMusicTheoryHandler(mth)
+        quiz.askNewQuestion()
+
+        assert(quiz.currentQuestion.optionText == mth.getIntervalNameAccusative(option))
     }
 
     @Test
@@ -82,6 +92,7 @@ class QuizUnitTests {
             val rightAnswer = mth.getShortIntervalName(mth.getIntervalFromNotes(subjectNotes[0], subjectNotes[1]))
             val rightButtonNumber =
                 quiz.currentQuestion.buttonTexts.indexOf(rightAnswer)
+
             assert(quiz.submitAnswer(setOf(rightButtonNumber)) == null)
         }
     }
@@ -94,6 +105,7 @@ class QuizUnitTests {
         quiz.askNewQuestion()
         val answerId = quiz.subject
         val rightButtonNumber = quiz.currentQuestion.buttonTexts.indexOf(mth.getNoteName(answerId))
+
         assert(quiz.submitAnswer(setOf(rightButtonNumber)) == null)
     }
 
@@ -108,6 +120,7 @@ class QuizUnitTests {
         for (answerId in answerIds) {
             rightButtonNumbers.add(quiz.currentQuestion.buttonTexts.indexOf(mth.getNoteName(answerId)))
         }
+
         assert(quiz.submitAnswer(rightButtonNumbers) == null)
     }
 
@@ -129,6 +142,7 @@ class QuizUnitTests {
                     )
                 )
             }
+
             assert(quiz.currentQuestion.optionText == mth.getScaleName(option))
             assert(quiz.submitAnswer(rightButtonNumbers) == null)
         }

@@ -29,7 +29,7 @@ class QuizActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(
             this,
-            ViewModelFactory(this.application.applicationContext, intent.extras!!, ViewModelFactory.ViewModelType.QUIZ)
+            ViewModelFactory(this.applicationContext, intent.extras!!, ViewModelFactory.ViewModelType.QUIZ)
         )[QuizViewModel::class.java]
 
         setUpViews()

@@ -31,7 +31,7 @@ class MenuActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(
             this, ViewModelFactory(
-                this.application.applicationContext,
+                this.applicationContext,
                 intent.extras!!,
                 ViewModelFactory.ViewModelType.MENU
             )

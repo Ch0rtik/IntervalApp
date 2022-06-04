@@ -24,8 +24,7 @@ class SettingsViewModel(context: Context): ViewModel() {
 
     init {
         repository = QuizRepository(context)
-        mutDoSystemData = MutableLiveData()
-        mutDoSystemData.value = sharedPrefs.getBoolean(MusicalNames.DO_SYSTEM, false)
+        mutDoSystemData = MutableLiveData(sharedPrefs.getBoolean(MusicalNames.DO_SYSTEM, false))
     }
 
     fun resetHighScores() {
