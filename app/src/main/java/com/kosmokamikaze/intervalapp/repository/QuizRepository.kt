@@ -11,16 +11,12 @@ class QuizRepository(context: Context) {
 
     fun readAllData(): LiveData<List<QuizData>> = quizDao.readAllData()
 
-    fun readData(typeGroup: TypeGroups): LiveData<List<QuizData>> {
+    fun readQuizGroup(typeGroup: TypeGroups): LiveData<List<QuizData>> {
         return when (typeGroup) {
             TypeGroups.INTERVAL_GROUP -> quizDao.readIntervalQuizData()
             TypeGroups.CHORD_GROUP -> quizDao.readChordQuizData()
             TypeGroups.SCALE_GROUP -> quizDao.readScaleQuizData()
         }
-    }
-
-    suspend fun addQuiz(quizData: QuizData) {
-        quizDao.addQuiz(quizData)
     }
 
     suspend fun updateHighScore(id: Int, highScore: Int) {

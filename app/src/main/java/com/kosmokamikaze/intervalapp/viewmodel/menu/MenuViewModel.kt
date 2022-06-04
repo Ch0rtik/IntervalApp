@@ -19,7 +19,7 @@ class MenuViewModel(context: Context, extras: Bundle) : ViewModel() {
     init {
         repository = QuizRepository(context)
 
-        quizGroup = repository.readData(typeGroup)
+        quizGroup = repository.readQuizGroup(typeGroup)
     }
 
     private fun updateHighScoreData(id: Int, highScore: Int) {
