@@ -9,7 +9,7 @@ An Android app helping upcoming music enthusiast to learn relations between diff
 - An option to use different types of naming: Do, Re, Mi… or C, D, E…
 - Full English/Russian localization.
 
-## Techmologies
+## Technologies
 - [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) — architectural pattern used in this project.
 - [Rooms](https://developer.android.com/jetpack/androidx/releases/room) — library provides an abstraction layer over SQLite. 
 - [JUnit](https://junit.org/junit4/) — testing framework for Java and the JVM.
