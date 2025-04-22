@@ -196,4 +196,5 @@
     <string name="new_record">!!! НОВЫЙ РЕКОРД !!!</string>
 
     <string name="interval">Интервал</string>
+    <string name="sign_out">Выйти</string>
 </resources>

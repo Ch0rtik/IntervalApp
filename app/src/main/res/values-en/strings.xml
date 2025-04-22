@@ -117,4 +117,5 @@
     <string name="intervals">Intervals</string>
     <string name="chords">Chords</string>
     <string name="interval">Interval</string>
+    <string name="sign_out">Sign out</string>
 </resources>

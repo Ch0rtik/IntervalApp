@@ -1,29 +1,29 @@
 package com.kosmokamikaze.intervalapp.repository
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import com.kosmokamikaze.intervalapp.model.data.QuizDatabase
 import com.kosmokamikaze.intervalapp.model.quiz.QuizData
 import com.kosmokamikaze.intervalapp.model.quiz.TypeGroups
 
 class QuizRepository(context: Context) {
-    private val quizDao = QuizDatabase.getDatabase(context).quizDao()
+    // private val quizDao = QuizDatabase.getDatabase(context).quizDao()
 
-    fun readAllData(): LiveData<List<QuizData>> = quizDao.readAllData()
+    private val ktorClient = KtorClient.getKtorClient(context)
 
-    fun readQuizGroup(typeGroup: TypeGroups): LiveData<List<QuizData>> {
+    // fun readAllData(): LiveData<List<QuizData>> = quizDao.readAllData()
+
+    suspend fun readQuizGroup(typeGroup: TypeGroups): List<QuizData> {
         return when (typeGroup) {
-            TypeGroups.INTERVAL_GROUP -> quizDao.readIntervalQuizData()
-            TypeGroups.CHORD_GROUP -> quizDao.readChordQuizData()
-            TypeGroups.SCALE_GROUP -> quizDao.readScaleQuizData()
+            TypeGroups.INTERVAL_GROUP -> ktorClient.getIntervalQuizData()
+            TypeGroups.CHORD_GROUP -> ktorClient.getChordQuizData()
+            TypeGroups.SCALE_GROUP -> ktorClient.getScaleQuizData()
         }
     }
 
     suspend fun updateHighScore(id: Int, highScore: Int) {
-        quizDao.updateHighScore(id, highScore)
+        ktorClient.updateHighScore(id, highScore)
     }
 
     suspend fun resetHighScores() {
-        quizDao.resetHighScore()
+        // quizDao.resetHighScore()
     }
 }

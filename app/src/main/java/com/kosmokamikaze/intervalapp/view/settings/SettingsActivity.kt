@@ -1,11 +1,13 @@
 package com.kosmokamikaze.intervalapp.view.settings
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.kosmokamikaze.intervalapp.R
 import com.kosmokamikaze.intervalapp.databinding.ActivitySettingsBinding
+import com.kosmokamikaze.intervalapp.view.auth.LoginActivity
 import com.kosmokamikaze.intervalapp.viewmodel.factory.ViewModelFactory
 import com.kosmokamikaze.intervalapp.viewmodel.settings.SettingsViewModel
 
@@ -21,14 +23,12 @@ class SettingsActivity : AppCompatActivity() {
             this,
             ViewModelFactory(
                 this.applicationContext,
-                intent.extras,
+                intent.extras ?: Bundle(),
                 ViewModelFactory.ViewModelType.SETTINGS
             )
         )[SettingsViewModel::class.java]
 
         setUpButtons()
-
-
     }
 
     private fun setUpButtons() {
@@ -44,6 +44,14 @@ class SettingsActivity : AppCompatActivity() {
         binding.resetButton.setOnClickListener {
             viewModel.resetHighScores()
             Toast.makeText(this, resources.getString(R.string.high_score_reset), Toast.LENGTH_SHORT).show()
+        }
+
+        binding.signOutButton.setOnClickListener {
+            viewModel.signOut()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
         }
     }
 }

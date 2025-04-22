@@ -1,6 +1,7 @@
 package com.kosmokamikaze.intervalapp.view.menu.adapter
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,9 @@ import com.kosmokamikaze.intervalapp.model.musical.MusicTheoryHandler
 import com.kosmokamikaze.intervalapp.model.musical.MusicalNames
 import com.kosmokamikaze.intervalapp.view.menu.MenuActivity
 import com.kosmokamikaze.intervalapp.view.quiz.QuizActivity
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 
 class MenuAdapter : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
@@ -62,7 +66,7 @@ class MenuAdapter : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
         init {
             item.setOnClickListener {
                 val intent = Intent(item.context, QuizActivity::class.java)
-                intent.putExtra("quiz", quizData)
+                intent.putExtra("quiz", Json.encodeToString(QuizData.serializer(), quizData))
                 with(item.context as MenuActivity) {
                     resultLauncher.launch(intent)
                 }

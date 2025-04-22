@@ -13,6 +13,7 @@ import com.kosmokamikaze.intervalapp.view.quiz.QuizActivity
 import com.kosmokamikaze.intervalapp.model.musical.MusicTheoryHandler
 import com.kosmokamikaze.intervalapp.model.quiz.Quiz
 import com.kosmokamikaze.intervalapp.model.musical.MusicalNames
+import kotlinx.serialization.json.Json
 
 class QuizViewModel(
     musicalNames: MusicalNames,
@@ -49,7 +50,8 @@ class QuizViewModel(
     private var id: Int = 0
 
     init {
-        val quizData: QuizData = extras.getParcelable("quiz")!!
+        val quizDataString = extras.getString("quiz")
+        val quizData: QuizData = Json.decodeFromString(QuizData.serializer(),quizDataString!!)
 
         quiz = Quiz(quizData)
 

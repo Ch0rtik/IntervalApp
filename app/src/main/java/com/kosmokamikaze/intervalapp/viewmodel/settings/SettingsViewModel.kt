@@ -40,4 +40,11 @@ class SettingsViewModel(context: Context): ViewModel() {
             apply()
         }
     }
+
+    fun signOut() {
+        with(sharedPrefs.edit()) {
+            remove("token")
+            apply()
+        }
+    }
 }
